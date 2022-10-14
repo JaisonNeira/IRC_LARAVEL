@@ -43,7 +43,7 @@
     <li class="nav-item  items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
-                <i  class="fa-solid fa-cloud-arrow-up text-center"></i>
+                <i class="fa-solid fa-folder-open text-center"></i>
                 <div Class="text-center"><span>Consultar<br>pacientes</span></div>
             </div>
             <hr class="sidebar-divider">
@@ -52,7 +52,7 @@
     <li class="nav-item  items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
-                <i  class="fa-solid fa-cloud-arrow-up text-center"></i>
+                <i class="fa-solid fa-user-doctor text-center"></i>
                 <div Class="text-center"><span>Administracion</span></div>
             </div>
             <hr class="sidebar-divider">
@@ -61,7 +61,7 @@
     <li class="nav-item  items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
-                <i  class="fa-solid fa-cloud-arrow-up text-center"></i>
+                <i class="fa-solid fa-clipboard text-center"></i>
                 <div Class="text-center"><span>Reportes</span></div>
             </div>
             <hr class="sidebar-divider">
