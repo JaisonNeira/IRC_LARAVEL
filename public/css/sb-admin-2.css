@@ -64,7 +64,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #858796;
+  color: #000000;
   text-align: left;
   background-color: #fff;
 }
@@ -266,7 +266,54 @@ select {
 select {
   word-wrap: normal;
 }
+select{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -ms-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:0!important;
+  background: #ffffff;
+  background-image: none;
+  flex: 1;
+  padding: 0 .5em;
+  color:#E22A3D;
+  cursor:pointer;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  position: relative;
+  display: flex;
+  width: 40em;
+  height: 3em;
+  line-height: 3;
+  background: #ffffff;
+  overflow: hidden;
+  border-radius: .25em;
+  font-weight: bold;
+}
+.select::after {
+  content: '\23F7';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #ffffff;
+  cursor:pointer;
+  pointer-events:none;
+  color:#E22A3D;
+  transition:.25s all ease;
+}
+.select:hover::after {
+  color: #000000;
+}
 
+.opcion:hover{color:#E22A3D; background-color: #cfcfcf;}
 button,
 [type="button"],
 [type="reset"],
@@ -1905,7 +1952,7 @@ input[type="month"].form-control {
 }
 
 select.form-control:focus::-ms-value {
-  color: #6e707e;
+  color:#E22A3D;
   background-color: #fff;
 }
 
@@ -2909,12 +2956,12 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #4e73df;
+  color: #E22A3D;
   text-decoration: none;
 }
 
 .btn-link:hover {
-  color: #224abe;
+  color: #941925;
   text-decoration: underline;
 }
 
@@ -10514,7 +10561,7 @@ a:focus {
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 14rem !important;
+    width: 10rem !important;
   }
   .sidebar .nav-item .collapse {
     position: relative;
@@ -10541,7 +10588,7 @@ a:focus {
     width: 100%;
     text-align: left;
     padding: 1rem;
-    width: 14rem;
+    width: 10rem;
   }
   .sidebar .nav-item .nav-link i {
     font-size: 0.85rem;
