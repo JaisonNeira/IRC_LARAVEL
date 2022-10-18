@@ -22,7 +22,7 @@
         </a>
     </li>
 
-    <li class="nav-item  items m-t-5">
+    <li class="nav-item active items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-pencil text-center" style="font-size: 25px;"></i>
@@ -31,16 +31,16 @@
             <hr class="sidebar-divider">
         </a>
     </li>
-    <li class="nav-item  items m-t-5">
+    <li class="nav-item active items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-house-medical-circle-check text-center" style="font-size: 25px;"></i>
                 <div Class="text-center"><span>Gestionar</span></div>
             </div>
-            <hr class="sidebar-divider">    
+            <hr class="sidebar-divider">
         </a>
     </li>
-    <li class="nav-item  items m-t-5">
+    <li class="nav-item active items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-folder-open text-center" style="font-size: 25px;"></i>
@@ -49,7 +49,7 @@
             <hr class="sidebar-divider">
         </a>
     </li>
-    <li class="nav-item  items m-t-5">
+    <li class="nav-item active items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-user-doctor text-center" style="font-size: 30px;"></i>
@@ -58,7 +58,7 @@
             <hr class="sidebar-divider">
         </a>
     </li>
-    <li class="nav-item  items m-t-5">
+    <li class="nav-item active items m-t-5">
         <a class="nav-link" href="index.html">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-clipboard text-center" style="font-size: 30px;"></i>

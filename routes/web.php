@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('importar.index');
+return view('administrar_procesos.index');
 });
 
 Auth::routes();
