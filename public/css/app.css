@@ -1,6 +1,6 @@
 .irc-input-file {
     display: none;
-    
+
 }
 
 .irc-input-file + label {
@@ -15,7 +15,8 @@
     display: block;
     padding: 10px;
     flex: 1;
-    
+    border-radius: 4px 0px  0px 4px;
+
 }
 .irc-input-file_nombre span {
     white-space: nowrap;
@@ -35,8 +36,17 @@
     color: #ffff ;
     display: block;
     cursor: pointer;
+    border-radius: 0px 4px  4px 0px;
 }
 .irc-input-file_boton:hover{
   background-color: #f3f3f3;
   color: #E22A3D ;
 }
+
+
+.circle{
+    color: #E22A3D;
+    border: 1px solid #000;
+     border-radius: 100%;
+}
+

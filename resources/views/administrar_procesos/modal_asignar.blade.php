@@ -11,26 +11,34 @@
           </button>
         </div>
         <div class="modal-body">
-            <table class="table table-primary">
-                <!--  Tabla  -->
-                <thead class="thead-primary">
-                    <tr>
-                        <th scope="col">Identificacion</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Asignar</th>
-                    </tr>
-                </thead>
-                <tbody style="background-color: #ffff">
-                    <td>1042241113</td>
-                    <td>Jaison</td>
-                    <td>Neira</td>
-                    <td>
-                        <input type="checkbox" id="cbox1" value="first_checkbox">
-                    </td>
-                </tbody>
-            </table>
-            <!--  fin Tabla  -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table id="table2" class="table table-bordered">
+                                <thead style="background-color: #E22A3D; color:#ffff; text-align: center !important;">
+                                    <tr>
+                                        <th scope="col">Identificacion</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Asignar</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="background-color: #ffff; text-align: center;">
+                                    <tr>
+                                        <td>1042241113</td>
+                                        <td>Jaison</td>
+                                        <td>Neira</td>
+                                        <td>
+                                            <input type="checkbox" id="cbox1" value="first_checkbox">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
