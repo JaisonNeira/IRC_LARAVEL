@@ -159,6 +159,7 @@
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('js/funcionalidades/table_irc.js') }}"></script>
     <script src="{{ asset('js/funcionalidades/irc_input_file.js') }}"></script>
+    <script src="{{ asset('js/funcionalidades/validator.js') }}"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     @yield('script')
 </body>
