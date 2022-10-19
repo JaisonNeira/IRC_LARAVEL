@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
 
@@ -156,7 +157,8 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
-    <script src="{{ asset('js/table.js') }}"></script>
+    <script src="{{ asset('js/funcionalidades/table_irc.js') }}"></script>
+    <script src="{{ asset('js/funcionalidades/irc_input_file.js') }}"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     @yield('script')
 </body>

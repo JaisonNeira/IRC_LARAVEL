@@ -4,16 +4,10 @@
     Importar
 @endsection
 
-<style>
 
-    option:hover {
-      background-color: yellow !important;
-    }
-
-</style>
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <h1 style="font-weight: bold;">Selecciona el tipo de proceso</h1>
         <div class="select shadow-sm mb-4 align-items-center">
             <select name="format" id="format" style="font-weight: bold;">
@@ -26,18 +20,19 @@
                 <option value="6" style="color: #000000" class="option">Reprogramacion</option>
             </select>
         </div>
-        <div class="row">
-            <div class="col">
-                <input type="file" class="form-class border" name="" id="importar" style="width: 640px" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
-            </div>
-
-            <div class=" col d-flex align-items-center">
-                <button type="button" class="btn btn-primary"
-                    style="width: 200px; height: 32px; font-weight: bold;">Subir Archivo</button>
-
-            </div>
-        </div>
-    </div>
+                <input type="file" class="irc-input-file"  id="importar" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <label for="importar">
+                    <span class="irc-input-file_nombre">
+                        <span>Selecciona un archivo</span>
+                     </span>
+                    <span class="irc-input-file_boton">
+                        <i class="fa-solid fa-paperclip text-center m-2" style="font-size: 30px;"></i>
+                    </span>
+                </label>
+                    
+                <button type="button" class="btn btn-primary mt-3"
+                style="width: 200px; height: 48px; font-weight: bold; border: 1px solid  #E22A3D; color: #fff ">Subir Archivo</button>
+       
 
 
     </div>

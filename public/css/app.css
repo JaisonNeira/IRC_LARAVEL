@@ -1,1 +1,42 @@
+.irc-input-file {
+    display: none;
+    
+}
 
+.irc-input-file + label {
+    display: flex;
+    flex: 1;
+    width: 200px;
+}
+
+.irc-input-file_nombre {
+    background: #eeee;
+    border: 1px solid #cacaca;
+    display: block;
+    padding: 10px;
+    flex: 1;
+    
+}
+.irc-input-file_nombre span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-shadow: ellipsis;
+    width: 570px;
+    display: block;
+    cursor: pointer;
+}
+.irc-input-file_nombre span:hover {
+    color: #E22A3D;
+}
+
+.irc-input-file_boton {
+    background: #E22A3D;
+    border: 1px solid #E22A3D;
+    color: #ffff ;
+    display: block;
+    cursor: pointer;
+}
+.irc-input-file_boton:hover{
+  background-color: #f3f3f3;
+  color: #E22A3D ;
+}
