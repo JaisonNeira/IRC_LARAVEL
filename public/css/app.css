@@ -49,3 +49,20 @@
     border-radius: 100%;
 }
 
+.error{
+    color: #FF00A8;
+    font-weight: bold;
+    display: none;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.opciones{
+    color: #000;
+}
+.opciones:hover{
+    color: #cacaca;
+    background-color: #E22A3D;
+}
+
