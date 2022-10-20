@@ -5,7 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 use App\Models\tipos_proceso;
+
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Validators\Failure;
+use App\Imports\BrigadaImport;
+use App\Imports\HospitalizadoImport;
+use App\Imports\InasistidoImport;
+use App\Imports\RecordatorioImport;
+use App\Imports\ReprogramacionImport;
+use App\Imports\SeguimientoImport;
 
 class ImportarController extends Controller
 {
@@ -20,11 +30,80 @@ class ImportarController extends Controller
     function importar(request $request){
 
         $request->validate([
-            'Tipo_proceso' => 'required',
+            'tipo_proceso' => 'required',
             'file' => 'required'
         ]);
 
+        return DB::transaction(function () use ($request){
 
+            $tipo = $request->tipo_proceso;
+            $file = $request->file('file');
+
+            if($tipo == '1'){
+                /* inasistidos */
+                try {
+                    Excel::import(new InasistidoImport, $file);
+                    return back()->with('messageimportar', 'Inasistidos importados exitosamente');
+                } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                    $failures = $e->failures();
+                    return back()->with('import_error', $failures);
+                }
+            }
+            else if($tipo == '2'){
+                /* seguimiento */
+                try {
+                    Excel::import(new SeguimientoImport, $file);
+                    return back()->with('messageimportar', 'Seguimientos importados exitosamente');
+                } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                    $failures = $e->failures();
+                    return back()->with('import_error', $failures);
+                }
+            }
+            else if($tipo == '3'){
+                /* recordatorio */
+                try {
+                    Excel::import(new RecordatorioImport, $file);
+                    return back()->with('messageimportar', 'Recordatorios importados exitosamente');
+                } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                    $failures = $e->failures();
+                    return back()->with('import_error', $failures);
+                }
+            }
+            else if($tipo == '4'){
+                /* hospitalizados */
+                try {
+                    Excel::import(new HospitalizadoImport, $file);
+                    return back()->with('messageimportar', 'Hospitalizados importados exitosamente');
+                } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                    $failures = $e->failures();
+                    return back()->with('import_error', $failures);
+                }
+            }
+            else if($tipo == '5'){
+                /* brigadas */
+                try {
+                    Excel::import(new BrigadaImport, $file);
+                    return back()->with('messageimportar', 'Brigadas importadas exitosamente');
+                } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                    $failures = $e->failures();
+                    return back()->with('import_error', $failures);
+                }
+            }
+            else if($tipo == '6'){
+                /* reprogramacion */
+                try {
+                    Excel::import(new ReprogramacionImport, $file);
+                    return back()->with('messageimportar', 'Reprogramaciones importadas exitosamente');
+                } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+                    $failures = $e->failures();
+                    return back()->with('import_error', $failures);
+                }
+            }
+            else{
+
+            }
+
+        }, 5);
 
 
     }

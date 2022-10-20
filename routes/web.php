@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /* IMPORTAR */
 Route::get('/importar', [App\Http\Controllers\ImportarController::class, 'index'])->name('importar.index');
+Route::post('/post/importar', [App\Http\Controllers\ImportarController::class, 'importar'])->name('importar.post');
