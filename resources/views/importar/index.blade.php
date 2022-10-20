@@ -15,12 +15,9 @@
             <div class="select  col-12  align-items-center" id="select">
                 <select id="seleccion" style="font-weight: bold;">
                     <option selected disabled>Tipo de proceso</option>
-                    <option value="1" class="opciones">Inasistidos</option>
-                    <option value="2" class="opciones">Seguimiento demanda inducida</option>
-                    <option value="3" class="opciones">Recordatorios</option>
-                    <option value="4" class="opciones">Hospitalizados</option>
-                    <option value="5" class="opciones">Brigadas</option>
-                    <option value="6" class="opciones">Reprogramacion</option>
+                    @foreach ($tipos_procesos as $list)
+                    <option value="{{$list->tpp_id}}" class="opciones">{{$list->tpp_nombre}}</option>
+                    @endforeach
                 </select>
             </div>
             <span class="error" id="error1">Selecciona un proceso</span> {{--error--}}

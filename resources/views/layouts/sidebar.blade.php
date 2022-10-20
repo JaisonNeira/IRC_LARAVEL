@@ -13,7 +13,7 @@
     <!-- Nav Item - Dashboard -->
     {{-- importar item --}}
     <li class="nav-item active items m-t-5 mb-0" style="margin-top: 15px!important;">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('importar.index')}}">
             <div class="d-flex flex-column ">
                 <i  class="fa-solid fa-cloud-arrow-up text-center" style="font-size: 25px;"></i>
                 <div Class="text-center"><span>Importar</span></div>
@@ -23,7 +23,7 @@
     </li>
 
     <li class="nav-item active items m-t-5">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-pencil text-center" style="font-size: 25px;"></i>
                 <div Class="text-center"><span style="line-height: 10px;">Administrar<br>Proceso</span></div>
@@ -32,7 +32,7 @@
         </a>
     </li>
     <li class="nav-item active items m-t-5">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-house-medical-circle-check text-center" style="font-size: 25px;"></i>
                 <div Class="text-center"><span>Gestionar</span></div>
@@ -41,7 +41,7 @@
         </a>
     </li>
     <li class="nav-item active items m-t-5">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-folder-open text-center" style="font-size: 25px;"></i>
                 <div Class="text-center"><span style="line-height: 10px;">Consultar<br>pacientes</span></div>
@@ -50,7 +50,7 @@
         </a>
     </li>
     <li class="nav-item active items m-t-5">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-user-doctor text-center" style="font-size: 30px;"></i>
                 <div Class="text-center"><span>Administracion</span></div>
@@ -59,7 +59,7 @@
         </a>
     </li>
     <li class="nav-item active items m-t-5">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-clipboard text-center" style="font-size: 30px;"></i>
                 <div Class="text-center"><span>Reportes</span></div>

@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-return view('importar.index');
+return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/* IMPORTAR */
+Route::get('/importar', [App\Http\Controllers\ImportarController::class, 'index'])->name('importar.index');
