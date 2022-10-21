@@ -28,36 +28,20 @@
                     </thead>
                     <tbody style="background-color: #ffff; text-align: center;">
                         <tr>
-                            <td> <p style="display: none;">1</p><i class="fa-solid fa-circle circle"></i></td>
-                            <td>1</td>
+                                <!-- Esta es la variable -->
+                            <td> <p style="display: none;">Variable</p>
+                                <!-- Si es prioridad 1 -->
+                            <i class="fa-solid fa-circle circle-red" style="display: inline;"></i>
+                                <!-- Si es prioridad 2 -->
+                            <i class="fa-solid fa-circle circle-yellow" style="display: inline;"></i>
+                                <!-- Si es prioridad 3 -->
+                            <i class="fa-solid fa-circle circle-green" style="display: inline;"></i>
+                            </td>
+                            <td>Jhon</td>
                             <td>Ramirez</td>
-                            <td>301013</td>
+                            <td>323 0931232</td>
                             <td>Hospitalizados</td>
-                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
-                        </tr>
-                        <tr>
-                            <td> <p style="display: none;">3</p><i class="fa-solid fa-circle s" style="background-color:#fff "></i></td>
-                            <td>3</td>
-                            <td>Ramirez</td>
-                            <td>301013</td>
-                            <td>Hospitalizados</td>
-                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
-                        </tr>
-                        <tr>
-                            <td> <p style="display: none;">2</p><i class="fa-solid fa-circle circle"></i></td>
-                            <td>2</td>
-                            <td>Ramirez</td>
-                            <td>301013</td>
-                            <td>Hospitalizados</td>
-                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
-                        </tr>
-                        <tr>
-                            <td> <p style="display: none;">2</p><i class="fa-solid fa-circle circle"></i></td>
-                            <td>2</td>
-                            <td>Ramirez</td>
-                            <td>301013</td>
-                            <td>Hospitalizados</td>
-                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
+                            <td> @include("gestionar.proceso") @include("gestionar.perfil") @include("gestionar.gestion") </td>
                         </tr>
                     </tbody>
                 </table>

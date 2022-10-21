@@ -43,10 +43,26 @@
 }
 
 
-.circle{
-    color: #E22A3D;
+.circle-red{
+    background: linear-gradient(to bottom, #E22A3D,  #c02635, #66161e);;
+    color: transparent;
     border: 1px solid #000;
     border-radius: 100%;
+    display: none;
+}
+.circle-yellow{
+    background: linear-gradient(to bottom, #e2df2a,  #cfcd27, #b8b523);
+    color: transparent;
+    border: 1px solid #000;
+    border-radius: 100%;
+    display: none;
+}
+.circle-green{
+    background: linear-gradient(to bottom, #2ae22a,  #26c926, rgb(36, 196, 36));;
+    color: transparent;
+    border: 1px solid #000;
+    border-radius: 100%;
+    display: on;
 }
 
 .error{
@@ -114,5 +130,25 @@
 }
 
 
+div#table-gestion_info.dataTables_info{
+    display: none;
+}
+
+div#table-gestion_length.dataTables_length{
+    display: none;
+}
+
+.select_gestion{
+    box-shadow: 1px 2px 3px 3px rgba(0, 0, 0, 0.13) !important;
+    height: 40px;
+}
+
+div#table-perfil_info.dataTables_info{
+display: none;
+}
+
+div#table-perfil_length.dataTables_length{
+    display: none;
+}
 
 
