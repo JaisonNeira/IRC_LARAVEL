@@ -28,8 +28,32 @@
                     </thead>
                     <tbody style="background-color: #ffff; text-align: center;">
                         <tr>
-                            <td><i class="fa-solid fa-circle circle"></i></td>
-                            <td>Jhon</td>
+                            <td> <p style="display: none;">1</p><i class="fa-solid fa-circle circle"></i></td>
+                            <td>1</td>
+                            <td>Ramirez</td>
+                            <td>301013</td>
+                            <td>Hospitalizados</td>
+                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
+                        </tr>
+                        <tr>
+                            <td> <p style="display: none;">3</p><i class="fa-solid fa-circle s" style="background-color:#fff "></i></td>
+                            <td>3</td>
+                            <td>Ramirez</td>
+                            <td>301013</td>
+                            <td>Hospitalizados</td>
+                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
+                        </tr>
+                        <tr>
+                            <td> <p style="display: none;">2</p><i class="fa-solid fa-circle circle"></i></td>
+                            <td>2</td>
+                            <td>Ramirez</td>
+                            <td>301013</td>
+                            <td>Hospitalizados</td>
+                            <td><button class="btn btn-primary"></button> <button class="btn btn-primary"></button> <button class="btn btn-primary"></button></td>
+                        </tr>
+                        <tr>
+                            <td> <p style="display: none;">2</p><i class="fa-solid fa-circle circle"></i></td>
+                            <td>2</td>
                             <td>Ramirez</td>
                             <td>301013</td>
                             <td>Hospitalizados</td>
