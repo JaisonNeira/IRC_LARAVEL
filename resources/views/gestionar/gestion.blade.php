@@ -5,27 +5,26 @@
 <div class="modal fade" id="Gestion" tabindex="-1" aria-labelledby="gestion-title" aria-hidden="true" role="dialog">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="Gestion-title">Gestion</h5>
+            <div class="modal-header" style="background: #E22A3D">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
+                <div class="container p-4">
                     <!-- Gestion section -->
                     <div class="row mb-5">
                         <div class="col-4">
                             <div class="row">
                                 <!-- titulos  gestion -->
                                 <div class="col-4">
-                                    <h6>Proceso</h6>
+                                    <h5>Proceso</h5>
                                 </div>
                                 <div class="col-4">
-                                    <h6>Mes</h6>
+                                    <h5>Mes</h5>
                                 </div>
                                 <div class="col-4">
-                                    <h6>Cargue</h6>
+                                    <h5>Cargue</h5>
                                 </div>
                                 <!-- texto de titulos gestion -->
                                 <div class="col-4">
@@ -68,19 +67,19 @@
                             <div class="row">
                                 <!-- Titulo principal -->
                                 <div class="col-12 mb-3">
-                                    <h6>Hospitalizados</h6>
+                                    <h4>Hospitalizados</h4>
                                 </div>
 
 
                                 <!-- Titulos  de arriba -->
                                 <div class="col-4">
-                                    <h6>Diagnostico</h6>
+                                    <h5>Diagnostico</h5>
                                 </div>
                                 <div class="col-4">
-                                    <h6>Fecha de ingreso</h6>
+                                    <h5>Fecha de ingreso</h5>
                                 </div>
                                 <div class="col-4">
-                                    <h6>Fecha de egreso</h6>
+                                    <h5>Fecha de egreso</h5>
                                 </div>
                                 <!--  Texto de Los titulos de arriba -->
                                 <div class="col-4">
@@ -97,10 +96,10 @@
 
                                 <!-- Titulos  de abajo -->
                                 <div class="col-6">
-                                    <h6>Programa</h6>
+                                    <h5>Programa</h5>
                                 </div>
                                 <div class="col-6">
-                                    <h6>Es usuario irc?</h6>
+                                    <h5>Es usuario irc?</h5>
                                 </div>
                                 <!-- Texto de Los titulos de abajo -->
                                 <div class="col-6">
@@ -118,7 +117,7 @@
                     <!-- Historial section -->
                     <div class="row mt-5">
                         <div class="col-12">
-                            <h5> Hisitorial de Gestiones Hospitalizados</h5>
+                            <h4> Hisitorial de Gestiones Hospitalizados</h4>
                         </div>
                         <div class="col-12">
                             <div class="table-responsive">

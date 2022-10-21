@@ -18,7 +18,6 @@ $(document).ready( function () {
     $('#table-perfil').DataTable();
 } );
 
-
 $(document).ready( function () {
     $('#table-proceso').DataTable();
 } );
