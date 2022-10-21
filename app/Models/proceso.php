@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class proceso extends Model
 {
     use HasFactory;
+    protected $fillable = ['car_id','pac_id','pro_prioridad'];
 }

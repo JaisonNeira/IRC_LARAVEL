@@ -3,14 +3,12 @@ function validacion(){
     var todo_ok = true;
     var seleccion = document.getElementById('seleccion');
     var importar = document.getElementById('add_archivo');
-    const span = document.getElementsByClassName('.error');
 
     if(seleccion.value == 'Tipo de proceso' || importar.files.length == 0){
         if(seleccion.value == 'Tipo de proceso'){
              document.getElementById('select').style.borderRadius = '4px 4px 4px 4px';
              document.getElementById('select').style.boxShadow= '0px 0px 4px 4px rgba(255, 0, 168, 1)';
              document.getElementById('error1').style.display= 'flex';
-             span.style.color = '#fffff';
         }
         if(importar.files.length == 0){
           document.getElementById('validator').style.boxShadow= '0px 0px 4px 4px rgba(255, 0, 168, 1)';

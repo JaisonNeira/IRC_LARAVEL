@@ -24,27 +24,42 @@
                 <div class="text-end">
                 </div>
                 <div class="container mb-5 text-center pt-3" style="height: 25%">
-                    <img src="https://static.wixstatic.com/media/c79d06_a115601f06d343e483207fa5ffa01fca~mv2.png/v1/fill/w_336,h_210,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo%20animar%20IRC.png" class="img-fluid" alt="Responsive Image" style="width: 50%">
+                    <img src="https://static.wixstatic.com/media/c79d06_a115601f06d343e483207fa5ffa01fca~mv2.png/v1/fill/w_336,h_210,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/logo%20animar%20IRC.png"
+                        class="img-fluid" alt="Responsive Image" style="width: 50%">
                 </div>
                 <!-- form login -->
-                <form action="#" class="px-2 py-2">
+                <form method="POST" action="{{ route('login') }}" class="px-2 py-2">
+                    @csrf
                     <div class="mb-4">
                         <label for="user"class="form-label fw-bold"> Usuario </label>
-                        <input type="email" class="form-control" name="user"
-                            placeholder="Escribe tu nombre de usuario" required>
+                        <input id="email" type="email"
+                            class="form-control form-control-user @error('email') is-invalid @enderror" name="email"
+                            value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label fw-bold"> Contraseña </label>
-                        <input type="password" class="form-control" name="user" placeholder="Escribe tu contraseña"
-                            required>
+                        <input id="password" type="password"
+                            class="form-control @error('password') is-invalid @enderror" name="password" required
+                            autocomplete="current-password" placeholder="Password">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary fw-bold"> Iniciar sesión</button>
-                    </div>
-                    <div class="mb-4 py-2">
-                        <a href="#" class=""> Recuperar contraseña</a>
+                        <button type="submit" class="btn btn-primary fw-bold">Iniciar sesión</button>
                     </div>
                 </form>
+
+                <div class="mb-4 py-2">
+                    <a href="#" class=""> Recuperar contraseña</a>
+                </div>
                 <!-- end form login-->
             </div>
         </div>
