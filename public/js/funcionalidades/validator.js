@@ -9,7 +9,6 @@ function validacion(){
              document.getElementById('select').style.borderRadius = '4px 4px 4px 4px';
              document.getElementById('select').style.boxShadow= '0px 0px 4px 4px rgba(255, 0, 168, 1)';
              document.getElementById('error1').style.display= 'flex';
-             span.style.color = '#fffff';
         }
         if(importar.files.length == 0){
           document.getElementById('validator').style.boxShadow= '0px 0px 4px 4px rgba(255, 0, 168, 1)';

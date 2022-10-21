@@ -43,17 +43,18 @@ class ImportarController extends Controller
                 /* inasistidos */
                 try {
                     Excel::import(new InasistidoImport, $file);
-                    return back()->with('messageimportar', 'Inasistidos importados exitosamente');
+                    return back()->with('mSucces', 'Inasistidos importados exitosamente!');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-                    $failures = $e->failures();
-                    return back()->with('import_error', $failures);
+                    /* $failures = $e->failures();
+                    return back()->with('import_error', $failures); */
+                    return back()->with('mDanger', 'No se ha podido importar los inasistidos!');
                 }
             }
             else if($tipo == '2'){
                 /* seguimiento */
                 try {
                     Excel::import(new SeguimientoImport, $file);
-                    return back()->with('messageimportar', 'Seguimientos importados exitosamente');
+                    return back()->with('mSucces', 'Seguimientos importados exitosamente');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);
@@ -63,7 +64,7 @@ class ImportarController extends Controller
                 /* recordatorio */
                 try {
                     Excel::import(new RecordatorioImport, $file);
-                    return back()->with('messageimportar', 'Recordatorios importados exitosamente');
+                    return back()->with('mSucces', 'Recordatorios importados exitosamente');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);
@@ -73,7 +74,7 @@ class ImportarController extends Controller
                 /* hospitalizados */
                 try {
                     Excel::import(new HospitalizadoImport, $file);
-                    return back()->with('messageimportar', 'Hospitalizados importados exitosamente');
+                    return back()->with('mSucces', 'Hospitalizados importados exitosamente');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);
@@ -82,8 +83,11 @@ class ImportarController extends Controller
             else if($tipo == '5'){
                 /* brigadas */
                 try {
+
                     Excel::import(new BrigadaImport, $file);
-                    return back()->with('messageimportar', 'Brigadas importadas exitosamente');
+
+                    
+                    return back()->with('mSucces', 'Brigadas importadas exitosamente');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);
@@ -93,7 +97,7 @@ class ImportarController extends Controller
                 /* reprogramacion */
                 try {
                     Excel::import(new ReprogramacionImport, $file);
-                    return back()->with('messageimportar', 'Reprogramaciones importadas exitosamente');
+                    return back()->with('mSucces', 'Reprogramaciones importadas exitosamente');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);

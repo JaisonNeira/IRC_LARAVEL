@@ -14,6 +14,18 @@
             onsubmit="return validacion()">
             @csrf
             <h1 style="font-weight: bold;">Selecciona el tipo de proceso</h1>
+
+            @include('layouts.msj')
+
+            @if (Session::has('import_error'))
+                @foreach (Session::get('import_error') as $erros)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> {{ $erros->errors()[0] }} en la linea {{ $erros->row() }} </strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endforeach
+            @endif
+
             <div class="select  col-12  align-items-center" id="select">
                 <select id="seleccion" name="tipo_proceso" style="font-weight: bold;">
                     <option selected disabled>Tipo de proceso</option>
