@@ -24,6 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 /* IMPORTAR */
 Route::get('/importar', [App\Http\Controllers\ImportarController::class, 'index'])->name('importar.index');
 Route::post('/post/importar', [App\Http\Controllers\ImportarController::class, 'importar'])->name('importar.post');
+Route::get('/get/pdf/{codigo}', [App\Http\Controllers\ImportarController::class, 'descargar_pdf'])->name('importar.pdf.descargar');
 
 /* PROCESOS */
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');

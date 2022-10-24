@@ -18,6 +18,10 @@ use App\Imports\RecordatorioImport;
 use App\Imports\ReprogramacionImport;
 use App\Imports\SeguimientoImport;
 
+use PDF;
+use Illuminate\Support\Facades\Mail;
+/* use App\Mail\ImportMailable; */
+
 class ImportarController extends Controller
 {
 
@@ -119,11 +123,19 @@ class ImportarController extends Controller
 
                     $excel = Excel::import(new BrigadaImport($acc_codigo, substr($file_name, 0, -5)), $file);
 
-                    /* PDF */
+                    /* return back()->with('import_pro', $acc_codigo); */
+                    $acta = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
 
-                    $acta_cargue = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
+                    $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
+
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf) {
+                        $mail->from('Admin.IRC@gmail.com', 'Admin IRC');
+                        $mail->to('jcoobdavidcharrisv@gmail.com');
+                        $mail->attachData($pdf->output(), 'ActaCargue.pdf');
+                    });
 
                     return back()->with('mSucces', 'Brigadas importadas exitosamente');
+
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);
