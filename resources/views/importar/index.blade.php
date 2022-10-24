@@ -11,10 +11,14 @@
 
     <div class="container" style="width: 55%; align:left;">
         {{--  Inicio Formulorio  --}}
+        <h1 style="font-weight: bold;">Selecciona el tipo de proceso</h1>
+
+        @include('layouts.msj')
         <form action="{{ route('importar.post') }}" method="POST" name="form-data" enctype="multipart/form-data"
             onsubmit="return validacion()">
             @csrf
             <h1 style="font-weight: bold;">Selecciona el tipo de proceso</h1>
+
             @include('layouts.msj')
 
             @if (Session::has('import_error'))
@@ -26,6 +30,7 @@
                 @endforeach
             @endif
 
+            <input type="text" name="email" id="email" style="display: none;" value={{Auth::user()->email}}>
             <input type="text" name="file_name" id="file_name" style="display: none;">
 
             <div class="select  col-12  align-items-center" id="select">

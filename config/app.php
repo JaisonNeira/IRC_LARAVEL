@@ -179,7 +179,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         /* SPATIE */
         Spatie\Permission\PermissionServiceProvider::class,
-
+        /* PDF */
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -237,6 +238,8 @@ return [
 
         /* EXCEL */
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        /* PDF */
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
