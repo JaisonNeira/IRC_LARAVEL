@@ -14,8 +14,8 @@
             onsubmit="return validacion()">
             @csrf
             <h1 style="font-weight: bold;">Selecciona el tipo de proceso</h1>
-
             @include('layouts.msj')
+            @include('importar.modal_pdf')
 
             @if (Session::has('import_error'))
                 @foreach (Session::get('import_error') as $erros)
