@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\tipos_proceso;
+use App\Models\actas_cargue;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Validators\Failure;
@@ -35,9 +36,33 @@ class ImportarController extends Controller
         ]);
 
         return DB::transaction(function () use ($request){
-
+            /* VALIDACIONES */
             $tipo = $request->tipo_proceso;
             $file = $request->file('file');
+            $file_name = $request->file_name;
+            $file_ir = substr($file_name, 0, -16);
+            $file_pro = substr($file_name, 2, -13);
+            $file_fecha = substr($file_name, 5, -5);
+            $file_tipe = substr($file_name, 14);
+            $file_len = strlen($file_name);
+
+            /* VALIDAMOS QUE EL NOMBRE DEL ARCHIVO ESTE BIEN */
+            if($file_len != 18 || $file_ir != "IR"){
+                return back()->with('mDanger', 'El nombre del archivo no es adecuado, cambielo e intentelo nuevamente!');
+            }
+            /* VALIDAMOS QUE SEA UN ARCHOVO XLSX */
+            if($file_tipe != "xlsx"){
+                return back()->with('mDanger', 'Tipo de archivo erroneo, debe ser formato excel (.xlsx)!');
+            }
+
+            /* VALIDAMOS QUE LA FECHA EN EL NOMBRE DEL ARCHIVO ESTE BIEN */
+            $año = intval(substr($file_fecha, 0, -4));
+            $mes = intval(substr($file_fecha, 4, -2));
+            $dia = intval(substr($file_fecha, 6));
+
+            if($mes > 12 || $dia > 31 || $mes < 0 || $dia < 0){
+                return back()->with('mDanger', 'La fecha dentro del nombre es invalida!');
+            }
 
             if($tipo == '1'){
                 /* inasistidos */
@@ -82,11 +107,22 @@ class ImportarController extends Controller
             }
             else if($tipo == '5'){
                 /* brigadas */
+
+                if($file_pro != "BRI"){
+                    return back()->with('mDanger', 'Este archivo no es de brigadas, seleccione un tipo correcto!');
+                }
+
+                $fecha = date('Ymd-hms');
+                $acc_codigo = substr($file_name, 0, -5)."-".$fecha;
+
                 try {
 
-                    Excel::import(new BrigadaImport, $file);
+                    $excel = Excel::import(new BrigadaImport($acc_codigo, substr($file_name, 0, -5)), $file);
 
-                    
+                    /* PDF */
+
+                    $acta_cargue = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
+
                     return back()->with('mSucces', 'Brigadas importadas exitosamente');
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();

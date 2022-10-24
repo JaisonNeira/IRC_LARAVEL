@@ -8,6 +8,7 @@
 
 
 @section('content')
+
     <div class="container" style="width: 55%; align:left;">
         {{--  Inicio Formulorio  --}}
         <form action="{{ route('importar.post') }}" method="POST" name="form-data" enctype="multipart/form-data"
@@ -25,6 +26,8 @@
                     </div>
                 @endforeach
             @endif
+
+            <input type="text" name="file_name" id="file_name" style="display: none;">
 
             <div class="select  col-12  align-items-center" id="select">
                 <select id="seleccion" name="tipo_proceso" style="font-weight: bold;">
@@ -60,4 +63,10 @@
 
 @section('script')
     <script src="{{ asset('js/funcionalidades/validator.js') }}"></script>
+
+    <script>
+        document.getElementById('add_archivo').onchange = function() {
+            $("#file_name").val(document.getElementById('add_archivo').files[0].name);
+        }
+    </script>
 @endsection
