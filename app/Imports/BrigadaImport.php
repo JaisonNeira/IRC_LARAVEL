@@ -7,6 +7,7 @@ use App\Models\tipos_identificacione;
 use App\Models\cargue;
 use App\Models\proceso;
 use App\Models\paciente;
+use App\Models\actas_cargue;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -14,17 +15,34 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 /* use Maatwebsite\Excel\Concerns\WithValidation; */
+
 use Throwable;
 
 class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading/* , WithValidation */
 {
+
+    protected $acc_codigo;
+    protected $file_name;
+    protected $r_leidos = 0;
+    protected $r_duplicados = 0;
+    protected $r_cargados = 0;
+    protected $car_id = 0;
+
+    public function __construct(string $acc_codigo, string $file_name)
+    {
+        $this->acc_codigo = $acc_codigo;
+        $this->file_name = $file_name;
+    }
+
     public function model(array $row)
     {
+        $this->r_leidos = $this->r_leidos+1;
+
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
 
-        $validador = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
+        $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
 
-        if($validador == 0){
+        if($validador_pac == 0){
             $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
             /* dd(intval($ti[0]->tip_id)); */
             $paciente = paciente::create([
@@ -54,33 +72,58 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
 
         $fecha = date('d-m-Y H:i:s');
 
-        $cargue = cargue::create([
-            'car_fecha_cargue' => $fecha,
-            'car_mes' => $row['mes'],
-            'car_fecha_reporte' => $row['fecha_reporte'],
-            'tpp_id' => '5',
-        ]);
 
+        if($this->car_id == 0){
+            $cargue = cargue::create([
+                'car_fecha_cargue' => $fecha,
+                'car_mes' => $row['mes'],
+                'car_fecha_reporte' => $row['fecha_reporte'],
+                'tpp_id' => '5',
+            ]);
 
-        $proceso = proceso::create([
-            'car_id' => $cargue->id,
-            'pac_id' => $pac_id,
-            'pro_prioridad' => $row['prioridad']
-        ]);
+            $this->car_id = $cargue->id;
+        }
 
-        $brigada = brigada::create([
-            'pro_id' => $proceso->id,
-            'bri_fecha' => $row['fecha_llegada'],
-            'bri_convenio' => $row['convenio'],
-            'bri_punto_acopio' => $row['punto_de_acopio'],
-            'bri_especialidad' => $row['especialidad'],
-            'bri_fecha_ultimo_control' => $row['fecha_ultimo_control'],
-            'bri_dias_transcurrido' => $row['dias_transcurrido'],
-            'bri_fecha_cita' => $row['fecha_cita']
-        ]);
+        $validador_pro = proceso::where('car_id', $this->car_id)->where('pac_id', $pac_id)->count();
 
+        if($validador_pro == 0){
+            $proceso = proceso::create([
+                'car_id' => $this->car_id,
+                'pac_id' => $pac_id,
+                'pro_prioridad' => $row['prioridad']
+            ]);
 
-        
+            $brigada = brigada::create([
+                'pro_id' => $proceso->id,
+                'bri_fecha' => $row['fecha_llegada'],
+                'bri_convenio' => $row['convenio'],
+                'bri_punto_acopio' => $row['punto_de_acopio'],
+                'bri_especialidad' => $row['especialidad'],
+                'bri_fecha_ultimo_control' => $row['fecha_ultimo_control'],
+                'bri_dias_transcurrido' => $row['dias_transcurrido'],
+                'bri_fecha_cita' => $row['fecha_cita']
+            ]);
+            $this->r_cargados = $this->r_cargados+1;
+        }else{
+            $this->r_duplicados = $this->r_duplicados+1;
+        }
+
+        $validador_acc = actas_cargue::where('Acc_codigo', $this->acc_codigo)->count();
+
+        if($validador_acc == 0){
+            actas_cargue::create([
+                'Acc_codigo' => $this->acc_codigo,
+                'Acc_nombre' => $this->file_name,
+                'Acc_fecha_recepcion' => $fecha,
+                'Acc_leidos' => $this->r_leidos,
+                'Acc_duplicados' => $this->r_duplicados,
+                'Acc_cargados' => $this->r_cargados
+            ]);
+        }else{
+            actas_cargue::where('Acc_codigo', $this->acc_codigo)->update(['Acc_leidos' => $this->r_leidos]);
+            actas_cargue::where('Acc_codigo', $this->acc_codigo)->update(['Acc_duplicados' => $this->r_duplicados]);
+            actas_cargue::where('Acc_codigo', $this->acc_codigo)->update(['Acc_cargados' => $this->r_cargados]);
+        }
 
     }
 
@@ -94,7 +137,7 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         return 4000;
     }
 
-    public function rules(): array
+    /* public function rules(): array
     {
         return [
             'pac_identificacion' => 'required|unique:pacientes',
@@ -102,5 +145,6 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
              // Above is alias for as it always validates in batches
              '*.pac_identificacion' => 'required|unique:pacientes'
         ];
-    }
+    } */
+
 }
