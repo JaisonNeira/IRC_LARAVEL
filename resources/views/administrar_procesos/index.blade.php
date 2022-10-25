@@ -25,13 +25,12 @@
                                 <th>Asignar Agente</th>
                             </tr>
                         </thead>
-                        <tbody style="background-color: #ffff; text-align: center;">
-                            @foreach (variable as $list )
+                        <tbody style="background-color: #ffff; text-align: center;" id="registros" name="registros">
+                            {{-- @foreach ($cargues as $list)
                             <tr>
-                                <td>20/02/2022</td>
-                                <td>Febrero</td>
-                                <td>24/02/2022</td>
-                                <td>Hospitalizados</td>
+                                <td>{{$list->car_fecha_cargue}}</td>
+                                <td>{{$list->car_mes}}</td>
+                                <td>{{$list->"falta tipo de proceso"}}</td>
                                 <td>
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="customSwitch1">
@@ -41,9 +40,8 @@
                                 <td>
                                     @include('administrar_procesos.modal_asignar')
                                 </td>
-                                
                             </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
