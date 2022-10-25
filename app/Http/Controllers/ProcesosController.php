@@ -19,7 +19,7 @@ class ProcesosController extends Controller
     /* AJAX */
     function index_tabla(){
 
-        $sql = "SELECT car.car_fecha_cargue, car.car_mes, car.car_fecha_reporte, tpp.tpp_nombre, car.car_activo
+        $sql = "SELECT car.car_id, car.car_fecha_cargue, car.car_mes, car.car_fecha_reporte, tpp.tpp_id, tpp.tpp_nombre, car.car_activo
         FROM cargues AS car
         INNER JOIN tipos_procesos AS tpp ON car.tpp_id = tpp.tpp_id
         WHERE car.car_estado = 1";
