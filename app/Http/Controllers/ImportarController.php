@@ -129,7 +129,7 @@ class ImportarController extends Controller
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
                     Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf) {
-                        $mail->from('Admin.IRC@gmail.com', 'Admin IRC');
+                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to('jcoobdavidcharrisv@gmail.com');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
                     });
