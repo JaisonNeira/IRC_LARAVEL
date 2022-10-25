@@ -143,7 +143,7 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
             'pac_identificacion' => 'required|unique:pacientes',
 
              // Above is alias for as it always validates in batches
-             '*.pac_identificacion' => 'required|unique:pacientes'
+             '*.pac_identificacion' => 'required|unique:pacientes',
         ];
     } */
 

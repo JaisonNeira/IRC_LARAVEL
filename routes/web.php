@@ -28,6 +28,8 @@ Route::get('/get/pdf/{codigo}', [App\Http\Controllers\ImportarController::class,
 
 /* PROCESOS */
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'index_tabla'])->name('proceso.index.tabla');
+Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
 
 /* GESTIONAR */
 Route::get('/gestionar', [App\Http\Controllers\GestionesController::class, 'index'])->name('gestionar.index');
