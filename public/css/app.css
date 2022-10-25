@@ -150,3 +150,22 @@ div#table2_info.dataTables_info, div#table2_length.dataTables_length{
     padding-bottom: 0px;
 }
 
+div#table2_filter.dataTables_filter{
+display: none;
+}
+
+/* .centrado_select{
+ display: grid;
+ grid-template-columns:
+ repeat(5, 1fr);
+ grid-gap: 5px;
+} */
+
+.flex-column{
+    margin: 4px;
+}
+.custom-select{
+box-shadow: 2px 2px 2px 2px rgba(189, 186, 186, 0.288);
+}
+
+

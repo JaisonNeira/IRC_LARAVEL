@@ -8,6 +8,11 @@ Array.from(files).forEach(
             }else{
                 span.innerHTML = f.files[0].name;
             }
-        } );   
+        } );
     }
 );
+
+// Posible solucion para el select
+
+
+

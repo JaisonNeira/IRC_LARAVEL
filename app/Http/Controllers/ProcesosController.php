@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Session;
 class ProcesosController extends Controller
 {
     function index(){
+
+        
+
         return view('administrar_procesos.index');
     }
 }

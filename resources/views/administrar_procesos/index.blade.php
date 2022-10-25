@@ -26,6 +26,7 @@
                             </tr>
                         </thead>
                         <tbody style="background-color: #ffff; text-align: center;">
+                            @foreach (variable as $list )
                             <tr>
                                 <td>20/02/2022</td>
                                 <td>Febrero</td>
@@ -40,22 +41,9 @@
                                 <td>
                                     @include('administrar_procesos.modal_asignar')
                                 </td>
+                                
                             </tr>
-                            <tr>
-                                <td>20/02/2022</td>
-                                <td>Febrero</td>
-                                <td>24/02/2022</td>
-                                <td>Hospitalizados</td>
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch2">
-                                        <label class="custom-control-label" for="customSwitch2" style=""></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    @include('administrar_procesos.modal_asignar')
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

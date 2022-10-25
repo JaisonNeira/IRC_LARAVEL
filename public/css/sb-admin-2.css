@@ -10778,6 +10778,7 @@ a:focus {
 
 .sidebar-dark .nav-item.active .nav-link {
   color: #fff;
+  padding-top: initial;
 }
 
 .sidebar-dark .nav-item.active .nav-link i {
