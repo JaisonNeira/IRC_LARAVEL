@@ -24,7 +24,7 @@ class ProcesosController extends Controller
         INNER JOIN tipos_procesos AS tpp ON car.tpp_id = tpp.tpp_id
         WHERE car.car_estado = 1";
 
-        $cargues = DB::statement($sql);
+        $cargues = DB::select($sql);
 
         echo json_encode(
             array(
@@ -43,7 +43,7 @@ class ProcesosController extends Controller
 
     }
 
-    /* function modal_tabla_index(request $request){
+    function modal_tabla_index(request $request){
 
         $agentes = agente::where('age_estado', '=', '1')->get();
 
@@ -64,7 +64,7 @@ class ProcesosController extends Controller
         );
 
 
-    } */
+    }
 
 
 

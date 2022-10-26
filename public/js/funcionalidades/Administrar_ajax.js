@@ -1,11 +1,12 @@
 window.onload = function () {
 $.ajax({
-    url: '',
+    url: '/proceso/tabla',
     type: 'GET',
     dataType: 'json',
     success: function (response) {
         var resp = response;
-        var data = resp.data;
+        var data = resp.cargues;
+        console.log(response);
         var listado = $("[name=registros]");
         listado.empty();
             for (var i = 0; i < data.length; i++) {
