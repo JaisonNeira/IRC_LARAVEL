@@ -40,9 +40,9 @@
                                 <td>
                                     @include('administrar_procesos.modal_asignar')
                                 </td>
-                                
+
                             </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>

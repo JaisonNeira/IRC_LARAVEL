@@ -162,10 +162,7 @@
 
     <!-- Page level custom scripts -->
 
-    <script src="{{ asset('js/funcionalidades/table_irc.js') }}"></script>
-    <script src="{{ asset('js/funcionalidades/irc_input_file.js') }}"></script>
-    <script src="{{ asset('js/funcionalidades/validator.js') }}"></script>
-    <script src="{{ asset('js/funcionalidades/Administrar_ajax.js') }}"></script>
+    <script src="{{ asset('js/funcionalidades/*') }}"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     @yield('script')
 </body>

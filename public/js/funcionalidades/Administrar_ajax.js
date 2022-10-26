@@ -24,7 +24,7 @@ $.ajax({
                         '</div>'+
                     '</td>'+
                      '<td>'+
-                        "@include('administrar_procesos.modal_asignar')"+
+                        "<?php @include('administrar_procesos.modal_asignar') ?>"+
                     '</td>'
                 );
             }
