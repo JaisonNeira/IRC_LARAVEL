@@ -7,11 +7,10 @@ $.ajax({
         var resp = response;
         var data = resp.cargues;
         console.log(response);
-        var listado = $("[name=registros]");
-        listado.empty();
+        var listado = document.getElementById('registros');
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
-                listado.append(
+                listado.innerHTML(
                     '<tr>' +
                     '<td>' + item['car_fecha_cargue'] + '</td>' +
                     '<td>' + item['car_mes'] + '</td>' +
