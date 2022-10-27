@@ -29,7 +29,7 @@ Route::get('/get/pdf/{codigo}', [App\Http\Controllers\ImportarController::class,
 /* PROCESOS */
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
 Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'index_tabla'])->name('proceso.index.tabla');
-Route::get('/proceso/c/estado/{id}', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
+Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
 /* PRO_AJAX */
 Route::get('/pro/convenio', [App\Http\Controllers\ProcesosController::class, 'dep_conv'])->name('conbo.convenio');
 
