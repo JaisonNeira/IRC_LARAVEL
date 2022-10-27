@@ -27,23 +27,26 @@
                         </thead>
                         <tbody style="background-color: #ffff; text-align: center;" id="registros" name="registros">
                             @foreach ($cargues as $list)
-                            <tr>
-                                <td>{{$list->car_fecha_cargue}}</td>
-                                <td>{{$list->car_mes}}</td>
-                                <td>{{$list->car_fecha_reporte}}</td>
-                                <td>{{$list->tpp_nombre}}</td>
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                        <label class="custom-control-label" for="customSwitch1" style=""></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' id='btn_asignar'>
-                                        <i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i>
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $list->car_fecha_cargue }}</td>
+                                    <td>{{ $list->car_mes }}</td>
+                                    <td>{{ $list->car_fecha_reporte }}</td>
+                                    <td>{{ $list->tpp_nombre }}</td>
+                                    <td>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="check_{{ $list->car_id }}">
+                                            <label class="custom-control-label" for="check_{{$list->car_id }}"
+                                                style=""></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type='button' class='btn btn-primary' data-toggle='modal'
+                                            data-target='#modal_{{ $list->car_id }}' id='btn_asignar'>
+                                            <i class='fa-solid fa-person-circle-plus text-center'
+                                                style='font-size: 20px;'></i>
+                                        </button>
+                                    </td>
+                                </tr>
                             @endforeach
 
                         </tbody>
@@ -53,7 +56,7 @@
         </div>
     </div>
 
-    @include('administrar_procesos.modal_asignar')
+
 
     {{-- <table class="table table-primary">
         <thead class="thead-primary">
