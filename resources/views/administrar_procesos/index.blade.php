@@ -43,7 +43,7 @@
 
                             </tr>
                             @endforeach --}}
-                        </tbody>
+                        </tbody>    
                     </table>
                 </div>
             </div>
