@@ -47,9 +47,31 @@ class ProcesosController extends Controller
 
     function actualizar_estado(request $request) {
 
-        cargue::where('car_id', $id)->update(['car_activo' => $request->estado]);
+        $id = $request->car_id;
 
-        return redirect()->back();
+        $cargue = cargue::where('car_id', $id)->get();
+
+        if($cargue[0]->car_estado == 1){
+            cargue::where('car_id', $id)->update(['car_estado' => 0]);
+            $e = 0;
+        }else if($cargue[0]->car_estado == 0){
+            cargue::where('car_id', $id)->update(['car_estado' => 1]);
+            $e = 1;
+        }else{
+            echo json_encode(
+                array(
+                    "success" => false,
+                    "estado" => "error!"
+                )
+            );
+        }
+
+        echo json_encode(
+            array(
+                "success" => true,
+                "estado" => $e
+            )
+        );
 
     }
 
@@ -156,37 +178,79 @@ class ProcesosController extends Controller
 
         switch ($tpp_id) {
             case 1:
+                /* INASISTIDOS */
+
                 $sql = "SELECT pro.pro_programa
+                FROM procesos AS pro
+                INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id."
+                GROUP BY pro.pro_progr";
+
+                break;
+            case 2:
+                /* SEGUIMIENTOS */
+
+                $sql = "SELECT seg.seg_convenio
+                FROM procesos AS pro
+                INNER JOIN seguimientos AS seg ON seg.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id."
+                GROUP BY seg.seg_convenio";
+
+                break;
+            case 3:
+                /* RECORDATORIOS */
+
+                $sql = "SELECT rec.rec_convenio
+                FROM procesos AS pro
+                INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id."
+                GROUP BY rec.rec_convenio";
+
+                break;
+            case 4:
+                /* HOSPITALIZADOS */
+
+                $sql = "SELECT hos.hos_convenio
+                FROM procesos AS pro
+                INNER JOIN hospitalizados AS hos ON hos.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id."
+                GROUP BY hos.hos_convenio";
+
+                break;
+            case 5:
+                /* BRIGADA */
+
+                $sql = "SELECT bri.bri_convenio
                 FROM procesos AS pro
                 INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = 1
-                GROUP BY pro.pro_programa";
-
-                break;
-            case 2:
-                $sql = "";
-
-                break;
-            case 3:
-                $sql = "";
-
-                break;
-            case 4:
-                $sql = "";
-
-                break;
-            case 5:
-                $sql = "";
+                AND pro.car_id = ".$car_id."
+                GROUP BY bri.bri_convenio";
 
                 break;
             case 6:
-                $sql = "";
+                /* REPROGRAMACION */
+
+                $sql = "SELECT rep.rep_convenio
+                FROM procesos AS pro
+                INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id."
+                GROUP BY rep.rep_convenio";
 
                 break;
             default:
-                # code...
+
                 break;
         }
 
