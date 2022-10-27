@@ -10,6 +10,8 @@
 @endsection
 
 @section('content')
+
+
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -27,34 +29,33 @@
                         </thead>
                         <tbody style="background-color: #ffff; text-align: center;" id="registros" name="registros">
                             @foreach ($cargues as $list)
-                                <tr>
-                                    <td>{{ $list->car_fecha_cargue }}</td>
-                                    <td>{{ $list->car_mes }}</td>
-                                    <td>{{ $list->car_fecha_reporte }}</td>
-                                    <td>{{ $list->tpp_nombre }}</td>
-                                    <td>
-                                        <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="check_{{ $list->car_id }}">
-                                            <label class="custom-control-label" for="check_{{$list->car_id }}"
-                                                style=""></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button type='button' class='btn btn-primary' data-toggle='modal'
-                                            data-target='#modal_{{ $list->car_id }}' id='btn_asignar'>
-                                            <i class='fa-solid fa-person-circle-plus text-center'
-                                                style='font-size: 20px;'></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{$list->car_fecha_cargue}}</td>
+                                <td>{{$list->car_mes}}</td>
+                                <td>{{$list->car_fecha_reporte}}</td>
+                                <td>{{$list->tpp_nombre}}</td>
+                                <td>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="estado_{{$list->car_id}}" onchange="cambio({{$list->car_id}})" @if($list->car_activo == "SI")checked @endif>
+                                        <label class="custom-control-label" for="estado_{{$list->car_id}}" style=""></label>
+                                        <input type="text" style="display: none" name="" id="" value="{{$list->car_id}}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#modal_{{$list->car_id}}' id='btn_asignar'>
+                                        <i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i>
+                                    </button>
+                                </td>
+                            </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('administrar_procesos.modal_asignar')
 
 
 
