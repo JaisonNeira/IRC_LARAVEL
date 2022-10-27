@@ -27,24 +27,6 @@ class ProcesosController extends Controller
 
 
     /* AJAX */
-/*     function index_tabla(){
-
-        $sql = "SELECT car.car_id, car.car_fecha_cargue, car.car_mes, car.car_fecha_reporte, tpp.tpp_id, tpp.tpp_nombre, car.car_activo
-        FROM cargues AS car
-        INNER JOIN tipos_procesos AS tpp ON car.tpp_id = tpp.tpp_id
-        WHERE car.car_estado = 1";
-
-        $cargues = DB::select($sql);
-
-        echo json_encode(
-            array(
-                "success" => true,
-                "cargues" => $cargues
-            )
-        );
-
-    } */
-
     function actualizar_estado(request $request) {
 
         $id = $request->car_id;
@@ -74,7 +56,6 @@ class ProcesosController extends Controller
         );
 
     }
-
 
     /* COMBOBOX */
     public function dep_conv(request $request){
@@ -276,6 +257,7 @@ class ProcesosController extends Controller
 
         $tpp_id = $request->tpp_id;
         $car_id = $request->car_id;
+        $programa = $request->programa;
 
         switch ($tpp_id) {
             case 1:
@@ -287,6 +269,7 @@ class ProcesosController extends Controller
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
                 AND pro.car_id = ".$car_id."
+                AND pro.pro_programa = '".$pro_programa."'
                 GROUP BY ina.ina_medico_especialidad";
 
                 break;
@@ -299,43 +282,47 @@ class ProcesosController extends Controller
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
                 AND pro.car_id = ".$car_id."
+                AND pro.pro_programa = '".$pro_programa."'
                 GROUP BY seg.sdi_especialidad";
 
                 break;
             case 3:
                 /* RECORDATORIOS */
 
-                $sql = "SELECT pro.pro_programa
+                $sql = "SELECT rec.rec_especialidad
                 FROM procesos AS pro
                 INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
                 AND pro.car_id = ".$car_id."
-                GROUP BY pro.pro_programa";
+                AND pro.pro_programa = '".$pro_programa."'
+                GROUP BY rec.rec_especialidad";
 
                 break;
             case 5:
                 /* BRIGADA */
 
-                $sql = "SELECT pro.pro_programa
+                $sql = "SELECT bri.bri_especialidad
                 FROM procesos AS pro
                 INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
                 AND pro.car_id = ".$car_id."
-                GROUP BY pro.pro_programa";
+                AND pro.pro_programa = '".$pro_programa."'
+                GROUP BY bri.bri_especialidad";
 
                 break;
             case 6:
                 /* REPROGRAMACION */
 
-                $sql = "SELECT pro.pro_programa
+                $sql = "SELECT rep.rep_especialidad
                 FROM procesos AS pro
                 INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
                 AND pro.car_id = ".$car_id."
-                GROUP BY pro.pro_programa";
+                AND pro.pro_programa = '".$pro_programa."'
+                GROUP BY rep.rep_especialidad";
 
                 break;
             default:
@@ -357,19 +344,36 @@ class ProcesosController extends Controller
 
     public function esp_mun(request $request){
 
-        $sql = "SELECT c.CAM_ID, c.CAM_NOMBRE
-        FROM contratos co
-        INNER JOIN campanas c
-        WHERE co.CON_ESTADO = 1
-        AND co.CAM_ID = c.CAM_ID
-        AND co.CLI_ID = ".$request->CLI_ID;
+        $tpp_id = $request->tpp_id;
+        $car_id = $request->car_id;
+        $especialidad = $request->especialidad;
 
-        $campana = DB::select($sql);
+        switch ($tpp_id) {
+            case 2:
+                /* INASISTIDOS */
+
+                $sql = "SELECT mun.mun_id, mun.mun_nombre
+                FROM procesos AS pro
+                INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id."
+                AND bri.bri_especialidad = '".$especialidad."'
+                GROUP BY mun.mun_id, mun.mun_nombre";
+
+                break;
+            default:
+
+                break;
+        }
+
+        $especialidad = DB::select($sql);
 
         echo json_encode(
             array(
                 "success" => true,
-                "campana" => $campana
+                "especialidad" => $especialidad
             )
         );
 
