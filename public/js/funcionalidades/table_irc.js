@@ -13,6 +13,7 @@ $(document).ready( function () {
             "url"
         }
     });
+    table.ajax.reload();
 } );
 
 $(document).ready( function () {
