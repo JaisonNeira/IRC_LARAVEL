@@ -1,4 +1,4 @@
-window.onload = function () {
+/* window.onload = function () {
 $.ajax({
     url: '/proceso/tabla',
     type: 'GET',
@@ -24,10 +24,12 @@ $.ajax({
                         '</div>'+
                     '</td>'+
                      '<td>'+
-                        "<?php @include('administrar_procesos.modal_asignar') ?>"+
+                        "<button type'button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' id='btn_asignar'>"+
+                        "<i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i>"+
+                        "</button>"+
                     '</td>'
                 );
-            }
+            }X
     },
     error: function (jqXHR) {
         console.log('error!');
@@ -35,3 +37,4 @@ $.ajax({
 });
 
 }
+ */

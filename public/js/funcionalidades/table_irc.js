@@ -8,6 +8,7 @@ $(document).ready( function () {
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
     });
+    table.ajax.reload();
 } );
 
 $(document).ready( function () {

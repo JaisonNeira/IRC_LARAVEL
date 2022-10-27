@@ -1,6 +1,3 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="btn_asignar">
-    <i class="fa-solid fa-person-circle-plus text-center" style="font-size: 20px;"></i>
-</button>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -19,21 +16,6 @@
 
 
                         <div class="d-flex flex-row ml-3">
-                                <div class="flex-column">
-                                    {{-- select programa  --}}
-                                    <select class="custom-select" id="programa">
-                                        <option selected disabled>Programa</option>
-                                        <option value="1">One</option>
-                                    </select>
-                                </div>
-
-                                {{-- select convenio --}}
-                                <div class="flex-column">
-                                    <select class="custom-select" id="convenio">
-                                        <option selected disabled>Convenio</option>
-                                        <option value="1">One</option>
-                                    </select>
-                                </div>
 
                                 {{-- select departamento --}}
                                 <div class="flex-column">
@@ -42,13 +24,7 @@
                                         <option value="1">One</option>
                                     </select>
                                 </div>
-                                <div class="flex-column">
-                                    {{-- select especialidad --}}
-                                    <select class="custom-select" id="especialidad">
-                                        <option selected disabled>Especialidad</option>
-                                        <option value="1">One</option>
-                                    </select>
-                                </div>
+
                                 {{-- select Municipio --}}
                                 <div class="flex-column">
                                     <select class="custom-select" id="municipio">
@@ -56,6 +32,24 @@
                                         <option value="1">One</option>
                                     </select>
                                 </div>
+
+                                <div class="flex-column">
+                                    {{-- select programa  --}}
+                                    <select class="custom-select" id="programa">
+                                        <option selected disabled>Programa</option>
+                                        <option value="1">One</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex-column">
+                                    {{-- select especialidad --}}
+                                    <select class="custom-select" id="especialidad">
+                                        <option selected disabled>Especialidad</option>
+                                        <option value="1">One</option>
+                                    </select>
+                                </div>
+
+
                                 {{-- select punto de acopio --}}
                                 <div class="flex-column">
                                     <select class="custom-select" id="punto_de_acopio">

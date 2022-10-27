@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\Models\brigada;
+use App\Models\municipio;
+use App\Models\departamento;
 use App\Models\tipos_identificacione;
 use App\Models\cargue;
 use App\Models\proceso;
@@ -39,14 +41,16 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         $this->r_leidos = $this->r_leidos+1;
 
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
+        $departamento = departamento::where('dep_nombre', '=', $row['departamento'])->get();
+        $municipio = municipio::where('mun_nombre', '=', $row['municipio'])->get();
 
         $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
 
         if($validador_pac == 0){
             $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
-            /* dd(intval($ti[0]->tip_id)); */
+            /* dd(intval($municipio[0]->mun_id)); */
             $paciente = paciente::create([
-                'tip_id' => 1,
+                'tip_id' => $ti[0]->tip_id,
                 'pac_identificacion' => $row['numero_de_documento'],
                 'pac_primer_nombre' => $row['primer_nombre'],
                 'pac_segundo_nombre' => $row['segundo_nombre'],
@@ -55,8 +59,8 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
                 'pac_nombre_completo' => $nombre_completo,
                 'pac_telefono' => $row['telefono'],
                 'pac_fecha_nacimiento' => $row['fecha_nacimiento'],
-                'pac_departamento' => $row['departamento'],
-                'pac_municipio' => $row['municipio'],
+                'dep_id' => $departamento[0]->dep_id,
+                'mun_id' => $municipio[0]->mun_id,
                 'pac_direccion' => $row['direccion'],
                 'pac_sexo' => $row['sexo'],
                 'pac_regimen_afiliacion_SGSS' => $row['regimen_afiliacion_sgss']
@@ -90,7 +94,8 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
             $proceso = proceso::create([
                 'car_id' => $this->car_id,
                 'pac_id' => $pac_id,
-                'pro_prioridad' => $row['prioridad']
+                'pro_prioridad' => $row['prioridad'],
+                'pro_programa' => $row['programa']
             ]);
 
             $brigada = brigada::create([

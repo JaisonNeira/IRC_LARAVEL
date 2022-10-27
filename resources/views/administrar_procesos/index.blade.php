@@ -26,11 +26,12 @@
                             </tr>
                         </thead>
                         <tbody style="background-color: #ffff; text-align: center;" id="registros" name="registros">
-                            {{-- @foreach ($cargues as $list)
+                            @foreach ($cargues as $list)
                             <tr>
                                 <td>{{$list->car_fecha_cargue}}</td>
                                 <td>{{$list->car_mes}}</td>
-                                <td>{{$list->"falta tipo de proceso"}}</td>
+                                <td>{{$list->car_fecha_reporte}}</td>
+                                <td>{{$list->tpp_nombre}}</td>
                                 <td>
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="customSwitch1">
@@ -38,17 +39,23 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @include('administrar_procesos.modal_asignar')
+                                    <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' id='btn_asignar'>
+                                        <i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i>
+                                    </button>
+                                    
                                 </td>
 
                             </tr>
-                            @endforeach --}}
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    @include('administrar_procesos.modal_asignar')
 
     {{-- <table class="table table-primary">
         <thead class="thead-primary">
