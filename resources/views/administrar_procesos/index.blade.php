@@ -44,7 +44,6 @@
                                     </button>
 
                                 </td>
-
                             </tr>
                             @endforeach
 

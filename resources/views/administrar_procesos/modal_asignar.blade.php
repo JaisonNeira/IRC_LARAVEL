@@ -14,47 +14,73 @@
                             <h5>Escoge el tipo de segmentacion</h5>
                         </div>
 
+                        @php
+                            use app\models\departamento;
+                            use DB;
+
+                            $sql = "SELECT dep.dep_id, dep.dep_nombre
+                                    FROM procesos AS pro
+                                    INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
+                                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                                    INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+                                    WHERE pro.pro_estado = 1
+                                    AND pro.car_id = ".$list->car_id."
+                                    GROUP BY dep.dep_id";
+                            $departamentos = DB::select($sql);
+                        @endphp
 
                         <div class="d-flex flex-row ml-3">
 
                                 {{-- select departamento --}}
                                 <div class="flex-column">
-                                    <select class="custom-select" id="departamento">
-                                        <option selected disabled>Departamento</option>
-                                        <option value="1">One</option>
+                                    <select class="custom-select" id="departamento" required>
+
+                                        <option class="form-control" selected disabled>-- Seleccione --</option>
+                                        @foreach ($departamentos as $dep)
+                                            <option value="{{ $dep->dep_id }}">{{ $dep->dep_nombre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
-                                {{-- select Municipio --}}
+
                                 <div class="flex-column">
-                                    <select class="custom-select" id="municipio">
-                                        <option selected disabled>Municipio</option>
-                                        <option value="1">One</option>
+                                    {{-- select convenio  --}}
+                                    <select class="custom-select" id="convenio">
+
                                     </select>
                                 </div>
 
                                 <div class="flex-column">
                                     {{-- select programa  --}}
                                     <select class="custom-select" id="programa">
-                                        <option selected disabled>Programa</option>
-                                        <option value="1">One</option>
+
                                     </select>
                                 </div>
 
                                 <div class="flex-column">
                                     {{-- select especialidad --}}
                                     <select class="custom-select" id="especialidad">
-                                        <option selected disabled>Especialidad</option>
-                                        <option value="1">One</option>
+
                                     </select>
                                 </div>
 
+                                {{-- select Municipio --}}
+                                <div class="flex-column">
+                                    <select class="custom-select" id="municipio">
+
+                                    </select>
+                                </div>
 
                                 {{-- select punto de acopio --}}
                                 <div class="flex-column">
                                     <select class="custom-select" id="punto_de_acopio">
-                                        <option selected disabled>Punto de acopio</option>
-                                        <option value="1">One</option>
+
+                                    </select>
+                                </div>
+                                {{-- select punto de acopio --}}
+                                <div class="flex-column">
+                                    <select class="custom-select" id="punto_de_acopio">
+
                                     </select>
                                 </div>
                         </div>
