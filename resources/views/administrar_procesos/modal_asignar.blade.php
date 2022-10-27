@@ -16,7 +16,7 @@
 
                         @php
                             use app\models\departamento;
-                            use DB;
+                            use Illuminate\Support\Facades\DB;
 
                             $sql = "SELECT dep.dep_id, dep.dep_nombre
                                     FROM procesos AS pro
@@ -25,7 +25,7 @@
                                     INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
                                     WHERE pro.pro_estado = 1
                                     AND pro.car_id = ".$list->car_id."
-                                    GROUP BY dep.dep_id";
+                                    GROUP BY dep.dep_id, dep.dep_nombre";
                             $departamentos = DB::select($sql);
                         @endphp
 
