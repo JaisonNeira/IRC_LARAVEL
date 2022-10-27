@@ -35,7 +35,7 @@
                                 <div class="flex-column">
                                     <select class="custom-select" id="departamento" required>
 
-                                        <option class="form-control" selected disabled>-- Seleccione --</option>
+                                        <option class="form-control" selected disabled>Departamento</option>
                                         @foreach ($departamentos as $dep)
                                             <option value="{{ $dep->dep_id }}">{{ $dep->dep_nombre }}</option>
                                         @endforeach

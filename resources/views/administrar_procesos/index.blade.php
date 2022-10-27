@@ -42,7 +42,6 @@
                                     <button type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal' id='btn_asignar'>
                                         <i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i>
                                     </button>
-
                                 </td>
                             </tr>
                             @endforeach

@@ -6,14 +6,8 @@ $(document).ready( function () {
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-
-
-        "ajax": {
-            "url"
-        }
+        ]
     });
-    table.ajax.reload();
 } );
 
 $(document).ready( function () {
