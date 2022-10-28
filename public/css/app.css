@@ -168,5 +168,11 @@ display: none;
 box-shadow: 2px 2px 2px 2px rgba(189, 186, 186, 0.288);
 }
 
-
+.custpm_span{
+background-color: #26c926;
+border: 1px solid #000000;
+-moz-border-radius: 7px;
+-webkit-border-radius: 7px;
+padding: 10px;
+}
 

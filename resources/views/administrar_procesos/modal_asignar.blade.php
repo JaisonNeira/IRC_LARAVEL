@@ -18,51 +18,52 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 mb-2" style="text-align: left">
+                            <div class="col-6 mb-2" style="text-align: left">
                                 <h5>Escoge el tipo de segmentacion</h5>
                             </div>
-                            @php
-                                //Departamento
-                                $sql =
-                                    "SELECT dep.dep_id, dep.dep_nombre
-                                        FROM procesos AS pro
-                                        INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                                        INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
-                                        WHERE pro.pro_estado = 1
-                                        AND pro.car_id = ".$modales->car_id.
-                                    ' GROUP BY dep.dep_id, dep.dep_nombre';
-                                $departamentos = DB::select($sql);
+                            <div class="col-6 mb-2 text-right" style="text-align: left">
+                                <h6>Registros encontrados: <span class="custom_span" id=registros></span> </h6>
+                            </div>
+                                @php
+                                    //Departamento
+                                    $sql =
+                                        "SELECT dep.dep_id, dep.dep_nombre
+                                            FROM procesos AS pro
+                                            INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                                            INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+                                            WHERE pro.pro_estado = 1
+                                            AND pro.car_id = ".$modales->car_id.
+                                        ' GROUP BY dep.dep_id, dep.dep_nombre';
+                                    $departamentos = DB::select($sql);
 
-                                //Municipio
-                                $sql2 =
-                                    "SELECT mun.mun_id, mun.mun_nombre
-                                       FROM procesos AS pro
-                                       INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                                       INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
-                                       WHERE pro.pro_estado = 1
-                                       AND pro.car_id = " .$modales->car_id.
-                                    ' GROUP BY mun.mun_id, mun.mun_nombre';
-                                $municipio = DB::select($sql2);
-
-                                //Prioridad
-                                $sql3 =
-                                    "SELECT pro.pro_prioridad
+                                    //Municipio
+                                    $sql2 =
+                                        "SELECT mun.mun_id, mun.mun_nombre
                                         FROM procesos AS pro
                                         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                                         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
                                         WHERE pro.pro_estado = 1
-                                        AND pro.car_id =" .$modales->car_id.
-                                      ' GROUP BY pro.pro_prioridad';
-                                $prioridad = DB::select($sql3);
-                            @endphp
+                                        AND pro.car_id = " .$modales->car_id.
+                                        ' GROUP BY mun.mun_id, mun.mun_nombre';
+                                    $municipio = DB::select($sql2);
 
-
+                                    //Prioridad
+                                    $sql3 =
+                                        "SELECT pro.pro_prioridad
+                                            FROM procesos AS pro
+                                            INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                                            INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+                                            WHERE pro.pro_estado = 1
+                                            AND pro.car_id =" .$modales->car_id.
+                                        ' GROUP BY pro.pro_prioridad';
+                                    $prioridad = DB::select($sql3);
+                                @endphp
                             <div class="d-flex flex-row ml-3 text-center">
                                 {{-- -->  inicio los que siempre salen  <-- --}}
                                 {{-- select departamento --}}
                                 <div class="flex-column">
-                                    <select class="custom-select" id="departamento" required>
-                                        <option class="form-control" selected disabled>Departamento</option>
+                                    <select class="custom-select" id="departamento" onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})" >
+                                        <option class="form-control" value="" selected disabled>Departamento</option>
                                         @foreach ($departamentos as $dep)
                                             <option value="{{ $dep->dep_id }}">{{ $dep->dep_nombre }}</option>
                                         @endforeach
@@ -71,8 +72,8 @@
 
                                 {{-- select Municipio --}}
                                 <div class="flex-column">
-                                    <select class="custom-select" id="municipio">
-                                        <option class="form-control" selected disabled>Municipio</option>
+                                    <select class="custom-select" id="municipio" onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})">
+                                        <option class="form-control" value="" selected disabled>Municipio</option>
                                         @foreach ($municipio as $mun)
                                             <option value="{{ $mun->mun_id }}">{{ $mun->mun_nombre }}</option>
                                         @endforeach
@@ -81,8 +82,8 @@
 
                                 {{-- select prioridad --}}
                                 <div class="flex-column">
-                                    <select class="custom-select" id="prioridad">
-                                        <option class="form-control" selected disabled>Prioridad</option>
+                                    <select class="custom-select" id="prioridad"  onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})">
+                                        <option class="form-control" value="" selected disabled>Prioridad</option>
                                         @foreach ($prioridad as $prio)
                                             <option value="{{ $prio->pro_prioridad }}">{{ $prio->pro_prioridad }}
                                             </option>
@@ -142,8 +143,8 @@
                                         }
                                     @endphp
                                     <div class="flex-column">
-                                        <select class="custom-select" id="convenio">
-                                            <option class="form-control" selected disabled>Convenio</option>
+                                        <select class="custom-select" id="convenio" onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})">
+                                            <option class="form-control" value="" selected disabled>Convenio</option>
                                             @foreach ($convenio as $conv)
                                                 <option value="{{ $conv->convenio }}">{{ $conv->convenio }}
                                                 </option>
@@ -165,8 +166,8 @@
                                         $programa = DB::select($sql_espe_hosp);
                                     @endphp
                                     <div class="flex-column">
-                                        <select class="custom-select" id="programa">
-                                            <option class="form-control" selected disabled>Programa</option>
+                                        <select class="custom-select" id="programa"  onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})">
+                                            <option class="form-control" value="" selected disabled>Programa</option>
                                             @foreach ($programa as $pro)
                                                 <option value="{{ $pro->programa }}">{{ $pro->programa }}
                                                 </option>
@@ -176,7 +177,7 @@
                                 @endif
 
                                 {{-- select especialidad --}}
-                                @if ($modales->tpp_id == 1 || $modales->tpp_id == 2 || $modales->tpp_id == 3 || $modales->tpp_id == 6)
+                                @if ($modales->tpp_id == 1 || $modales->tpp_id == 2 || $modales->tpp_id == 3 || $modales->tpp_id == 5 || $modales->tpp_id == 6)
                                     @php
                                         switch ($modales->tpp_id) {
                                             case 1:
@@ -210,6 +211,16 @@
                                                                     " GROUP BY rec.rec_especialidad";
                                                  $especialidad = DB::select($sql_espe_reco);
                                                 break;
+                                            case 5:
+                                                $sql_espe_bri = "SELECT bri.bri_especialidad as especialidad
+                                                                    FROM procesos AS pro
+                                                                    INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
+                                                                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                                                                    WHERE pro.pro_estado = 1
+                                                                    AND pro.car_id = ".$modales->car_id.
+                                                                    " GROUP BY bri.bri_especialidad";
+                                                 $especialidad = DB::select($sql_espe_bri);
+                                                break;
                                             case 6:
                                                 $sql_espe_repo = "SELECT rep.rep_especialidad as especialidad
                                                                     FROM procesos AS pro
@@ -227,8 +238,8 @@
                                         }
                                     @endphp
                                     <div class="flex-column">
-                                        <select class="custom-select" id="especialidad">
-                                            <option class="form-control" selected disabled>Especialidad</option>
+                                        <select class="custom-select" id="especialidad"  onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})">
+                                            <option class="form-control" value="" selected disabled>Especialidad</option>
                                             @foreach ($especialidad as $esp)
                                                 <option value="{{ $esp->especialidad }}">{{ $esp->especialidad }}
                                                 </option>
@@ -251,8 +262,8 @@
 
                                     @endphp
                                     <div class="flex-column">
-                                        <select class="custom-select" id="punto_de_acopio">
-                                            <option class="form-control" selected disabled>Punto de acopio</option>
+                                        <select class="custom-select" id="punto_de_acopio"  onchange="consulta({{$modales->car_id}}, {{$modales->tpp_id}})">
+                                            <option class="form-control" value="" selected disabled>Punto de acopio</option>
                                             @foreach ($punto_acopio as $punto)
                                                 <option value="{{ $punto->punto_acopio }}">{{ $punto->punto_acopio }}
                                                 </option>
