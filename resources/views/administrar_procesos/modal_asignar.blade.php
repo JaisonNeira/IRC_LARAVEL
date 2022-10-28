@@ -368,8 +368,8 @@
                             </div>
                         </div>
                     </div>
-                    <input type="text" name="tpp_id" id="tpp" value="{{$modales->tpp_id}}">
-                    <input type="text" name="car_id" id="car" value="{{$modales->car_id}}">
+                    <input type="text" name="tpp_id" id="tpp" value="{{$modales->tpp_id}}" style="display: none">
+                    <input type="text" name="car_id" id="car" value="{{$modales->car_id}}" style="display: none">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Asignar agentes</button>
                     </div>
