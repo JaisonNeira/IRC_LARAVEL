@@ -31,7 +31,7 @@ Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index']
 Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'index_tabla'])->name('proceso.index.tabla');
 Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
 /* PRO_AJAX */
-Route::get('/pro/convenio', [App\Http\Controllers\ProcesosController::class, 'dep_conv'])->name('conbo.convenio');
+Route::get('/filtro/consulta', [App\Http\Controllers\ProcesosController::class, 'filtro'])->name('conbo.filtro');
 
 
 /* GESTIONAR */

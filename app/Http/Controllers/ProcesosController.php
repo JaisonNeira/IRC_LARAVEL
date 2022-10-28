@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProcesosController extends Controller
 {
+
     function index(){
 
         $sql = "SELECT car.car_id, car.car_fecha_cargue, car.car_mes, car.car_fecha_reporte, tpp.tpp_id, tpp.tpp_nombre, car.car_activo
@@ -24,7 +25,6 @@ class ProcesosController extends Controller
 
         return view('administrar_procesos.index', compact('cargues', 'agentes'));
     }
-
 
     /* AJAX */
     function actualizar_estado(request $request) {
@@ -58,326 +58,245 @@ class ProcesosController extends Controller
     }
 
     /* COMBOBOX */
-    public function dep_conv(request $request){
+    public function filtro(request $request){
 
         $tpp_id = $request->tpp_id;
         $car_id = $request->car_id;
+        $dep = $request->dep;
+        $mun = $request->mun;
+        $pri = $request->pri;
+        $con = $request->con;
+        $esp = $request->esp;
+        $pro = $request->pro;
+        $pa = $request->pa;
 
         switch ($tpp_id) {
             case 1:
                 /* INASISTIDOS */
 
-                $sql = "SELECT ina.ina_convenio
+                $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
                 FROM procesos AS pro
                 INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                GROUP BY ina.ina_convenio";
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND ina.ina_convenio_nombre = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND ina.ina_medico_especialidad	 = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
 
                 break;
             case 2:
                 /* SEGUIMIENTOS */
 
-                $sql = "SELECT seg.seg_convenio
+                $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
                 FROM procesos AS pro
-                INNER JOIN seguimientos AS seg ON seg.pro_id = pro.pro_id
+                INNER JOIN seguimientos_demandas_inducidas AS seg ON seg.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                GROUP BY seg.seg_convenio";
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND seg.sdi_especialidad = '".$esp."'";
+                }
+
+
+                $cant = DB::select($filtro_sql);
 
                 break;
             case 3:
                 /* RECORDATORIOS */
 
-                $sql = "SELECT rec.rec_convenio
+                $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
                 FROM procesos AS pro
                 INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                GROUP BY rec.rec_convenio";
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND rec.rec_convenio = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND rec.rec_especialidad = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
 
                 break;
             case 4:
                 /* HOSPITALIZADOS */
 
-                $sql = "SELECT hos.hos_convenio
+                $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
                 FROM procesos AS pro
                 INNER JOIN hospitalizados AS hos ON hos.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                GROUP BY hos.hos_convenio";
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($pro != ""){
+                    $filtro_sql = $filtro_sql." AND hos.hos_programa = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
 
                 break;
             case 5:
                 /* BRIGADA */
 
-                $sql = "SELECT bri.bri_convenio
+                $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
                 FROM procesos AS pro
                 INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                GROUP BY bri.bri_convenio";
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND bri.bri_convenio = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND bri.bri_especialidad = '".$esp."'";
+                }
+
+                if($pa != ""){
+                    $filtro_sql = $filtro_sql."AND bri.bri_punto_acopio = '".$pa."'";;
+                }
+
+
+                $cant = DB::select($filtro_sql);
 
                 break;
             case 6:
                 /* REPROGRAMACION */
 
-                $sql = "SELECT rep.rep_convenio
+                $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
                 FROM procesos AS pro
                 INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                GROUP BY rep.rep_convenio";
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND rep.rep_convenio = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND rep.rep_especialidad = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
 
                 break;
             default:
 
-                break;
-        }
-
-        $convenios = DB::select($sql);
-
-        echo json_encode(
-            array(
-                "success" => true,
-                "convenios" => $convenios
-            )
-        );
-
-    }
-
-    public function con_pro(request $request){
-
-        $tpp_id = $request->tpp_id;
-        $car_id = $request->car_id;
-        $convenio = $request->convenio;
-
-        switch ($tpp_id) {
-            case 1:
-                /* INASISTIDOS */
-
-                $sql = "SELECT pro.pro_programa
-                FROM procesos AS pro
-                INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND ina.ina_convenio_nombre = ".$convenio."
-                GROUP BY pro.pro_progr";
-
-                break;
-            case 2:
-                /* SEGUIMIENTOS */
-
-                $sql = "SELECT pro.pro_programa
-                FROM procesos AS pro
-                INNER JOIN seguimientos AS seg ON seg.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND seg.sdi_convenio = ".$convenio."
-                GROUP BY pro.pro_programa";
-
-                break;
-            case 3:
-                /* RECORDATORIOS */
-
-                $sql = "SELECT pro.pro_programa
-                FROM procesos AS pro
-                INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND rec.rec_convenio = ".$convenio."
-                GROUP BY pro.pro_programa";
-
-                break;
-            case 4:
-                /* HOSPITALIZADOS */
-
-                $sql = "SELECT pro.pro_programa
-                FROM procesos AS pro
-                INNER JOIN hospitalizados AS hos ON hos.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND rec.rec_convenio = ".$convenio."
-                GROUP BY pro.pro_programa";
-
-                break;
-            case 5:
-                /* BRIGADA */
-
-                $sql = "SELECT pro.pro_programa
-                FROM procesos AS pro
-                INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND bri.bri_convenio = ".$convenio."
-                GROUP BY pro.pro_programa";
-
-                break;
-            case 6:
-                /* REPROGRAMACION */
-
-                $sql = "SELECT pro.pro_programa
-                FROM procesos AS pro
-                INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND rep.rep_convenio = ".$convenio."
-                GROUP BY pro.pro_programa";
-
-                break;
-            default:
+                $filtro_sql = "";
 
                 break;
         }
 
-        $programas = DB::select($sql);
+        if($filtro_sql != ""){
+            $convenios = DB::select($filtro_sql);
 
-        echo json_encode(
-            array(
-                "success" => true,
-                "programas" => $programas
-            )
-        );
-
-    }
-
-    public function pro_Esp_mas(request $request){
-
-        $tpp_id = $request->tpp_id;
-        $car_id = $request->car_id;
-        $programa = $request->programa;
-
-        switch ($tpp_id) {
-            case 1:
-                /* INASISTIDOS */
-
-                $sql = "SELECT ina.ina_medico_especialidad
-                FROM procesos AS pro
-                INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND pro.pro_programa = '".$pro_programa."'
-                GROUP BY ina.ina_medico_especialidad";
-
-                break;
-            case 2:
-                /* SEGUIMIENTOS */
-
-                $sql = "SELECT seg.sdi_especialidad
-                FROM procesos AS pro
-                INNER JOIN seguimientos AS seg ON seg.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND pro.pro_programa = '".$pro_programa."'
-                GROUP BY seg.sdi_especialidad";
-
-                break;
-            case 3:
-                /* RECORDATORIOS */
-
-                $sql = "SELECT rec.rec_especialidad
-                FROM procesos AS pro
-                INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND pro.pro_programa = '".$pro_programa."'
-                GROUP BY rec.rec_especialidad";
-
-                break;
-            case 5:
-                /* BRIGADA */
-
-                $sql = "SELECT bri.bri_especialidad
-                FROM procesos AS pro
-                INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND pro.pro_programa = '".$pro_programa."'
-                GROUP BY bri.bri_especialidad";
-
-                break;
-            case 6:
-                /* REPROGRAMACION */
-
-                $sql = "SELECT rep.rep_especialidad
-                FROM procesos AS pro
-                INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND pro.pro_programa = '".$pro_programa."'
-                GROUP BY rep.rep_especialidad";
-
-                break;
-            default:
-
-                break;
+            echo json_encode(
+                array(
+                    "success" => true,
+                    "cantidad" => $convenios[0]->cantidad
+                )
+            );
+        }else{
+            echo json_encode(
+                array(
+                    "success" => false,
+                    "error" => "tpp_id no valido!"
+                )
+            );
         }
 
-        $especialidad = DB::select($sql);
 
-
-        echo json_encode(
-            array(
-                "success" => true,
-                "especialidad" => $especialidad
-            )
-        );
 
     }
 
-    public function esp_mun(request $request){
 
-        $tpp_id = $request->tpp_id;
-        $car_id = $request->car_id;
-        $especialidad = $request->especialidad;
-
-        switch ($tpp_id) {
-            case 2:
-                /* INASISTIDOS */
-
-                $sql = "SELECT mun.mun_id, mun.mun_nombre
-                FROM procesos AS pro
-                INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
-                WHERE pro.pro_estado = 1
-                AND pro.car_id = ".$car_id."
-                AND bri.bri_especialidad = '".$especialidad."'
-                GROUP BY mun.mun_id, mun.mun_nombre";
-
-                break;
-            default:
-
-                break;
-        }
-
-        $especialidad = DB::select($sql);
-
-        echo json_encode(
-            array(
-                "success" => true,
-                "especialidad" => $especialidad
-            )
-        );
-
-    }
 
 
 }
