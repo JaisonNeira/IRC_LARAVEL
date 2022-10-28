@@ -1,16 +1,17 @@
-function consulta(car_id, tpp_id){
-    var departamento = document.getElementById("departamento");
-    var dep = departamento.value;
-    var municipio = document.getElementById("municipio");
-    var mun = municipio.value;
-    var prioridad = document.getElementById("prioridad");
-    var pri = prioridad.value;
-    var convenio = document.getElementById("convenio");
-    var especialidad = document.getElementById("especialidad");
-    var punto_de_acopio = document.getElementById("punto_de_acopio");
-    var programa = document.getElementById("programa");
-    var registro_span = document.getElementById("registro_span");
 
+function consulta(car_id, tpp_id){
+
+    var departamento = document.getElementById("departamento_"+car_id);
+    var dep = departamento.value;
+    var municipio = document.getElementById("municipio_"+car_id);
+    var mun = municipio.value;
+    var prioridad = document.getElementById("prioridad_"+car_id);
+    var pri = prioridad.value;
+    var convenio = document.getElementById("convenio_"+car_id);
+    var especialidad = document.getElementById("especialidad_"+car_id);
+    var punto_de_acopio = document.getElementById("punto_de_acopio_"+car_id);
+    var programa = document.getElementById("programa_"+car_id);
+    var registro_span = document.getElementById("registro_span_"+car_id);
 
   switch (tpp_id) {
     //Inasisitidos
@@ -104,27 +105,37 @@ function consulta(car_id, tpp_id){
         break;
   }
 
-console.log(sendData);
+// console.log(sendData);
   $.ajax({
     url: '/filtro/consulta',
     type: 'GET',
     dataType: 'json',
     data: sendData,
-     beforeSend: function () {
+    /* beforeSend: function () {
         console.log('enviada');
     },
     complete: function () {
         console.log('completada');
-    },
+    }, */
     success: function (response) {
         var cantidad = response.cantidad;
         registro_span.innerHTML = cantidad;
-        console.log(response);
+
+        if(registro_span.textContent == "" || registro_span.textContent == 0){
+            registro_span.style.background = "rgb(175, 32, 32)";
+         }else{
+            registro_span.style.background = "rgb(30, 160, 89)";
+         }
     },
     error: function (jqXHR) {
         console.log('error!');
     }
 });
+
+}
+
+
+function valida_agentes(){
 
 }
 
