@@ -86,11 +86,11 @@ class ProcesosController extends Controller
                 }
 
                 if($mun != ""){
-                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
                 }
 
                 if($pri != ""){
-                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
                 }
 
                 if($con != ""){
@@ -119,11 +119,11 @@ class ProcesosController extends Controller
                 }
 
                 if($mun != ""){
-                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
                 }
 
                 if($pri != ""){
-                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
                 }
 
                 if($esp != ""){
@@ -149,11 +149,11 @@ class ProcesosController extends Controller
                 }
 
                 if($mun != ""){
-                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
                 }
 
                 if($pri != ""){
-                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
                 }
 
                 if($con != ""){
@@ -182,11 +182,11 @@ class ProcesosController extends Controller
                 }
 
                 if($mun != ""){
-                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
                 }
 
                 if($pri != ""){
-                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
                 }
 
                 if($pro != ""){
@@ -211,11 +211,11 @@ class ProcesosController extends Controller
                 }
 
                 if($mun != ""){
-                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
                 }
 
                 if($pri != ""){
-                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
                 }
 
                 if($con != ""){
@@ -227,7 +227,7 @@ class ProcesosController extends Controller
                 }
 
                 if($pa != ""){
-                    $filtro_sql = $filtro_sql."AND bri.bri_punto_acopio = '".$pa."'";;
+                    $filtro_sql = $filtro_sql." AND bri.bri_punto_acopio = '".$pa."'";;
                 }
 
 
@@ -249,11 +249,11 @@ class ProcesosController extends Controller
                 }
 
                 if($mun != ""){
-                    $filtro_sql = $filtro_sql."AND pac.mun_id = ".$mun;
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
                 }
 
                 if($pri != ""){
-                    $filtro_sql = $filtro_sql."AND pro.pro_prioridad = ".$pri;
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
                 }
 
                 if($con != ""){
@@ -296,7 +296,11 @@ class ProcesosController extends Controller
 
     }
 
+    public function asignar_segmentar(request $request){
 
+
+
+    }
 
 
 }
