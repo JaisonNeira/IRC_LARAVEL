@@ -34,7 +34,7 @@
                                 <td>{{$list->car_mes}}</td>
                                 <td>{{$list->car_fecha_reporte}}</td>
                                 <td>{{$list->tpp_nombre}}</td>
-                                <td>
+                                <td style="padding-top: 20px;">
                                     <div class="custom-control custom-switch">
                                         <input type="checkbox" class="custom-control-input" id="estado_{{$list->car_id}}" onchange="cambio({{$list->car_id}})" @if($list->car_activo == "SI")checked @endif>
                                         <label class="custom-control-label" for="estado_{{$list->car_id}}" style=""></label>
