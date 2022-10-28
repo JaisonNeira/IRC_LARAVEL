@@ -21,7 +21,12 @@ class ProcesosController extends Controller
 
         $cargues = DB::select($sql);
 
-        $agentes = agente::where('age_estado', '=', '1')->get();
+        $sql2 = "SELECT age.age_id, age.tip_id, age.age_documento, usu.id ,usu.name, usu.email
+        FROM agentes AS age
+        INNER JOIN users AS usu ON usu.id = age.user_id
+        WHERE age.age_estado = 1";
+
+        $agentes = DB::select($sql2);
 
         return view('administrar_procesos.index', compact('cargues', 'agentes'));
     }
@@ -275,12 +280,12 @@ class ProcesosController extends Controller
         }
 
         if($filtro_sql != ""){
-            $convenios = DB::select($filtro_sql);
+            $cantidad = DB::select($filtro_sql);
 
             echo json_encode(
                 array(
                     "success" => true,
-                    "cantidad" => $convenios[0]->cantidad
+                    "cantidad" => $cantidad[0]->cantidad
                 )
             );
         }else{
@@ -298,6 +303,254 @@ class ProcesosController extends Controller
 
     public function asignar_segmentar(request $request){
 
+        /* $agentes = $request->ids;
+
+        if($agentes == null){
+            return redirect()->back()->with('warmessage', 'Tiene que seleccionar por lo menos un agente!...');
+        } */
+
+        $tpp_id = $request->tpp_id;
+        $car_id = $request->car_id;
+        $dep = $request->dep;
+        $mun = $request->mun;
+        $pri = $request->pri;
+        $con = $request->con;
+        $esp = $request->esp;
+        $pro = $request->pro;
+        $pa = $request->pa;
+
+        switch ($tpp_id) {
+            case 1:
+                /* INASISTIDOS */
+
+                $filtro_sql = "SELECT pro.pro_id
+                FROM procesos AS pro
+                INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND ina.ina_convenio_nombre = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND ina.ina_medico_especialidad	 = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
+
+                break;
+            case 2:
+                /* SEGUIMIENTOS */
+
+                $filtro_sql = "SELECT pro.pro_id
+                FROM procesos AS pro
+                INNER JOIN seguimientos_demandas_inducidas AS seg ON seg.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND seg.sdi_especialidad = '".$esp."'";
+                }
+
+
+                $cant = DB::select($filtro_sql);
+
+                break;
+            case 3:
+                /* RECORDATORIOS */
+
+                $filtro_sql = "SELECT pro.pro_id
+                FROM procesos AS pro
+                INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND rec.rec_convenio = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND rec.rec_especialidad = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
+
+                break;
+            case 4:
+                /* HOSPITALIZADOS */
+
+                $filtro_sql = "SELECT pro.pro_id
+                FROM procesos AS pro
+                INNER JOIN hospitalizados AS hos ON hos.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($pro != ""){
+                    $filtro_sql = $filtro_sql." AND hos.hos_programa = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
+
+                break;
+            case 5:
+                /* BRIGADA */
+
+                $filtro_sql = "SELECT pro.pro_id
+                FROM procesos AS pro
+                INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND bri.bri_convenio = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND bri.bri_especialidad = '".$esp."'";
+                }
+
+                if($pa != ""){
+                    $filtro_sql = $filtro_sql." AND bri.bri_punto_acopio = '".$pa."'";;
+                }
+
+
+                $cant = DB::select($filtro_sql);
+
+                break;
+            case 6:
+                /* REPROGRAMACION */
+
+                $filtro_sql = "SELECT pro.pro_id
+                FROM procesos AS pro
+                INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id = ".$car_id;
+
+                if($dep != ""){
+                    $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                }
+
+                if($mun != ""){
+                    $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                }
+
+                if($pri != ""){
+                    $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                }
+
+                if($con != ""){
+                    $filtro_sql = $filtro_sql." AND rep.rep_convenio = '".$con."'";
+                }
+
+                if($esp != ""){
+                    $filtro_sql = $filtro_sql." AND rep.rep_especialidad = '".$esp."'";
+                }
+
+                $cant = DB::select($filtro_sql);
+
+                break;
+            default:
+
+                $filtro_sql = "";
+
+                break;
+        }
+
+        if($filtro_sql != ""){
+            $procesos = DB::select($filtro_sql);
+
+            /* for ($i=0; $i < count($procesos); $i++) {
+
+                for ($e = 0; $e < count($agentes); $e++) {
+                    $asignaciones[] = array(
+                        "pro_id" => $procesos[$i]->pro_id,
+                        "age_id" => $agentes[$e]->age_id
+                    );
+                }
+
+            } */
+
+            echo json_encode(
+                array(
+                    "success" => true,
+                    "procesos" => $procesos
+                )
+            );
+        }else{
+            echo json_encode(
+                array(
+                    "success" => false,
+                    "error" => "tpp_id no valido!"
+                )
+            );
+        }
 
 
     }

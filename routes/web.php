@@ -32,6 +32,7 @@ Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'i
 Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
 /* PRO_AJAX */
 Route::get('/filtro/consulta', [App\Http\Controllers\ProcesosController::class, 'filtro'])->name('conbo.filtro');
+Route::get('/asignar/segmentacion', [App\Http\Controllers\ProcesosController::class, 'asignar_segmentar'])->name('asignar.segmentacion');
 
 
 /* GESTIONAR */
