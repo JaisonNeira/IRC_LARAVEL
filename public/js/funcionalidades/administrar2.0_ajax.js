@@ -135,6 +135,10 @@ function consulta(car_id, tpp_id){
 }
 
 
+$('#seleccionar_todo').click(function () {
+    $('.chboxid').prop('checked', $ (this).prop('checked'));
+});
+
 function valida_agentes(){
 
 }

@@ -69,7 +69,8 @@
                                     {{-- -->  inicio los que siempre salen  <-- --}}
                                     {{-- select departamento --}}
                                     <div class="flex-column">
-                                        <select class="custom-select" id="departamento_{{ $modales->car_id }}" name="departamento"
+                                        <select class="custom-select" id="departamento_{{ $modales->car_id }}"
+                                            name="departamento"
                                             onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                             <option class="form-control" value="" selected disabled>Departamento
                                             </option>
@@ -81,7 +82,8 @@
 
                                     {{-- select Municipio --}}
                                     <div class="flex-column">
-                                        <select class="custom-select" id="municipio_{{ $modales->car_id }}" name="municipio"
+                                        <select class="custom-select" id="municipio_{{ $modales->car_id }}"
+                                            name="municipio"
                                             onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                             <option class="form-control" value="" selected disabled>Municipio
                                             </option>
@@ -93,7 +95,8 @@
 
                                     {{-- select prioridad --}}
                                     <div class="flex-column">
-                                        <select class="custom-select" id="prioridad_{{ $modales->car_id }}" name="prioridad""
+                                        <select class="custom-select" id="prioridad_{{ $modales->car_id }}"
+                                            name="prioridad""
                                             onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                             <option class="form-control" value="" selected disabled>Prioridad
                                             </option>
@@ -163,7 +166,8 @@
                                             }
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="convenio_{{ $modales->car_id }}" name="convenio"
+                                            <select class="custom-select" id="convenio_{{ $modales->car_id }}"
+                                                name="convenio"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>Convenio
                                                 </option>
@@ -190,7 +194,8 @@
                                             $programa = DB::select($sql_espe_hosp);
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="programa_{{ $modales->car_id }}" name="programa"
+                                            <select class="custom-select" id="programa_{{ $modales->car_id }}"
+                                                name="programa"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>Programa
                                                 </option>
@@ -278,7 +283,8 @@
                                             }
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="especialidad_{{ $modales->car_id }}" name="especialidad"
+                                            <select class="custom-select" id="especialidad_{{ $modales->car_id }}"
+                                                name="especialidad"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>
                                                     Especialidad</option>
@@ -306,7 +312,8 @@
 
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="punto_de_acopio_{{ $modales->car_id }}" name="punto_de_acopio"
+                                            <select class="custom-select" id="punto_de_acopio_{{ $modales->car_id }}"
+                                                name="punto_de_acopio"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>Punto de
                                                     acopio</option>
@@ -325,32 +332,32 @@
                                         <thead
                                             style="background-color: #E22A3D; color:#ffff; text-align: center !important;">
                                             <tr>
-                                                <th class="text-center th_a pb-2">
+                                                <th class="text-center th_a py-3">
                                                     Identificacion</th>
-                                                <th class="text-center">Nombre Completo</th>
-                                                <th class="">
-                                                    <div class="text-center">
-                                                    <input class="form-check-input mt-2" type="checkbox"
-                                                        id="seleccionar_todo"><label for="seleccionar_todo"> Agregar</label>
+                                                <th class="text-center th_a py-3">Nombre Completo</th>
+                                                <th class="text-center py-3 px-1">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            id="selecionar_todo">
+                                                        <label class="form-check-label" for="selecionar_todo">
+                                                            Seleccionar todos
+                                                        </label>
                                                     </div>
                                                 </th>
-
                                             </tr>
                                         </thead>
                                         <tbody style="background-color: #ffff; text-align: center;"
                                             id="registros_asignar" name="registros_asignar">
 
+
                                             @foreach ($agentes as $agente)
                                                 <tr>
                                                     <td>{{ $agente->age_documento }}</td>
                                                     <td>{{ $agente->name }}</td>
-                                                    <td>
-                                                        <div>
-                                                        <input type="checkbox" id="cbox_{{ $agente->age_id }}" value="first_checkbox">
+                                                    <td class="mr-3" style="padding-left: 40px;">
                                                         <input class="form-check-input" type="checkbox"
                                                             name="ids[]" value="{{ $agente->age_id }}"
                                                             id="check_{{ $agente->age_id }}">
-                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -368,8 +375,10 @@
                             </div>
                         </div>
                     </div>
-                    <input type="text" name="tpp_id" id="tpp" value="{{$modales->tpp_id}}" style="display: none">
-                    <input type="text" name="car_id" id="car" value="{{$modales->car_id}}" style="display: none">
+                    <input type="text" name="tpp_id" id="tpp" value="{{ $modales->tpp_id }}"
+                        style="display: none">
+                    <input type="text" name="car_id" id="car" value="{{ $modales->car_id }}"
+                        style="display: none">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Asignar agentes</button>
                     </div>
