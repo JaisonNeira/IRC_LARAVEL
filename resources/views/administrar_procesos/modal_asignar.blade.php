@@ -325,10 +325,14 @@
                                         <thead
                                             style="background-color: #E22A3D; color:#ffff; text-align: center !important;">
                                             <tr>
-                                                <th scope="col">Identificacion</th>
-                                                <th scope="col">Nombre Completo</th>
-                                                <th class="text-center"><input class="form-check-input" type="checkbox"
-                                                        id="seleccionar_todo"><label for=""> Agregar</label>
+                                                <th class="text-center th_a">
+                                                    Identificacion</th>
+                                                <th class="text-center">Nombre Completo</th>
+                                                <th class="">
+                                                    <div class="text-center">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="seleccionar_todo"><label for="seleccionar_todo"> Agregar</label>
+                                                    </div>
                                                 </th>
 
                                             </tr>
@@ -341,10 +345,12 @@
                                                     <td>{{ $agente->age_documento }}</td>
                                                     <td>{{ $agente->name }}</td>
                                                     <td>
+                                                        <div>
                                                         <input type="checkbox" id="cbox_{{ $agente->age_id }}" value="first_checkbox">
-                                                        <input class="form-check-input chboxid" type="checkbox"
+                                                        <input class="form-check-input" type="checkbox"
                                                             name="ids[]" value="{{ $agente->age_id }}"
                                                             id="check_{{ $agente->age_id }}">
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -362,6 +368,8 @@
                             </div>
                         </div>
                     </div>
+                    <input type="text" name="tpp_id" id="tpp" value="{{$modales->tpp_id}}">
+                    <input type="text" name="car_id" id="car" value="{{$modales->car_id}}">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Asignar agentes</button>
                     </div>
