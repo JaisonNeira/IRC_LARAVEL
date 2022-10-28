@@ -1,5 +1,4 @@
 function cargarEstado(sendDatos){
-
     $.ajax({
             url: '/proceso/c/estado',
             type: 'GET',
@@ -18,20 +17,12 @@ function cargarEstado(sendDatos){
                 console.log('error!');
             }
         });
-
 }
 
-
-
-
-
 function cambio(id){
-
     const sendDatos = {
         'car_id': id
     }
-
-
     cargarEstado(sendDatos);
 }
 
