@@ -69,7 +69,7 @@
                                     {{-- -->  inicio los que siempre salen  <-- --}}
                                     {{-- select departamento --}}
                                     <div class="flex-column">
-                                        <select class="custom-select" id="departamento_{{ $modales->car_id }}"
+                                        <select class="custom-select" id="departamento_{{ $modales->car_id }}" name="departamento"
                                             onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                             <option class="form-control" value="" selected disabled>Departamento
                                             </option>
@@ -81,7 +81,7 @@
 
                                     {{-- select Municipio --}}
                                     <div class="flex-column">
-                                        <select class="custom-select" id="municipio_{{ $modales->car_id }}"
+                                        <select class="custom-select" id="municipio_{{ $modales->car_id }}" name="municipio"
                                             onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                             <option class="form-control" value="" selected disabled>Municipio
                                             </option>
@@ -93,7 +93,7 @@
 
                                     {{-- select prioridad --}}
                                     <div class="flex-column">
-                                        <select class="custom-select" id="prioridad_{{ $modales->car_id }}"
+                                        <select class="custom-select" id="prioridad_{{ $modales->car_id }}" name="prioridad""
                                             onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                             <option class="form-control" value="" selected disabled>Prioridad
                                             </option>
@@ -163,7 +163,7 @@
                                             }
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="convenio_{{ $modales->car_id }}"
+                                            <select class="custom-select" id="convenio_{{ $modales->car_id }}" name="convenio"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>Convenio
                                                 </option>
@@ -190,7 +190,7 @@
                                             $programa = DB::select($sql_espe_hosp);
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="programa_{{ $modales->car_id }}"
+                                            <select class="custom-select" id="programa_{{ $modales->car_id }}" name="programa"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>Programa
                                                 </option>
@@ -278,7 +278,7 @@
                                             }
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="especialidad_{{ $modales->car_id }}"
+                                            <select class="custom-select" id="especialidad_{{ $modales->car_id }}" name="especialidad"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>
                                                     Especialidad</option>
@@ -306,7 +306,7 @@
 
                                         @endphp
                                         <div class="flex-column">
-                                            <select class="custom-select" id="punto_de_acopio_{{ $modales->car_id }}"
+                                            <select class="custom-select" id="punto_de_acopio_{{ $modales->car_id }}" name="punto_de_acopio"
                                                 onchange="consulta({{ $modales->car_id }}, {{ $modales->tpp_id }})">
                                                 <option class="form-control" value="" selected disabled>Punto de
                                                     acopio</option>
@@ -325,12 +325,12 @@
                                         <thead
                                             style="background-color: #E22A3D; color:#ffff; text-align: center !important;">
                                             <tr>
-                                                <th class="text-center th_a">
+                                                <th class="text-center th_a pb-2">
                                                     Identificacion</th>
                                                 <th class="text-center">Nombre Completo</th>
                                                 <th class="">
                                                     <div class="text-center">
-                                                    <input class="form-check-input" type="checkbox"
+                                                    <input class="form-check-input mt-2" type="checkbox"
                                                         id="seleccionar_todo"><label for="seleccionar_todo"> Agregar</label>
                                                     </div>
                                                 </th>
