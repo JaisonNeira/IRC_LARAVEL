@@ -6,7 +6,7 @@
 
 @foreach ($cargues as $modales)
     <form action="{{ route('asignar.segmentacion') }}" method="POST" name="form-data" enctype="multipart/form-data"
-        onsubmit="return valida_agentes()">
+        onsubmit="return valida_agentes({{$modales->car_id}})">
         @csrf
         <div class="modal fade" id="modal_{{ $modales->car_id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">

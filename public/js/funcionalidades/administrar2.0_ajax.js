@@ -139,8 +139,13 @@ $('#seleccionar_todo').click(function () {
     $('.chboxid').prop('checked', $ (this).prop('checked'));
 });
 
-function valida_agentes(){
-
+function valida_agentes(id){
+    var registro_span = document.getElementById("registro_span_"+id);
+    if(registro_span.textContent == "" || registro_span.textContent == 0){
+        return id = false;
+     }else{
+        return id = true;
+     }
 }
 
 
