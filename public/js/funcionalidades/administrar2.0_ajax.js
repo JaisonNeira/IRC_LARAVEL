@@ -9,7 +9,8 @@ function consulta(car_id, tpp_id){
     var especialidad = document.getElementById("especialidad");
     var punto_de_acopio = document.getElementById("punto_de_acopio");
     var programa = document.getElementById("programa");
-    var registros = document.getElementById("registros");
+    var registro_span = document.getElementById("registro_span");
+
 
   switch (tpp_id) {
     //Inasisitidos
@@ -17,6 +18,7 @@ function consulta(car_id, tpp_id){
         var con = convenio.value;
         var esp = especialidad.value;
         var sendData = {
+            "tpp_id" : tpp_id,
             "car_id" : car_id,
             "dep" : dep,
             "mun" : mun,
@@ -30,6 +32,7 @@ function consulta(car_id, tpp_id){
     case 2:
         var esp = especialidad.value;
         var sendData = {
+            "tpp_id" : tpp_id,
             "car_id" : car_id,
             "dep" : dep,
             "mun" : mun,
@@ -43,6 +46,7 @@ function consulta(car_id, tpp_id){
         var esp = especialidad.value;
         var con = convenio.value;
         var sendData = {
+            "tpp_id" : tpp_id,
             "car_id" : car_id,
             "dep" : dep,
             "mun" : mun,
@@ -55,6 +59,7 @@ function consulta(car_id, tpp_id){
     case 4:
         var pro = programa.value;
         var sendData = {
+            "tpp_id" : tpp_id,
             "car_id" : car_id,
             "dep" : dep,
             "mun" : mun,
@@ -69,6 +74,7 @@ function consulta(car_id, tpp_id){
         var esp = especialidad.value;
         var pa = punto_de_acopio.value;
         var sendData = {
+            "tpp_id" : tpp_id,
             "car_id" : car_id,
             "dep" : dep,
             "mun" : mun,
@@ -84,6 +90,7 @@ function consulta(car_id, tpp_id){
         var con = convenio.value;
         var esp = especialidad.value;
         var sendData = {
+            "tpp_id" : tpp_id,
             "car_id" : car_id,
             "dep" : dep,
             "mun" : mun,
@@ -97,20 +104,22 @@ function consulta(car_id, tpp_id){
         break;
   }
 
-
+console.log(sendData);
   $.ajax({
     url: '/filtro/consulta',
     type: 'GET',
     dataType: 'json',
     data: sendData,
-    /* beforeSend: function () {
+     beforeSend: function () {
         console.log('enviada');
     },
     complete: function () {
         console.log('completada');
-    },*/
+    },
     success: function (response) {
-        registros.innerHTML(response.cantidad)
+        var cantidad = response.cantidad;
+        registro_span.innerHTML = cantidad;
+        console.log(response);
     },
     error: function (jqXHR) {
         console.log('error!');

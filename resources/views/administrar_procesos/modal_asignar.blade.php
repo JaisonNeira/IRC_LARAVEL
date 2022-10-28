@@ -22,7 +22,7 @@
                                 <h5>Escoge el tipo de segmentacion</h5>
                             </div>
                             <div class="col-6 mb-2 text-right" style="text-align: left">
-                                <h6>Registros encontrados: <span class="custom_span" id=registros></span> </h6>
+                                <h6>Registros encontrados: <span class="span_red" id="registro_span"></span> </h6>
                             </div>
                                 @php
                                     //Departamento

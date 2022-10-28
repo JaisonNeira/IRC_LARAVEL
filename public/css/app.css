@@ -168,11 +168,17 @@ display: none;
 box-shadow: 2px 2px 2px 2px rgba(189, 186, 186, 0.288);
 }
 
-.custpm_span{
-background-color: #26c926;
-border: 1px solid #000000;
--moz-border-radius: 7px;
--webkit-border-radius: 7px;
-padding: 10px;
-}
+.span_red {
+    background: rgb(0, 255, 55);
+     border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #000000;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 15px;
+    text-align: center;
+    width: 30px;
+  }
 
