@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\cargue;
 use App\Models\proceso;
 use App\Models\agente;
+use App\Models\proceso_agente;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -303,21 +304,21 @@ class ProcesosController extends Controller
 
     public function asignar_segmentar(request $request){
 
-        /* $agentes = $request->ids;
+        $agentes = $request->ids;
 
-        if($agentes == null){
+        /* if($agentes == null){
             return redirect()->back()->with('warmessage', 'Tiene que seleccionar por lo menos un agente!...');
         } */
 
         $tpp_id = $request->tpp_id;
         $car_id = $request->car_id;
-        $dep = $request->dep;
-        $mun = $request->mun;
-        $pri = $request->pri;
-        $con = $request->con;
-        $esp = $request->esp;
-        $pro = $request->pro;
-        $pa = $request->pa;
+        $dep = $request->departamento;
+        $mun = $request->municipio;
+        $pri = $request->prioridad;
+        $con = $request->convenio;
+        $esp = $request->especialidad;
+        $pro = $request->programa;
+        $pa = $request->punto_de_acopio;
 
         switch ($tpp_id) {
             case 1:
@@ -526,30 +527,33 @@ class ProcesosController extends Controller
         if($filtro_sql != ""){
             $procesos = DB::select($filtro_sql);
 
-            /* for ($i=0; $i < count($procesos); $i++) {
+            for ($i=0; $i < count($procesos); $i++) {
 
                 for ($e = 0; $e < count($agentes); $e++) {
                     $asignaciones[] = array(
                         "pro_id" => $procesos[$i]->pro_id,
-                        "age_id" => $agentes[$e]->age_id
+                        "age_id" => $agentes[$e]
                     );
                 }
 
-            } */
+            }
 
-            echo json_encode(
-                array(
-                    "success" => true,
-                    "procesos" => $procesos
-                )
-            );
+            for ($o=0; $o < count($asignaciones); $o++) {
+
+                $validador = proceso_agente::where('pro_id', $asignaciones[$o]["pro_id"])->where('age_id', $asignaciones[$o]["age_id"])->count();
+
+                if($validador == 0){
+                    $asignacion = new proceso_agente();
+                    $asignacion->pro_id = $asignaciones[$o]["pro_id"];
+                    $asignacion->age_id = $asignaciones[$o]["age_id"];
+                    $asignacion->save();
+                }
+
+            }
+
+            return redirect()->back()->with('mSucces', 'Asignacion correcta!...');
         }else{
-            echo json_encode(
-                array(
-                    "success" => false,
-                    "error" => "tpp_id no valido!"
-                )
-            );
+            return redirect()->back()->with('mDanger', 'Error en la asignacion!...');
         }
 
 

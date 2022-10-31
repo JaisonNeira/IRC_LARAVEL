@@ -24,6 +24,10 @@ use Illuminate\Support\Facades\Mail;
 
 class ImportarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     function index(){
         $tipos_procesos = tipos_proceso::where('tpp_estado', '=','1')->get();
