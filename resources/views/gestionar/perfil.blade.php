@@ -156,7 +156,7 @@
                                                 <td>{{$gestion_historial->resultado}}</td>
                                                 <td>{{$gestion_historial->comentario}}</td> --}}
                                             </tr>
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
