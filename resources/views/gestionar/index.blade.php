@@ -49,7 +49,7 @@
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#perfil_{{$gestion->pro_id}}">
                                     Perfil
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Gestion_{{$gestion->pro_id}}">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gestion_{{$gestion->pro_id}}">
                                     Gestion
                                 </button>
                             </td>

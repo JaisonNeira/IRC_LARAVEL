@@ -1,5 +1,5 @@
 @foreach ($gestiones as $perfil )
-<div class="modal fade" id="#perfil__{{$perfil->pro_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="perfil_{{$perfil->pro_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background: #E22A3D">
