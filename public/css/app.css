@@ -48,21 +48,18 @@
     color: transparent;
     border: 1px solid #000;
     border-radius: 100%;
-    display: none;
 }
 .circle-yellow{
     background: linear-gradient(to bottom, #e2df2a,  #cfcd27, #b8b523);
     color: transparent;
     border: 1px solid #000;
     border-radius: 100%;
-    display: none;
 }
 .circle-green{
     background: linear-gradient(to bottom, #2ae22a,  #26c926, rgb(36, 196, 36));;
     color: transparent;
     border: 1px solid #000;
     border-radius: 100%;
-    display: on;
 }
 
 .error{

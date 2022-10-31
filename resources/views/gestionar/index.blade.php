@@ -28,15 +28,21 @@
                     </thead>
                     <tbody style="background-color: #ffff; text-align: center;">
                         @foreach ($gestiones as $gestion )
-                        <tr onload="prioridad({{$gestion->pro_id}})">
-                                <!-- Esta es la variable -->
-                            <td> <p style="" id="prioridad_var_{{$gestion->pro_id}}">{{$gestion->pro_prioridad}}</p>
-                                <!-- Si es prioridad 1 -->
-                            <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->pro_id}}"></i>
-                                <!-- Si es prioridad 2 -->
-                            <i class="fa-solid fa-circle circle-yellow" id="pri_yellow_{{$gestion->pro_id}}"></i>
-                                <!-- Si es prioridad 3 -->
-                            <i class="fa-solid fa-circle circle-green" id="pri_green_{{$gestion->pro_id}}"></i>
+                        <tr>
+                            <td>
+                                <p style="display: none;" id="prioridad_var_{{$gestion->pro_id}}">{{$gestion->pro_prioridad}}</p>
+                                @if ($gestion->pro_prioridad == 1)
+                                    <!-- Si es prioridad 1 -->
+                                    <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->pro_id}}"></i>
+                                @endif
+                                @if ($gestion->pro_prioridad == 2)
+                                    <!-- Si es prioridad 2 -->
+                                    <i class="fa-solid fa-circle circle-yellow" id="pri_yellow_{{$gestion->pro_id}}"></i>
+                                @endif
+                                @if ($gestion->pro_prioridad == 3)
+                                    <!-- Si es prioridad 3 -->
+                                    <i class="fa-solid fa-circle circle-green" id="pri_green_{{$gestion->pro_id}}"></i>
+                                @endif
                             </td>
                             <td>{{$gestion->pac_primer_nombre}} {{$gestion->pac_segundo_nombre}}</td>
                             <td>{{$gestion->pac_primer_apellido}} {{$gestion->pac_segundo_apellido}}</td>
