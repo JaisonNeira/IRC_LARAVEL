@@ -44,10 +44,10 @@
                                     <i class="fa-solid fa-circle circle-green" id="pri_green_{{$gestion->pro_id}}"></i>
                                 @endif
                             </td>
-                            <td>{{$gestion->pac_primer_nombre}} {{$gestion->pac_segundo_nombre}}</td>
-                            <td>{{$gestion->pac_primer_apellido}} {{$gestion->pac_segundo_apellido}}</td>
-                            <td>{{$gestion->pac_telefono}}</td>
-                            <td>{{$gestion->tpp_nombre}}</</td>
+                            <td style="padding-top: 18px;">{{$gestion->pac_primer_nombre}} {{$gestion->pac_segundo_nombre}}</td>
+                            <td style="padding-top: 18px;">{{$gestion->pac_primer_apellido}} {{$gestion->pac_segundo_apellido}}</td>
+                            <td style="padding-top: 18px;">{{$gestion->pac_telefono}}</td>
+                            <td style="padding-top: 18px;">{{$gestion->tpp_nombre}}</</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proceso_{{$gestion->pro_id}}">
                                    Proceso
