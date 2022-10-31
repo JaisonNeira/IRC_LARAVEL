@@ -28,15 +28,15 @@
                     </thead>
                     <tbody style="background-color: #ffff; text-align: center;">
                         @foreach ($gestiones as $gestion )
-                        <tr>
+                        <tr onload="prioridad({{$gestion->id_gestion}})">
                                 <!-- Esta es la variable -->
                             <td> <p style="display: none;" id="prioridad_var">{{$gestion->prioridad}}</p>
                                 <!-- Si es prioridad 1 -->
-                            <i class="fa-solid fa-circle circle-red" id="pri_red"></i>
+                            <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->id_gestion}}"></i>
                                 <!-- Si es prioridad 2 -->
-                            <i class="fa-solid fa-circle circle-yellow" id="pri_yellow"></i>
+                            <i class="fa-solid fa-circle circle-yellow" id="pri_yellow_{{$gestion->id_gestion}}"></i>
                                 <!-- Si es prioridad 3 -->
-                            <i class="fa-solid fa-circle circle-green" id="pri_green"></i>
+                            <i class="fa-solid fa-circle circle-green" id="pri_green_{{$gestion->id_gestion}}"></i>
                             </td>
                             <td>{{$gestion->nombre}}</td>
                             <td>{{$gestion->apellido}}</td>
