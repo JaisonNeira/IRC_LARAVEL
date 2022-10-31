@@ -1,7 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Gestion">
-    Gestion
-</button>
-
+@foreach ( $gestiones as $paciente_gestion)
 <div class="modal fade" id="Gestion" tabindex="-1" aria-labelledby="gestion-title" aria-hidden="true" role="dialog">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -14,7 +11,7 @@
                 <div class="container p-4">
                     <!-- Gestion section -->
                     <div class="row mb-5">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="row">
                                 <!-- titulos  gestion -->
                                 <div class="col-4">
@@ -28,24 +25,20 @@
                                 </div>
                                 <!-- texto de titulos gestion -->
                                 <div class="col-4">
-                                    <p>Hospitalizados</p>
+                                    <p>{{$paciente_gestion->tpp_proceso}}</p>
                                 </div>
                                 <div class="col-4">
-                                    <p>Marzo</p>
+                                    <p>{{$paciente_gestion->mes}}</p>
                                 </div>
                                 <div class="col-4">
-                                    <p>10/03/2022</p>
+                                    <p>{{$paciente_gestion->fecha_cargue}}</p>
                                 </div>
                                 <form action="" class="row">
                                     <div class="col-12">
                                         <div class="select select_gestion  col-12  align-items-center">
                                             <select id="seleccion" name="tipo_proceso" style="font-weight: bold;" required>
                                                 <option selected disabled>Resultado</option>
-                                                <option>Tipo de proceso</option>
-                                                <option>Tipo de proceso</option>
-                                                <option>Tipo de proceso</option>
-                                                <option>Tipo de proceso</option>
-                                                <option>Tipo de proceso</option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -63,7 +56,7 @@
                             </div>
                         </div>
 
-                        <div class="col-8">
+                        <div class="col-6">
                             <div class="row">
                                 <!-- Titulo principal -->
                                 <div class="col-12 mb-3">
@@ -83,13 +76,13 @@
                                 </div>
                                 <!--  Texto de Los titulos de arriba -->
                                 <div class="col-4">
-                                    <p>Un diagnostico</p>
+                                    <p>{{$paciente_gestion->diagnostico}}</p>
                                 </div>
                                 <div class="col-4">
-                                    <p>23/03/2022</p>
+                                    <p>{{$paciente_gestion->fecha_ingreso}}</p>
                                 </div>
                                 <div class="col-4 mb-2">
-                                    <p>26/03/2022</p>
+                                    <p>{{$paciente_gestion->fecha_egreso}}</p>
                                 </div>
 
 
@@ -103,10 +96,10 @@
                                 </div>
                                 <!-- Texto de Los titulos de abajo -->
                                 <div class="col-6">
-                                    <p>Ejemplo</p>
+                                    <p>{{$paciente_gestion->programa}}</p>
                                 </div>
                                 <div class="col-6">
-                                    <p>Si</p>
+                                    <p>{{$paciente_gestion->usuario_irc}}</p>
                                 </div>
 
                             </div>
@@ -133,13 +126,15 @@
                                         </tr>
                                     </thead>
                                     <tbody style="background-color: #ffff; text-align: center;">
-                                        <tr>
-                                            <td>23/02/2022</td>
-                                            <td> - </td>
-                                            <td>Jhon</td>
-                                            <td>No contestó</td>
-                                            <td> Agendado </td>
-                                        </tr>
+                                        @foreach ($gestiones as $historial_gestion )
+                                            <tr>
+                                                <td>{{$historial_gestion->fecha_gestion}}</td>
+                                                <td>{{$historial_gestion->gestion}}</td>
+                                                <td>{{$historial_gestion->fagente}}</td>
+                                                <td>{{$historial_gestion->resultado}}</td>
+                                                <td>{{$historial_gestion->comentarios}}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -151,3 +146,4 @@
         </div>
     </div>
 </div>
+@endforeach

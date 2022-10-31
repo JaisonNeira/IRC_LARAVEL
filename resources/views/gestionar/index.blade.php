@@ -27,28 +27,42 @@
                         </tr>
                     </thead>
                     <tbody style="background-color: #ffff; text-align: center;">
+                        @foreach ($gestiones as $gestion )
                         <tr>
                                 <!-- Esta es la variable -->
-                            <td> <p style="display: none;">Variable</p>
+                            <td> <p style="display: none;" id="prioridad_var">{{$gestion->prioridad}}</p>
                                 <!-- Si es prioridad 1 -->
-                            <i class="fa-solid fa-circle circle-red" style="display: inline;"></i>
+                            <i class="fa-solid fa-circle circle-red" id="pri_red"></i>
                                 <!-- Si es prioridad 2 -->
-                            <i class="fa-solid fa-circle circle-yellow" style="display: inline;"></i>
+                            <i class="fa-solid fa-circle circle-yellow" id="pri_yellow"></i>
                                 <!-- Si es prioridad 3 -->
-                            <i class="fa-solid fa-circle circle-green" style="display: inline;"></i>
+                            <i class="fa-solid fa-circle circle-green" id="pri_green"></i>
                             </td>
-                            <td>Jhon</td>
-                            <td>Ramirez</td>
-                            <td>323 0931232</td>
-                            <td>Hospitalizados</td>
-                            <td> @include("gestionar.proceso") @include("gestionar.perfil") @include("gestionar.gestion") </td>
+                            <td>{{$gestion->nombre}}</td>
+                            <td>{{$gestion->apellido}}</td>
+                            <td>{{$gestion->telefono}}</td>
+                            <td>{{$gestion->operacion}}</</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proceso_{{$gestion->id_gestion}}">
+                                   Proceso
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#perfil_{{$gestion->id_gestion}}">
+                                    Perfil
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Gestion_{{$gestion->id_gestion}}">
+                                    Gestion
+                                </button>
+                            </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+@include("gestionar.proceso") @include("gestionar.perfil") @include("gestionar.gestion")
 
 @endsection
 

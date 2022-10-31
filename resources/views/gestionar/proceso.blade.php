@@ -1,7 +1,5 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proceso">
- Proceso
-</button>
-<div class="modal fade" id="proceso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($gestiones as $proceso)
+<div class="modal fade" id="proceso_{{$proceso->id_gestion}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" style="background: #E22A3D">
@@ -26,11 +24,11 @@
                                 </thead>
                                 <tbody style="background-color: #ffff; text-align: center;">
                                     <tr>
-                                        <td>Hospitalizados</td>
-                                        <td class="fw-bold">No</td>
-                                        <td>Octubre</td>
-                                        <td>12/10/2022</td>
-                                        <td>20/10/2022</td>
+                                        <td>{{$proceso->tpp_proceso}}</td>
+                                        <td class="fw-bold">{{$proceso->activo}}</td>
+                                        <td>{{$proceso->mes}}</td>
+                                        <td>{{$proceso->fechacargue}}</td>
+                                        <td>{{$proceso->fechareporte}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -42,3 +40,4 @@
       </div>
     </div>
   </div>
+  @endforeach

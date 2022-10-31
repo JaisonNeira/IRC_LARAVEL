@@ -1,7 +1,5 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Perfil
-</button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($gestiones as $perfil )
+<div class="modal fade" id="#perfil_{{$perfil->id_gestion}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background: #E22A3D">
@@ -39,21 +37,21 @@
 
                         <!-- Nombre completo -->
                         <div class="col-3">
-                            <p>James Smith</p>
+                            <p>{{$perfil->nombre}}</p>
                         </div>
                         <!-- Numero de documento -->
                         <div class="col-3">
-                            <p>10324568712</p>
+                            <p>{{$perfil->identificacion}}</p>
                         </div>
                         <!-- Tipo de documento -->
                         <div class="col-3">
 
-                            <p>Cedula</p>
+                            <p>{{$perfil->tipo_identificacion}}</p>
                         </div>
                         <!-- Sexo -->
                         <div class="col-3">
 
-                            <p>Masculino</p>
+                            <p>{{$perfil->sexo}}</p>
                         </div>
                     </div>
 
@@ -76,19 +74,19 @@
                         <!-- Variables de los titulos segunda fila -->
                         <div class="col-3">
                             <!-- Teléfono -->
-                            <p>310 2045837</p>
+                            <p>{{$perfil->telefono}}</p>
                         </div>
                         <div class="col-3">
                             <!-- Fecha de nacimineto -->
-                            <p>20/09/1998</p>
+                            <p>{{$perfil->fecha_nacimiento}}</p>
                         </div>
                         <div class="col-3">
                             <!-- Correo electronico -->
-                            <p>James123@gmail.com</p>
+                            <p>{{$perfil->correo}}</p>
                         </div>
                         <div class="col-3">
                             <!-- Direccion -->
-                            <p>Calle 76a #14a29</p>
+                            <p>{{$perfil->direccion}}</p>
                         </div>
                     </div>
 
@@ -110,16 +108,16 @@
 
                         <!-- Variables de los titulos segunda fila -->
                         <div class="col-3">
-                            <!-- Teléfono -->
-                            <p>310 2045837</p>
+                            <!-- Departamento -->
+                            <p>{{$perfil->dep}}</p>
                         </div>
                         <div class="col-3">
-                            <!-- Fecha de nacimineto -->
-                            <p>20/09/1998</p>
+                            <!-- Municipio -->
+                            <p>{{$perfil->mun}}</p>
                         </div>
                         <div class="col-3">
-                            <!-- Correo electronico -->
-                            <p>James123@gmail.com</p>
+                            <!-- Afiliacion -->
+                            <p>{{$perfil->afil}}</p>
                         </div>
                         <div class="col-3">
                             <!-- Campo vacio -->
@@ -147,17 +145,18 @@
                                         </tr>
                                     </thead>
                                     <tbody style="background-color: #ffff; text-align: center;">
-                                        <tr>
-                                            <!-- Variables de tabla -->
-                                            <td>Hopsitalizados</td>
-                                            <td>Marzo</td>
-                                            <td>19/03/2022</td>
-                                            <td>21/03/2022</td>
-                                            <td>Benjamin Gomez</td>
-                                            <td>Ejemplo resultado</td>
-                                            <td>Ejemplo comentario</td>
-
-                                        </tr>
+                                        @foreach ($gestiones as $gestion_historial)
+                                            <tr>
+                                                <!-- Variables de tabla -->
+                                                <td>{{$gestion_historial->tpp_prcoeso}}</td>
+                                                <td>{{$gestion_historial->mes}}</td>
+                                                <td>{{$gestion_historial->fecha_cargue}}</td>
+                                                <td>{{$gestion_historial->fecha_gestion}}</td>
+                                                <td>{{$gestion_historial->agente}}</td>
+                                                <td>{{$gestion_historial->resultado}}</td>
+                                                <td>{{$gestion_historial->comentario}}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -168,3 +167,4 @@
         </div>
     </div>
 </div>
+@endforeach
