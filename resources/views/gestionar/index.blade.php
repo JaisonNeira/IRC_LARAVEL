@@ -30,7 +30,7 @@
                         @foreach ($gestiones as $gestion )
                         <tr onload="prioridad({{$gestion->id_gestion}})">
                                 <!-- Esta es la variable -->
-                            <td> <p style="display: none;" id="prioridad_var">{{$gestion->prioridad}}</p>
+                            <td> <p style="display: none;" id="prioridad_var_{{$gestion->id_gestion}}">{{$gestion->prioridad}}</p>
                                 <!-- Si es prioridad 1 -->
                             <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->id_gestion}}"></i>
                                 <!-- Si es prioridad 2 -->
