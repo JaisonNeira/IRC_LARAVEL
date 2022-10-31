@@ -1,9 +1,5 @@
 function prioridad (id) {
-<<<<<<< HEAD
   var prioridad = document.getElementById("prioridad_var_"+id);
-=======
-  var prioridad = document.getElementById("prioridad_var"+id);
->>>>>>> fdbcd3e94b0d02478a872bfbe55879866b0ffca3
   var red = document.getElementById("pri_red_"+id);
   var yellow = document.getElementById("pri_yellow_"+id);
   var green = document.getElementById("pri_green_"+id);

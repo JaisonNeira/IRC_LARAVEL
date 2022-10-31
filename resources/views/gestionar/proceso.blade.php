@@ -1,5 +1,5 @@
 @foreach ($gestiones as $proceso)
-<div class="modal fade" id="proceso_{{$proceso->id_gestion}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="proceso__{{$proceso->pro_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header" style="background: #E22A3D">

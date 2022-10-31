@@ -30,7 +30,7 @@
                         @foreach ($gestiones as $gestion )
                         <tr onload="prioridad({{$gestion->pro_id}})">
                                 <!-- Esta es la variable -->
-                            <td> <p style="display: none;" id="prioridad_var_{{$gestion->pro_id}}">{{$gestion->pro_prioridad}}</p>
+                            <td> <p style="" id="prioridad_var_{{$gestion->pro_id}}">{{$gestion->pro_prioridad}}</p>
                                 <!-- Si es prioridad 1 -->
                             <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->pro_id}}"></i>
                                 <!-- Si es prioridad 2 -->
@@ -61,9 +61,9 @@
         </div>
     </div>
 </div>
-{{--
+
 @include("gestionar.proceso") @include("gestionar.perfil") @include("gestionar.gestion")
- --}}
+
 @endsection
 
 @section('script')
