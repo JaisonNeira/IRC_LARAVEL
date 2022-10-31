@@ -44,18 +44,18 @@
 
 
 .circle-red{
-    background: linear-gradient(to bottom, #E22A3D,  #c02635, #66161e);;
+    background: linear-gradient(to bottom, #e22a2a,  #c92626, rgb(196, 36, 36));;
     color: transparent;
     border: 1px solid #000;
     border-radius: 100%;
-    display: none;
+    display: on;
 }
 .circle-yellow{
-    background: linear-gradient(to bottom, #e2df2a,  #cfcd27, #b8b523);
+    background: linear-gradient(to bottom, #dfe22a,  #dfe22a, rgb(193, 196, 36));;
     color: transparent;
     border: 1px solid #000;
     border-radius: 100%;
-    display: none;
+    display: on;
 }
 .circle-green{
     background: linear-gradient(to bottom, #2ae22a,  #26c926, rgb(36, 196, 36));;

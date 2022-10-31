@@ -47,13 +47,16 @@ Route::get('/get/pdf/{codigo}', [App\Http\Controllers\ImportarController::class,
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
 Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'index_tabla'])->name('proceso.index.tabla');
 Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
+
 /* PRO_AJAX */
 Route::get('/filtro/consulta', [App\Http\Controllers\ProcesosController::class, 'filtro'])->name('conbo.filtro');
 Route::post('/asignar/segmentacion', [App\Http\Controllers\ProcesosController::class, 'asignar_segmentar'])->name('asignar.segmentacion');
 
-
 /* GESTIONAR */
 Route::get('/gestionar/{id}', [App\Http\Controllers\GestionesController::class, 'index'])->name('gestionar.index');
+Route::get('/gestionar/modal/proceso', [App\Http\Controllers\GestionesController::class, 'modal_proceso'])->name('gestionar.modal.proceso');
+Route::get('/gestionar/modal/perfil', [App\Http\Controllers\GestionesController::class, 'modal_perfil'])->name('gestionar.modal.perfil');
+Route::get('/gestionar/modal/gestion', [App\Http\Controllers\GestionesController::class, 'modal_gestion'])->name('gestionar.modal.gestion');
 
 /* CONSULTAS */
 Route::get('/consultas', [App\Http\Controllers\PacientesController::class, 'index'])->name('consultas.index');
