@@ -1,5 +1,5 @@
 function prioridad (id) {
-  var prioridad = document.getElementById("prioridad_var");
+  var prioridad = document.getElementById("prioridad_var_"+id);
   var red = document.getElementById("pri_red_"+id);
   var yellow = document.getElementById("pri_yellow_"+id);
   var green = document.getElementById("pri_green_"+id);
@@ -13,6 +13,5 @@ function prioridad (id) {
   if (prioridad.textContent == "3"){
     green.style.display ="inline";
   }
-
 }
 
