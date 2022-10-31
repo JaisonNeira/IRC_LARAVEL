@@ -124,8 +124,8 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Desea cerrar sesión?</h5>
+                <div class="modal-header" style="background-color: #E22A3D">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #fff">Desea cerrar sesión?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
