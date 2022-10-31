@@ -25,13 +25,13 @@
                                 </div>
                                 <!-- texto de titulos gestion -->
                                 <div class="col-4">
-                                    <p>{{$paciente_gestion->tpp_proceso}}</p>
+                                    {{-- <p>{{$paciente_gestion->tpp_proceso}}</p> --}}
                                 </div>
                                 <div class="col-4">
-                                    <p>{{$paciente_gestion->mes}}</p>
+                                    {{-- <p>{{$paciente_gestion->mes}}</p> --}}
                                 </div>
                                 <div class="col-4">
-                                    <p>{{$paciente_gestion->fecha_cargue}}</p>
+                                    {{-- <p>{{$paciente_gestion->fecha_cargue}}</p> --}}
                                 </div>
                                 <form action="" class="row">
                                     <div class="col-12">
@@ -75,7 +75,7 @@
                                     <h5>Fecha de egreso</h5>
                                 </div>
                                 <!--  Texto de Los titulos de arriba -->
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <p>{{$paciente_gestion->diagnostico}}</p>
                                 </div>
                                 <div class="col-4">
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-4 mb-2">
                                     <p>{{$paciente_gestion->fecha_egreso}}</p>
-                                </div>
+                                </div> --}}
 
 
 
@@ -95,12 +95,12 @@
                                     <h5>Es usuario irc?</h5>
                                 </div>
                                 <!-- Texto de Los titulos de abajo -->
-                                <div class="col-6">
+                                {{-- <div class="col-6">
                                     <p>{{$paciente_gestion->programa}}</p>
                                 </div>
                                 <div class="col-6">
                                     <p>{{$paciente_gestion->usuario_irc}}</p>
-                                </div>
+                                </div> --}}
 
                             </div>
 
@@ -126,7 +126,7 @@
                                         </tr>
                                     </thead>
                                     <tbody style="background-color: #ffff; text-align: center;">
-                                        @foreach ($gestiones as $historial_gestion )
+                                        {{-- @foreach ($gestiones as $historial_gestion )
                                             <tr>
                                                 <td>{{$historial_gestion->fecha_gestion}}</td>
                                                 <td>{{$historial_gestion->gestion}}</td>
@@ -134,7 +134,7 @@
                                                 <td>{{$historial_gestion->resultado}}</td>
                                                 <td>{{$historial_gestion->comentarios}}</td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>

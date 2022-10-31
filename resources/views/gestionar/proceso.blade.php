@@ -24,11 +24,11 @@
                                 </thead>
                                 <tbody style="background-color: #ffff; text-align: center;">
                                     <tr>
-                                        <td>{{$proceso->tpp_proceso}}</td>
+                                        {{-- <td>{{$proceso->tpp_proceso}}</td>
                                         <td class="fw-bold">{{$proceso->activo}}</td>
                                         <td>{{$proceso->mes}}</td>
                                         <td>{{$proceso->fechacargue}}</td>
-                                        <td>{{$proceso->fechareporte}}</td>
+                                        <td>{{$proceso->fechareporte}}</td> --}}
                                     </tr>
                                 </tbody>
                             </table>

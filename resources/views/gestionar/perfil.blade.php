@@ -37,21 +37,21 @@
 
                         <!-- Nombre completo -->
                         <div class="col-3">
-                            <p>{{$perfil->nombre}}</p>
+                            {{-- <p>{{$perfil->nombre}}</p> --}}
                         </div>
                         <!-- Numero de documento -->
                         <div class="col-3">
-                            <p>{{$perfil->identificacion}}</p>
+                            {{-- <p>{{$perfil->identificacion}}</p> --}}
                         </div>
                         <!-- Tipo de documento -->
                         <div class="col-3">
 
-                            <p>{{$perfil->tipo_identificacion}}</p>
+                            {{-- <p>{{$perfil->tipo_identificacion}}</p> --}}
                         </div>
                         <!-- Sexo -->
                         <div class="col-3">
 
-                            <p>{{$perfil->sexo}}</p>
+                            {{-- <p>{{$perfil->sexo}}</p> --}}
                         </div>
                     </div>
 
@@ -74,19 +74,19 @@
                         <!-- Variables de los titulos segunda fila -->
                         <div class="col-3">
                             <!-- Teléfono -->
-                            <p>{{$perfil->telefono}}</p>
+                            {{-- <p>{{$perfil->telefono}}</p> --}}
                         </div>
                         <div class="col-3">
                             <!-- Fecha de nacimineto -->
-                            <p>{{$perfil->fecha_nacimiento}}</p>
+                            {{-- <p>{{$perfil->fecha_nacimiento}}</p> --}}
                         </div>
                         <div class="col-3">
                             <!-- Correo electronico -->
-                            <p>{{$perfil->correo}}</p>
+                            {{-- <p>{{$perfil->correo}}</p> --}}
                         </div>
                         <div class="col-3">
                             <!-- Direccion -->
-                            <p>{{$perfil->direccion}}</p>
+                            {{-- <p>{{$perfil->direccion}}</p> --}}
                         </div>
                     </div>
 
@@ -109,15 +109,15 @@
                         <!-- Variables de los titulos segunda fila -->
                         <div class="col-3">
                             <!-- Departamento -->
-                            <p>{{$perfil->dep}}</p>
+                            {{-- <p>{{$perfil->dep}}</p> --}}
                         </div>
                         <div class="col-3">
                             <!-- Municipio -->
-                            <p>{{$perfil->mun}}</p>
+                            {{-- <p>{{$perfil->mun}}</p> --}}
                         </div>
                         <div class="col-3">
                             <!-- Afiliacion -->
-                            <p>{{$perfil->afil}}</p>
+                            {{-- <p>{{$perfil->afil}}</p> --}}
                         </div>
                         <div class="col-3">
                             <!-- Campo vacio -->
@@ -145,16 +145,16 @@
                                         </tr>
                                     </thead>
                                     <tbody style="background-color: #ffff; text-align: center;">
-                                        @foreach ($gestiones as $gestion_historial)
+                                        {{-- @foreach ($gestiones as $gestion_historial) --}}
                                             <tr>
                                                 <!-- Variables de tabla -->
-                                                <td>{{$gestion_historial->tpp_prcoeso}}</td>
+                                                {{-- <td>{{$gestion_historial->tpp_prcoeso}}</td>
                                                 <td>{{$gestion_historial->mes}}</td>
                                                 <td>{{$gestion_historial->fecha_cargue}}</td>
                                                 <td>{{$gestion_historial->fecha_gestion}}</td>
                                                 <td>{{$gestion_historial->agente}}</td>
                                                 <td>{{$gestion_historial->resultado}}</td>
-                                                <td>{{$gestion_historial->comentario}}</td>
+                                                <td>{{$gestion_historial->comentario}}</td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
