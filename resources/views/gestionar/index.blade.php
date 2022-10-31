@@ -28,28 +28,28 @@
                     </thead>
                     <tbody style="background-color: #ffff; text-align: center;">
                         @foreach ($gestiones as $gestion )
-                        <tr onload="prioridad({{$gestion->id_gestion}})">
+                        <tr onload="prioridad({{$gestion->pro_id}})">
                                 <!-- Esta es la variable -->
-                            <td> <p style="display: none;" id="prioridad_var">{{$gestion->prioridad}}</p>
+                            <td> <p style="display: none;" id="prioridad_var_{{$gestion->pro_id}}">{{$gestion->pro_prioridad}}</p>
                                 <!-- Si es prioridad 1 -->
-                            <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->id_gestion}}"></i>
+                            <i class="fa-solid fa-circle circle-red" id="pri_red_{{$gestion->pro_id}}"></i>
                                 <!-- Si es prioridad 2 -->
-                            <i class="fa-solid fa-circle circle-yellow" id="pri_yellow_{{$gestion->id_gestion}}"></i>
+                            <i class="fa-solid fa-circle circle-yellow" id="pri_yellow_{{$gestion->pro_id}}"></i>
                                 <!-- Si es prioridad 3 -->
-                            <i class="fa-solid fa-circle circle-green" id="pri_green_{{$gestion->id_gestion}}"></i>
+                            <i class="fa-solid fa-circle circle-green" id="pri_green_{{$gestion->pro_id}}"></i>
                             </td>
-                            <td>{{$gestion->nombre}}</td>
-                            <td>{{$gestion->apellido}}</td>
-                            <td>{{$gestion->telefono}}</td>
-                            <td>{{$gestion->operacion}}</</td>
+                            <td>{{$gestion->pac_primer_nombre}} {{$gestion->pac_segundo_nombre}}</td>
+                            <td>{{$gestion->pac_primer_apellido}} {{$gestion->pac_segundo_apellido}}</td>
+                            <td>{{$gestion->pac_telefono}}</td>
+                            <td>{{$gestion->tpp_nombre}}</</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proceso_{{$gestion->id_gestion}}">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proceso_{{$gestion->pro_id}}">
                                    Proceso
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#perfil_{{$gestion->id_gestion}}">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#perfil_{{$gestion->pro_id}}">
                                     Perfil
                                 </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Gestion_{{$gestion->id_gestion}}">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Gestion_{{$gestion->pro_id}}">
                                     Gestion
                                 </button>
                             </td>
@@ -61,9 +61,9 @@
         </div>
     </div>
 </div>
-
+{{--
 @include("gestionar.proceso") @include("gestionar.perfil") @include("gestionar.gestion")
-
+ --}}
 @endsection
 
 @section('script')

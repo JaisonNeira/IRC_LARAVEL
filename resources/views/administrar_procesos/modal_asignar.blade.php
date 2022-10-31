@@ -338,7 +338,7 @@
                                                 <th class="text-center py-3 px-1">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value=""
-                                                            id="selecionar_todo">
+                                                            id="seleccionar_todo">
                                                         <label class="form-check-label" for="selecionar_todo">
                                                             Seleccionar todos
                                                         </label>
@@ -355,7 +355,7 @@
                                                     <td>{{ $agente->age_documento }}</td>
                                                     <td>{{ $agente->name }}</td>
                                                     <td class="mr-3" style="padding-left: 40px;">
-                                                        <input class="form-check-input" type="checkbox"
+                                                        <input class="form-check-input all_select" type="checkbox"
                                                             name="ids[]" value="{{ $agente->age_id }}"
                                                             id="check_{{ $agente->age_id }}">
                                                     </td>

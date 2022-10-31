@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <title>IRC - @yield('title')</title>
-    <link rel="shortcut icon" href="img/ircicon_page_2.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/ircicon_page_2.png')}}" type="image/x-icon">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -64,10 +64,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <!--Funcionalida -->Persona Anonima
-                                </span>
-                                <img class="img-profile rounded-circle" src="img/icon_woman.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('img/icon_woman.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -169,7 +167,7 @@
     <script src="{{ asset('js/funcionalidades/irc_input_file.js') }}"></script>
     <script src="{{ asset('js/funcionalidades/validator.js') }}"></script>
     <script src="{{ asset('js/funcionalidades/estado.js') }}"></script>
-    <script src="{{ asset('js/funcionalidades/gestionar') }}"></script>
+    <script src="{{ asset('js/funcionalidades/gestionar.js') }}"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     @yield('script')
 </body>
