@@ -61,12 +61,12 @@
 
 
     @can('ver-administracion')
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link collapsed" {{-- href="#" --}} data-toggle="collapse" data-target="#gestiones"
                 aria-expanded="true" aria-controls="collapsePages">
                 <div class="d-flex flex-column ">
-                    <i class="fa-solid fa-house-medical-circle-check text-center" style="font-size: 25px;"></i>
-                    <div Class="text-center"><span>Administracion</span></div>
+                    <i class="fa-solid fa-user-doctor text-center" style="font-size: 25px;"></i>
+                <div Class="text-center"><span>Administracion</span></div>
                 </div>
                 <hr class="sidebar-divider">
             </a>
@@ -83,12 +83,12 @@
                     @can('ver-usuarios')
                         <a class="nav-link" href="{{ route('indexUser') }}">
                             <i class="fas fa-user"></i>
-                            <span>Gestionar Usuarios</span></a>
+                            <span>Usuarios</span></a>
                     @endcan
 
                     @can('ver-usuarios')
                         <a class="nav-link" href="{{ route('administracion.index') }}">
-                            <i class="fa-solid fa-user-doctor text-center" style="font-size: 30px;"></i>
+                            <i class="fa-solid fa-user-doctor text-center"></i>
                             <span>Administracion</span></a>
                     @endcan
 
