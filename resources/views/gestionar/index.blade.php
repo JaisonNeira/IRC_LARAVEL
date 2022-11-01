@@ -33,16 +33,19 @@
                                     <td>
                                         @if ($gestion->pro_prioridad == 1)
                                             <!-- Si es prioridad 1 -->
+                                            <span style="display: none;">1</span>
                                             <i class="fa-solid fa-circle circle-red"
                                                 id="pri_red_{{ $gestion->pro_id }}"></i>
                                         @endif
                                         @if ($gestion->pro_prioridad == 2)
                                             <!-- Si es prioridad 2 -->
+                                            <span style="display: none;">2</span>
                                             <i class="fa-solid fa-circle circle-yellow"
                                                 id="pri_yellow_{{ $gestion->pro_id }}"></i>
                                         @endif
                                         @if ($gestion->pro_prioridad == 3)
                                             <!-- Si es prioridad 3 -->
+                                            <span style="display: none;">3</span>
                                             <i class="fa-solid fa-circle circle-green"
                                                 id="pri_green_{{ $gestion->pro_id }}"></i>
                                         @endif
@@ -50,7 +53,7 @@
                                     <td>{{ $gestion->pac_primer_nombre }} {{ $gestion->pac_segundo_nombre }}</td>
                                     <td>{{ $gestion->pac_primer_apellido }} {{ $gestion->pac_segundo_apellido }}</td>
                                     <td>{{ $gestion->pac_telefono }}</td>
-                                    <td>{{ $gestion->tpp_nombre }}</< /td>
+                                    <td>{{ $gestion->tpp_nombre }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#modal_proceso" onclick="modal_proceso({{ $gestion->pac_id }});">

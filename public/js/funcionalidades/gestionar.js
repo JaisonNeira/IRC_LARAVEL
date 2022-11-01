@@ -98,7 +98,7 @@ function modal_perfil(pac_id) {
                         '<td>' + item['car_fecha_cargue'] + '</td>' +
                         '<td>' + item['ges_fecha'] + '</td>' +
                         '<td>' + item['name'] + '</td>' +
-                        '<td>' + item['ges_resultado'] + '</td>' +
+                        '<td>' + item['tge_nombre'] + '</td>' +
                         '<td>' + item['ges_comentario'] + '</td>' +
                         '</tr>'
                     );
@@ -125,7 +125,7 @@ function modal_perfil(pac_id) {
     });
 }
 
-function limpiar(){
+function limpiar() {
     $("#perfil_nombre").text('');
     $("#perfil_numero_documento").text('');
     $("#perfil_tipo_documento").text('');
@@ -140,9 +140,19 @@ function limpiar(){
 
 function modal_gestion(pro_id, tpp_id, pac_id) {
     var listado = $("[name=tbody_modal_gestion]");
+    var info_empleado = $("[name=tbody_modal_info_personal]");
+    var info_proceso = $("[name=tbody_modal_info_proceso]");
+    info_empleado.empty();
+    info_proceso.empty();
     listado.empty();
     listado.append(
         '<tr><td colspan="5" >Buscando...</td></tr>'
+    );
+    info_empleado.append(
+        '<tr><td colspan="6" >Buscando...</td></tr>'
+    );
+    info_proceso.append(
+        '<tr><td colspan="6" >Buscando...</td></tr>'
     );
 
     data = {
@@ -180,47 +190,200 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         '<tr>' +
                         '<td>' + item['ges_fecha'] + '</td>' +
                         '<td>' + item['name'] + '</td>' +
-                        '<td>' + item['ges_resultado'] + '</td>' +
+                        '<td>' + item['tge_nombre'] + '</td>' +
                         '<td>' + item['ges_comentario'] + '</td>' +
                         '</tr>'
                     );
                 }
             }
 
-            info_empleado.empty();
-            info_empleado.append(
-                '<tr>' +
-                '<th scope="row">Cedula</th>' +
-                '<td>' + resp.emp_cedula + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<th scope="row">Nombre</th>' +
-                '<td>' + resp.emp_nombre + '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<th scope="row">Cargo</th>' +
-                '<td>' + resp.emp_cargo + '</td>' +
-                '</tr>'
-            );
 
-            var info_calificacion = $("[name=info_calificacion]");
-            info_calificacion.empty();
-            info_calificacion.append(
-                '<tr>'+
-                '<th scope="row">Codigo</th>'+
-                '<td colspan="3">'+ resp.cal_codigo +'</td>'+
-              '</tr>'+
-              '<tr>'+
-                '<th scope="row">Curso</th>'+
-                '<td>'+ resp.cur_nombre +'</td>'+
-                '<th scope="row">Encargado</th>'+
-                '<td>'+ resp.enc_nombre +'</td>'+
-              '</tr>'+
-              '<tr>'+
-                '<th scope="row">Calificacion</th>'+
-               '<td colspan="3">'+ resp.cal_calificacion+'</td>'+
-              '</tr>'
-            );
+            info_empleado.empty();
+            info_proceso.empty();
+
+            var paciente = resp.paciente;
+
+            for (var i = 0; i < paciente.length; i++) {
+
+                var item = paciente[i];
+
+                $('#pac_id').val(item['pac_id']);
+
+                info_empleado.append(
+                    '<tr>' +
+                    '<th scope="row" >Documento</th>' +
+                    '<td colspan="2">' + item['tip_alias'] + ' - ' + item['pac_identificacion'] + '</td>' +
+                    '<th scope="row">Nombre</th>' +
+                    '<td colspan="2">' + item['pac_nombre_completo'] + '</td>' +
+                    '<th scope="row">Telefono</th>' +
+                    '<td colspan="2">' + item['pac_telefono'] + '</td>' +
+                    '</tr>'
+                );
+            }
+
+            var proceso = resp.proceso;
+
+            for (var i = 0; i < proceso.length; i++) {
+
+                var item = proceso[i];
+                $('#tpp_id').val(item['tpp_id']);
+                $('#pro_id').val(item['pro_id']);
+
+                switch (item['tpp_id']) {
+                    case 1:
+                        /* INASISTIDOS */
+
+                        $('#span_proceso').text('Informacion de la inasistencia')
+                        info_proceso.append(
+                            '<tr>' +
+                            '<th scope="row">Fecha cita</th>' +
+                            '<td>' + item['ina_fecha_cita'] + '</td>' +
+                            '<th scope="row">Medico</th>' +
+                            '<td>' + item['ina_medico_nombre'] + '</td>' +
+                            '<th scope="row">Medico especialidad</th>' +
+                            '<td>' + item['ina_medico_especialidad'] + '</td>' +
+                            '<th scope="row">Convenio</th>' +
+                            '<td>' + item['ina_convenio_nombre'] + '</td>' +
+                            '<th scope="row">Motivo</th>' +
+                            '<td>' + item['ina_motivo_inasistencia'] + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th scope="row">Rotulo</th>' +
+                            '<td>' + item['ina_rotulo'] + '</td>' +
+                            '<th scope="row">PYM</th>' +
+                            '<td>' + item['ina_pym'] + '</td>' +
+                            '<th scope="row">Modalidad</th>' +
+                            '<td>' + item['ina_modalidad'] + '</td>' +
+                            '<th scope="row">Estado consulta</th>' +
+                            '<td>' + item['ina_estado_consulta'] + '</td>' +
+                            '</tr>'
+                        );
+
+                        break;
+                    case 2:
+                        /* SEGUIMIENTOS */
+
+                        $('[name=div_input_datetime]').css("display", "block");
+                        $('#span_proceso').text('Informacion del seguimiento')
+                        info_proceso.append(
+                            '<tr>' +
+                            '<th scope="row">Fecha ultimo control</th>' +
+                            '<td>' + item['sdi_fecha_ultimo_control'] + '</td>' +
+                            '<th scope="row">Fecha cita</th>' +
+                            '<td>' + item['sdi_fecha_cita'] + '</td>' +
+                            '<th scope="row">Especialidad</th>' +
+                            '<td>' + item['sdi_especialidad'] + '</td>' +
+                            '</tr>'
+                        );
+
+                        break;
+                    case 3:
+                        /* RECORDATORIOS */
+
+                        $('#span_proceso').text('Informacion del recordatorio')
+                        info_proceso.append(
+                            '<tr>' +
+                            '<th scope="row">Fecha cita</th>' +
+                            '<td>' + item['rec_fecha_cita'] + '</td>' +
+                            '<th scope="row">Medico</th>' +
+                            '<td>' + item['rec_profesional'] + '</td>' +
+                            '<th scope="row">Medico especialidad</th>' +
+                            '<td>' + item['rec_especialidad'] + '</td>' +
+                            '<th scope="row">Convenio</th>' +
+                            '<td>' + item['rec_convenio'] + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th scope="row">Tipo recordatorio</th>' +
+                            '<td>' + item['rec_tipo_de_recordatorio'] + '</td>' +
+                            '<th scope="row">PYM</th>' +
+                            '<td>' + item['rec_pym'] + '</td>' +
+                            '<th scope="row">Modalidad</th>' +
+                            '<td>' + item['rec_modalidad'] + '</td>' +
+                            '</tr>'
+                        );
+
+                        break;
+                    case 4:
+                        /* HOSPITALIZADOS */
+
+                        $('#span_proceso').text('Informacion de la hospitalizacion')
+                        info_proceso.append(
+                            '<tr>' +
+                            '<th scope="row">Diagnostico</th>' +
+                            '<td>' + item['hos_diagnostico'] + '</td>' +
+                            '<th scope="row">Fecha ingreso</th>' +
+                            '<td>' + item['hos_fecha_ingreso'] + '</td>' +
+                            '<th scope="row">Fecha egreso</th>' +
+                            '<td>' + item['hos_fecha_egreso'] + '</td>' +
+                            '<th scope="row">Programa</th>' +
+                            '<td>' + item['hos_programa'] + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th scope="row">Pertenece a irc?</th>' +
+                            '<td>' + item['hos_pertenece_irc'] + '</td>' +
+                            '<th scope="row">Programa</th>' +
+                            '<td>' + item['hos_programa'] + '</td>' +
+                            '</tr>'
+                        );
+
+                        break;
+                    case 5:
+                        /* BRIGADA */
+
+                        $('#span_proceso').text('Informacion de la  brigada')
+                        info_proceso.append(
+                            '<tr>' +
+                            '<th scope="row">Fecha brigada</th>' +
+                            '<td>' + item['bri_fecha'] + '</td>' +
+                            '<th scope="row">Punto de acopio</th>' +
+                            '<td>' + item['bri_punto_acopio'] + '</td>' +
+                            '<th scope="row">Convenio</th>' +
+                            '<td>' + item['bri_convenio'] + '</td>' +
+                            '<th scope="row">Especialidad</th>' +
+                            '<td>' + item['bri_especialidad'] + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<th scope="row">Fecha cita</th>' +
+                            '<td>' + item['bri_dias_transcurrido'] + '</td>' +
+                            '<th scope="row">Fecha de ultimo control</th>' +
+                            '<td>' + item['bri_fecha_ultimo_control'] + '</td>' +
+                            '<th colspan="3" scope="row">Dias desde el ultimo control</th>' +
+                            '<td>' + item['bri_fecha_cita'] + '</td>' +
+                            '</tr>'
+                        );
+
+                        break;
+                    case 6:
+                        /* REPROGRAMACION */
+
+                        $('[name=div_input_datetime]').css("display", "block");
+                        $('#span_proceso').text('Informacion de la reprogramacion')
+                        info_proceso.append(
+                            '<tr>' +
+                            '<th scope="row">Convenio</th>' +
+                            '<td>' + item['rep_convenio'] + '</td>' +
+                            '<th scope="row">Fecha cita</th>' +
+                            '<td>' + item['rep_fecha_cita'] + '</td>' +
+                            '<th scope="row">Especialidad</th>' +
+                            '<td>' + item['rep_especialidad'] + '</td>' +
+                            '<th scope="row">Medico</th>' +
+                            '<td>' + item['rep_profesional'] + '</td>' +
+                            '</tr>'
+                        );
+
+                        break;
+                    default:
+
+                        info_proceso.append(
+                            '<tr><td colspan="6">No se encontraron informacion</td></tr>'
+                        );
+
+                        break;
+                }
+
+
+
+            }
 
         },
         error: function (jqXHR) {

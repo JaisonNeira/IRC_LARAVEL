@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\agente;
+use App\Models\gestione;
+use App\Models\tipos_gestione;
+use App\Models\seguimiento;
+use App\Models\reprogramacione;
 
 class GestionesController extends Controller
 {
@@ -18,8 +22,6 @@ class GestionesController extends Controller
     function index($id_user){
 
         $validator = agente::where('user_id', $id_user)->count();
-
-
 
         if($validator == 0){
             return redirect()->back();
@@ -44,7 +46,9 @@ class GestionesController extends Controller
 
         $gestiones = DB::select($sql);
 
-        return view('gestionar.index', compact('gestiones'));
+        $tipo_procesos = tipos_gestione::where('tge_estado', '=', '1')->get();
+
+        return view('gestionar.index', compact('gestiones', 'tipo_procesos'));
     }
 
     /* MODALES AJAX */
@@ -77,7 +81,7 @@ class GestionesController extends Controller
 
         $sql1 = "SELECT tpp.tpp_id, tpp.tpp_nombre, car.car_mes,
         car.car_fecha_cargue, ges.ges_fecha, age.age_id, usu.name,
-        ges.ges_resultado, ges.ges_comentario
+        ges.tge_id, tge.tge_nombre, ges.ges_comentario
         FROM gestiones AS ges
         INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
@@ -85,6 +89,7 @@ class GestionesController extends Controller
         INNER JOIN tipos_procesos AS tpp ON tpp.tpp_id = car.tpp_id
         INNER JOIN agentes AS age ON age.age_id = ges.age_id
         INNER JOIN users AS usu ON usu.id = age.user_id
+        INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
         WHERE ges.ges_estado = 1
         AND pro.pro_estado = 1
         AND car.car_estado = 1
@@ -116,7 +121,7 @@ class GestionesController extends Controller
 
         $sql1 = "SELECT tpp.tpp_id, tpp.tpp_nombre, car.car_mes,
         car.car_fecha_cargue, ges.ges_fecha, age.age_id, usu.name,
-        ges.ges_resultado, ges.ges_comentario
+        ges.ges_comentario, tge.tge_id, tge.tge_nombre
         FROM gestiones AS ges
         INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
@@ -124,6 +129,7 @@ class GestionesController extends Controller
         INNER JOIN tipos_procesos AS tpp ON tpp.tpp_id = car.tpp_id
         INNER JOIN agentes AS age ON age.age_id = ges.age_id
         INNER JOIN users AS usu ON usu.id = age.user_id
+        INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
         WHERE ges.ges_estado = 1
         AND pro.pro_estado = 1
         AND car.car_estado = 1
@@ -218,5 +224,28 @@ class GestionesController extends Controller
 
     }
 
+    public function post_gestion(request $request){
+
+        $tpp_id = $request->tpp_id;
+
+        $age_id = agente::where('user_id', '=' ,$request->usu_id)->get();
+
+        $gestion = new gestione();
+        $gestion->pac_id = $request->pac_id;
+        $gestion->tge_id = $request->tge_id;
+        $gestion->ges_comentario = $request->ges_comentario;
+        $gestion->pro_id = $request->pro_id;
+        $gestion->age_id = $age_id[0]->age_id;
+        $gestion->save();
+
+        if($tpp_id == 6){
+            seguimiento::where('pro_id', $request->pro_id)->update(['sdi_fecha_cita' => $request->fecha_cita]);
+        }
+        if($tpp_id == 2){
+            reprogramacione::where('pro_id', $request->pro_id)->update(['rep_nueva_cita' => $request->fecha_cita]);
+        }
+
+        return redirect()->back();
+    }
 
 }

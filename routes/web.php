@@ -57,6 +57,7 @@ Route::get('/gestionar/{id}', [App\Http\Controllers\GestionesController::class, 
 Route::get('/gestionar/modal/proceso', [App\Http\Controllers\GestionesController::class, 'modal_proceso'])->name('gestionar.modal.proceso');
 Route::get('/gestionar/modal/perfil', [App\Http\Controllers\GestionesController::class, 'modal_perfil'])->name('gestionar.modal.perfil');
 Route::get('/gestionar/modal/gestion', [App\Http\Controllers\GestionesController::class, 'modal_gestion'])->name('gestionar.modal.gestion');
+Route::post('/gestionar/modal/gestion/post', [App\Http\Controllers\GestionesController::class, 'post_gestion'])->name('gestionar.post');
 
 /* CONSULTAS */
 Route::get('/consultas', [App\Http\Controllers\PacientesController::class, 'index'])->name('consultas.index');
