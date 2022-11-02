@@ -12,7 +12,7 @@
                 <div class="container pl-4 pr-4">
                     {{-- gestion --}}
 
-                    <div class="contanier-fluid mt-2 p-3">
+                    <div class="contanier-fluid mt-2 pt-1 p-3">
                         <div class="row mb-4">
                             {{-- Gestion e informacion --}}
                             <div class="col-6 p-3">
@@ -80,7 +80,7 @@
                                 <!-- Informacion info proceso -->
                                 <table class="table table-responsive" name="tbody_modal_info_proceso">
                                 </table>
-                                <div class="container-fluid p-3 text-center" style="margin-top: 122px !important;">
+                                <div class="container-fluid p-3 text-right" style="margin-top: 122px !important;">
                                     <button class="btn  btn_ver_mas" onclick="activar()">
                                         <p id="texto_ver" style="margin-bottom: 0px">Ver Historial</p>
                                     </button>
