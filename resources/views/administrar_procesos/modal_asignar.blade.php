@@ -191,7 +191,7 @@
                                                             AND pro.car_id =" .
                                                 $modales->car_id .
                                                 ' GROUP BY hos.hos_programa';
-                                            $programa = DB::select($sql_espe_hosp);
+                                            $programa = DB::select($sql_pro_hosp);
                                         @endphp
                                         <div class="flex-column">
                                             <select class="custom-select" id="programa_{{ $modales->car_id }}"

@@ -104,9 +104,31 @@ class ImportarController extends Controller
             }
             else if($tipo == '4'){
                 /* hospitalizados */
+
+                if($file_pro != "HOS"){
+                    return back()->with('mDanger', 'Este archivo no es de hospitalizados, seleccione un tipo correcto!');
+                }
+
+                $fecha = date('Ymd-hms');
+                $acc_codigo = substr($file_name, 0, -5)."-".$fecha;
+
                 try {
-                    Excel::import(new HospitalizadoImport, $file);
+
+                    $excel = Excel::import(new HospitalizadoImport($acc_codigo, substr($file_name, 0, -5)), $file);
+
+                    /* return back()->with('import_pro', $acc_codigo); */
+                    $acta = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
+
+                    $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
+
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf) {
+                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                        $mail->to('jcoobdavidcharrisv@gmail.com');
+                        $mail->attachData($pdf->output(), 'ActaCargue.pdf');
+                    }); */
+
                     return back()->with('mSucces', 'Hospitalizados importados exitosamente');
+
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
                     return back()->with('import_error', $failures);

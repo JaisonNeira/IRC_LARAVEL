@@ -94,8 +94,7 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
             $proceso = proceso::create([
                 'car_id' => $this->car_id,
                 'pac_id' => $pac_id,
-                'pro_prioridad' => $row['prioridad'],
-                'pro_programa' => $row['programa']
+                'pro_prioridad' => $row['prioridad']
             ]);
 
             $brigada = brigada::create([
