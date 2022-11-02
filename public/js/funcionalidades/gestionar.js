@@ -434,8 +434,6 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
     });
 }
 
-
-
 function  activar(){
     var informacion = document.getElementById("informacion");
     var historial = document.getElementById("historial");
