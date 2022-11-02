@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container pl-4 pr-4 pb-4">
+                <div class="container pl-4 pr-4">
                     {{-- gestion --}}
 
                     <div class="contanier-fluid mt-2 p-3">
@@ -74,13 +74,17 @@
 
                              {{-- Informacion del proceso --}}
                             <div class="col-6 p-3">
-
                                 <div class="text-center">
                                     <h4 class="mb-3"><span id="span_proceso"></span></h4>
                                 </div>
                                 <!-- Informacion info proceso -->
                                 <table class="table table-responsive" name="tbody_modal_info_proceso">
                                 </table>
+                                <div class="container-fluid p-3 mt-5 text-center">
+                                    <button class="btn btn_ver_mas py-1 px-5" onclick="activar()">
+                                        <h5 id="texto_ver">Ver Historial</h5>
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
@@ -113,11 +117,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container-fluid p-3">
-                        <button class="btn btn_ver_mas" onclick="activar()">
-                            <h4 id="texto_ver">Ver mas..</h4>
-                        </button>
                     </div>
                 </div>
             </div>

@@ -216,3 +216,7 @@ a.nav-link.collapsed::after{
 .col_style{
     flex: 0 0 100% !important;
 }
+button.btn.btn_ver_mas{
+    background-color: #E22A3D;
+    color: #fff;
+}
