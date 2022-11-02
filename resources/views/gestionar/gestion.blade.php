@@ -1,44 +1,20 @@
-<div class="modal fade" id="modal_gestion" tabindex="-1" aria-labelledby="gestion-title" aria-hidden="true" role="dialog">
+<div class="modal fade" id="modal_gestion" tabindex="-1" aria-labelledby="gestion-title" aria-hidden="true" role="dialog"
+    data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background: #E22A3D">
                 <h4 class="text-white">Gestionar paciente</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="desactivar()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="container pl-4 pr-4 pb-4">
-                    <!-- Historial section -->
-                    <div class="row my-2 py-2">
-                        <div class="col-12">
-                            <div class="text-center">
-                                <h4>Informacion Personal</h4>
-                            </div>
-                            <div>
-                                <table class="table table-bordered">
-                                    <tbody name="tbody_modal_info_personal">
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="text-center">
-                                <h4><span id="span_proceso"></span></h4>
-                            </div>
-                            <div>
-                                <table class="table table-bordered">
-                                    <tbody name="tbody_modal_info_proceso">
-
-                                    </tbody>
-                                </table>
-                            </div>
-
+                    {{-- gestion --}}
+                    <div class="contanier-fluid mt-2 mb-4 p-3 shadow">
+                        <div class="col-12 mb-4">
+                            <h3>Gestion</h3>
                         </div>
-                    </div>
-
-                    {{-- gestionar --}}
-                    <div class="contanier-fluid">
-                        <div class="col-12"><h3 class="text-center">Gestion</h3></div>
                         <div class="col-12">
                             <form action="{{ route('gestionar.post') }}" method="POST" name="form-data"
                                 enctype="multipart/form-data" class="row">
@@ -65,13 +41,13 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-3 fecha_style" {{-- style="display: none;" --}} name="div_input_datetime">
+                                <div class="col-3 col_style" {{-- style="display: none;" --}} name="div_input_datetime">
                                     <div class="col-12 align-items-center">
                                         <input type="datetime-local" id="fecha_cita" name="fecha_cita">
                                     </div>
                                 </div>
                                 <div class="col-12 my-3">
-                                    <textarea class="form-control" id="ges_comentario" name="ges_comentario" rows="3"
+                                    <textarea class="form-control" id="ges_comentario" name="ges_comentario" rows="3" style="max-width: 985px"
                                         placeholder="Escribe un comentario..."required></textarea>
                                 </div>
                                 <div class="col-12  text-right mt-">
@@ -80,9 +56,36 @@
                             </form>
                         </div>
                     </div>
+                    <!-- Informacion-->
+                    <div class="conteiner-fluid shadow shadow" style="display: none" id="informacion">
+                        <div class="row my-4 py-4">
+                            <div class="col-6">
+                                <div class="text-center">
+                                    <h4><span id="span_proceso"></span></h4>
+                                </div>
+                                <!-- Informacion info proceso -->
+                                <table class="table table-responsive" name="tbody_modal_info_proceso">
+                                </table>
+                            </div>
+                            <div class="text-center col-6">
+                                <h4>Informacion Personal</h4>
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <td class="text-center bold">Documento</td>
+                                            <td class="text-center bold">Nombre Completo</td>
+                                            <td class="text-center bold">Telefono</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody name="tbody_modal_info_personal">
+                                    </tbody>
+                                </table>
+                            </div>
 
-                    <!-- Gestion section -->
-                    <div class="container-fluid">
+                        </div>
+                    </div>
+                    <!-- Historial gestion proceso -->
+                    <div class="container-fluid my-4 shadow" style="display: none" id="historial">
                         <div class="row mt-2 py-2">
                             <div class="col-12">
                                 <div class="text-center">
@@ -108,8 +111,11 @@
                             </div>
                         </div>
                     </div>
-
-
+                    <div class="container-fluid p-3">
+                        <button class="btn btn_ver_mas" onclick="activar()">
+                            <h4 id="texto_ver">Ver mas..</h4>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

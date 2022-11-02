@@ -2,6 +2,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header" style="background: #E22A3D">
+                <h4 class="text-white">Perfil</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,56 +13,56 @@
 
                     <div class="row">
                         <!-- Titulo -->
-                        <div class="col-12 pt-3 pb-5">
+                        <div class="col-12 pt-3 pb-4 text-center">
                             <h3>Informacion del paciente</h3>
                         </div>
                     </div>
 
                     <div class="row pb-4">
                         <!-- Titulos -->
-                        <div class="col-3 title">
-                            <h5>Tipo de documento</h5>
-                            <label for="" id="perfil_tipo_documento"></label>
+                        <div class="col-3  text-center title">
+                            <h5 class="title">Tipo de documento</h5>
+                            <label class="texto" for="" id="perfil_tipo_documento"></label>
                         </div>
-                        <div class="col-3 title">
-                            <h5>Numero de documento</h5>
-                            <label for="" id="perfil_numero_documento"></label>
+                        <div class="col-3  text-center title">
+                            <h5 class="title">Numero de documento</h5>
+                            <label class="texto" for="" id="perfil_numero_documento"></label>
                         </div>
-                        <div class="col-3 title">
-                            <h5>Nombre completo</h5>
-                            <label for="" id="perfil_nombre"></label>
+                        <div class="col-3  text-center title">
+                            <h5 class="title">Nombre completo</h5>
+                            <label class="texto" for="" id="perfil_nombre"></label>
                         </div>
-                        <div class="col-3">
-                            <h5>Teléfono</h5>
-                            <label for="" id="perfil_telefono"></label>
+                        <div class="col-3  text-center">
+                            <h5 class="title">Teléfono</h5>
+                            <label class="texto" for="" id="perfil_telefono"></label>
                         </div>
-                        <div class="col-3 title">
-                            <h5>Sexo</h5>
-                            <label for="" id="perfil_sexo"></label>
+                        <div class="col-3  text-center title">
+                            <h5 class="title">Sexo</h5>
+                            <label class="texto" for="" id="perfil_sexo"></label>
                         </div>
-                        <div class="col-3">
-                            <h5>Fecha de nacimineto</h5>
-                            <label for="" id="perfil_nacimiento"></label>
+                        <div class="col-3  text-center">
+                            <h5 class="title">Fecha de nacimineto</h5>
+                            <label class="texto" for="" id="perfil_nacimiento"></label>
                         </div>
-                        {{-- <div class="col-3">
-                            <h5>Correo electronico</h5>
-                            <label for="" id="perfil_correo"></label>
+                        {{-- <div class="col-3  text-center">
+                            <h5 class="title">Correo electronico</h5>
+                            <label class="texto" for="" id="perfil_correo"></label>
                         </div> --}}
-                        <div class="col-3">
-                            <h5>Direccion</h5>
-                            <label for="" id="perfil_direccion"></label>
+                        <div class="col-3  text-center">
+                            <h5 class="title">Direccion</h5>
+                            <label class="texto" for="" id="perfil_direccion"></label>
                         </div>
-                        <div class="col-3">
-                            <h5>Departamento</h5>
-                            <label for="" id="perfil_departamento"></label>
+                        <div class="col-3  text-center">
+                            <h5 class="title">Departamento</h5>
+                            <label class="texto" for="" id="perfil_departamento"></label>
                         </div>
-                        <div class="col-3">
-                            <h5>Municipio</h5>
-                            <label for="" id="perfil_municipio"></label>
+                        <div class="col-3  text-center">
+                            <h5 class="title">Municipio</h5>
+                            <label class="texto" for="" id="perfil_municipio"></label>
                         </div>
-                        <div class="col-3">
-                            <h5>Afiliacion al SGSS</h5>
-                            <label for="" id="perfil_afiliado"></label>
+                        <div class="col-3  text-center">
+                            <h5 class="title">Afiliacion al SGSS</h5>
+                            <label class="texto" for="" id="perfil_afiliado"></label>
                         </div>
                     </div>
 
