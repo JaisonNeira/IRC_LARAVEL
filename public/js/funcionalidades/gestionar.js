@@ -435,25 +435,20 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
 }
 
 function  activar(){
-    var informacion = document.getElementById("informacion");
     var historial = document.getElementById("historial");
     var texto_ver = document.getElementById("texto_ver");
 
     //console.log(informacion.style.display);
     //console.log(historial.style.display);
 
-    if(informacion.style.display == "none" && historial.style.display == "none"){
+    if(historial.style.display == "none"){
         //console.log("si sirve le condicional");
-        informacion.style.display = "";
-    }else if(informacion.style.display == "" && historial.style.display == "none"){
-        //console.log("segundo");
         historial.style.display = "";
-        texto_ver.textContent = "Ver menos";
-    }else if(informacion.style.display == "" && historial.style.display == ""){
+        texto_ver.textContent = "Ocultar Historial";
+    }else if(historial.style.display == ""){
         //console.log("tercero");
-        informacion.style.display = "none";
         historial.style.display = "none";
-        texto_ver.textContent = "Ver mas";
+        texto_ver.textContent = "Mostrar Historial";
     }
 }
 

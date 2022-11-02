@@ -11,64 +11,15 @@
             <div class="modal-body">
                 <div class="container pl-4 pr-4 pb-4">
                     {{-- gestion --}}
-                    <div class="contanier-fluid mt-2 mb-4 p-3 shadow">
-                        <div class="col-12 mb-4">
-                            <h3>Gestion</h3>
-                        </div>
-                        <div class="col-12">
-                            <form action="{{ route('gestionar.post') }}" method="POST" name="form-data"
-                                enctype="multipart/form-data" class="row">
-                                <input type="text" style="display: none;" id="tpp_id" name="tpp_id">
-                                <input type="text" style="display: none;" id="pro_id" name="pro_id">
-                                <input type="text" style="display: none;" id="pac_id" name="pac_id">
-                                <input type="text" style="display: none;" id="usu_id" name="usu_id"
-                                    value="{{ Auth::user()->id }}">
-                                @csrf
-                                <div class="col-6 ">
-                                    <h6>Resultado</h6>
-                                </div>
-                                <div class="col-6">
-                                    <h6 style="padding-left: 23px;">Fecha de la Nueva Cita</h6>
-                                </div>
-                                <div class="col-6" style="padding-left:0px">
-                                    <div class="select select_gestion  col-12  align-items-center mx-3">
-                                        <select id="seleccion" name="tge_id" style="font-weight: bold;" required>
-                                            <option selected disabled>Selecionar Resultado</option>
-                                            @foreach ($tipo_procesos as $list)
-                                                <option value="{{ $list->tge_id }}">{{ $list->tge_nombre }}</option>
-                                            @endforeach
 
-                                        </select>
-                                    </div>
+                    <div class="contanier-fluid mt-2 p-3">
+                        <div class="row mb-4">
+                            {{-- Gestion e informacion --}}
+                            <div class="col-6 p-3">
+                                {{-- Tabla de Informacion del Usuario --}}
+                                <div class="col-12">
+                                    <h4 class="text-center mb-3">Gestion</h4>
                                 </div>
-                                <div class="col-3 col_style" {{-- style="display: none;" --}} name="div_input_datetime">
-                                    <div class="col-12 align-items-center">
-                                        <input type="datetime-local" id="fecha_cita" name="fecha_cita">
-                                    </div>
-                                </div>
-                                <div class="col-12 my-3">
-                                    <textarea class="form-control" id="ges_comentario" name="ges_comentario" rows="3" style="max-width: 985px"
-                                        placeholder="Escribe un comentario..."required></textarea>
-                                </div>
-                                <div class="col-12  text-right mt-">
-                                    <button class="btn btn-primary" type="submit">Enviar Gestion</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!-- Informacion-->
-                    <div class="conteiner-fluid shadow shadow" style="display: none" id="informacion">
-                        <div class="row my-4 py-4">
-                            <div class="col-6">
-                                <div class="text-center">
-                                    <h4><span id="span_proceso"></span></h4>
-                                </div>
-                                <!-- Informacion info proceso -->
-                                <table class="table table-responsive" name="tbody_modal_info_proceso">
-                                </table>
-                            </div>
-                            <div class="text-center col-6">
-                                <h4>Informacion Personal</h4>
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
@@ -80,12 +31,64 @@
                                     <tbody name="tbody_modal_info_personal">
                                     </tbody>
                                 </table>
+                                {{-- Formulario --}}
+                                <form action="{{ route('gestionar.post') }}" method="POST" name="form-data"
+                                    enctype="multipart/form-data" class="row mb-4">
+                                    <input type="text" style="display: none;" id="tpp_id" name="tpp_id">
+                                    <input type="text" style="display: none;" id="pro_id" name="pro_id">
+                                    <input type="text" style="display: none;" id="pac_id" name="pac_id">
+                                    <input type="text" style="display: none;" id="usu_id" name="usu_id"
+                                        value="{{ Auth::user()->id }}">
+                                    @csrf
+                                    <div class="col-12 mb-3" style="padding-left:0px, max-width: 495PX !important;">
+                                        <h6>Resultado</h6>
+                                        <div class="select select_gestion  col-12  align-items-center">
+                                            <select id="seleccion" name="tge_id" style="font-weight: bold;" required>
+                                                <option selected disabled>Selecionar Resultado</option>
+                                                @foreach ($tipo_procesos as $list)
+                                                    <option value="{{ $list->tge_id }}">{{ $list->tge_nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col_style" {{-- style="display: none;" --}} name="div_input_datetime">
+                                        <h6>Fecha de la Nueva Cita</h6>
+                                        <input type="datetime-local" id="fecha_cita" name="fecha_cita">
+                                    </div>
+
+
+
+
+                                    <div class="col-12 my-3">
+                                        <textarea class="form-control" id="ges_comentario" name="ges_comentario" rows="3" style="max-width: 985px"
+                                            placeholder="Escribe un comentario..."required></textarea>
+                                    </div>
+                                    <div class="col-12  text-right mt-">
+                                        <button class="btn btn-primary" type="submit">Enviar Gestion</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                             {{-- Informacion del proceso --}}
+                            <div class="col-6 p-3">
+
+                                <div class="text-center">
+                                    <h4 class="mb-3"><span id="span_proceso"></span></h4>
+                                </div>
+                                <!-- Informacion info proceso -->
+                                <table class="table table-responsive" name="tbody_modal_info_proceso">
+                                </table>
                             </div>
 
                         </div>
                     </div>
+
+
                     <!-- Historial gestion proceso -->
-                    <div class="container-fluid my-4 shadow" style="display: none" id="historial">
+                    <div class="container-fluid" style="display: none" id="historial">
                         <div class="row mt-2 py-2">
                             <div class="col-12">
                                 <div class="text-center">

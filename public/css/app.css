@@ -215,5 +215,4 @@ a.nav-link.collapsed::after{
 }
 .col_style{
     flex: 0 0 100% !important;
-    max-width: 50% !important;
 }
