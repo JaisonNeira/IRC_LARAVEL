@@ -220,3 +220,8 @@ button.btn.btn_ver_mas{
     background-color: #E22A3D;
     color: #fff;
 }
+button.btn.btn_ver_mas:hover{
+    background-color: #ffff;
+    color: #E22A3D;
+    border: 1px solid #E22A3D;
+}
