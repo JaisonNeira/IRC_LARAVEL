@@ -29,6 +29,7 @@ Route::post('/rol/create', [RolController::class, 'store'])->name('StoreRol');
 Route::delete('/roles/delete/{id}', [RolController::class, 'destroy'])->name('BorrarRol');
 Route::get('/roles/update/{id}', [RolController::class, 'edit'])->name('EditarRol');
 Route::patch('/roles/update/{id}', [RolController::class, 'update'])->name('UpdateRol');
+Route::get('/user/perfil', [UserController::class, 'perfil'])->name('perfil');
 
 //USUARIOS CRUD
 Route::get('/user', [UserController::class, 'index'])->name('indexUser');

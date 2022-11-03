@@ -91,7 +91,7 @@ class UserController extends Controller
         return redirect()->route('indexUser');
     }
 
-    /* public function perfil(){
+    public function perfil(){
          return view('usuarios.perfil');
     }
 
@@ -114,6 +114,6 @@ class UserController extends Controller
         $user->update($input);
 
         return redirect()->route('Agente.perfil')->with('msjperfilactualizado', '¡Perfil actualizado correctamente!...');
-    } */
+    }
 
 }
