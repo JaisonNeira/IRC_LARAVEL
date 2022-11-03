@@ -57,9 +57,9 @@
                     </div>
                 </form>
 
-                <div class="mb-4 py-2">
+                {{-- <div class="mb-4 py-2">
                     <a href="#" class=""> Recuperar contraseña</a>
-                </div>
+                </div> --}}
                 <!-- end form login-->
             </div>
         </div>

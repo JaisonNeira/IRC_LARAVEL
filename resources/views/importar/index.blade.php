@@ -22,7 +22,9 @@
                 @foreach (Session::get('import_error') as $erros)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong> {{ $erros->errors()[0] }} en la linea {{ $erros->row() }} </strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endforeach
             @endif

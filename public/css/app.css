@@ -223,5 +223,11 @@ button.btn.btn_ver_mas{
 button.btn.btn_ver_mas:hover{
     background-color: #ffff;
     color: #E22A3D;
-    border: 1px solid #E22A3D;
+    border: 1px solid rgb(226, 42, 61, 0.7);
+}
+
+.bg-img-color{
+    background-image:linear-gradient(330deg, rgb(226, 42, 61, 0.7) 0%, rgb(226, 42, 61, 0.7) 41%, rgb(226, 42, 61, 0.7) 100%), url(https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
+    position: relative;
+    background-size: cover ;
 }

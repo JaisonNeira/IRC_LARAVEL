@@ -1,11 +1,12 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <div class="sidebar-brand d-flex align-items-center justify-content-start" style="background-color: white;">
+    <a class="sidebar-brand d-flex align-items-center justify-content-start" style="background-color: white; min-height: 74px;"
+    href="{{ route('home') }}">
         <div class="sidebar-brand-icon">
             <img src="{{ asset('img/IRCicon 1.png')}}" class="img-fluid" width="170" height="50">
         </div>
-    </div>
+    </a>
 
     <!-- Divider -->
 
