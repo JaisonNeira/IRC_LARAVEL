@@ -269,20 +269,20 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                     case 2:
                         /* SEGUIMIENTOS */
 
-                        $('[name=div_input_datetime]').css("display", "block");
+                        /* $('[name=div_input_datetime]').css("display", "block"); */
                         $('#span_proceso').text('Informacion del seguimiento')
                         info_proceso.append(
 
                             //Seguimientos Titulos 1
                             '<tr>'+
                             '<td class="bold">Fecha ultimo control</td>' +
-                            '<td class="bold center_text">Fecha cita/td>' +
+                            /* '<td class="bold center_text">Fecha cita/td>' + */
                             '<td class="bold">Especialidad</td>' +
                             '</tr>'+
                             //Seguimientos Registros 1
                             '<tr>' +
                             '<td class="text-center">' + item['sdi_fecha_ultimo_control'] + '</td>' +
-                            '<td class="text-center">' + item['sdi_fecha_cita'] + '</td>' +
+                            /* '<td class="text-center">' + item['sdi_fecha_cita'] + '</td>' + */
                             '<td class="text-center">' + item['sdi_especialidad'] + '</td>' +
                             '</tr>'
                         );
@@ -394,26 +394,36 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                     case 6:
                         /* REPROGRAMACION */
 
-                        $('[name=div_input_datetime]').css("display", "block");
+                        /* $('[name=div_input_datetime]').css("display", "block"); */
                         $('#span_proceso').text('Informacion de la reprogramacion')
                         info_proceso.append(
                             //Reprogramacion titulos 1
                             '<tr>'+
                             '<td class="bold center_text">Convenio</td>' +
-                            '<td class="bold">Fecha cita</td>' +
+                            /* '<td class="bold">Fecha cita</td>' + */
                             '<td class="bold">Especialidad</td>' +
                             '<td class="bold">Medico</td>' +
                             '</tr>'+
                             //Reprogramacion Registros 1
                             '<tr>' +
                             '<td>' + item['rep_convenio'] + '</td>' +
-                            '<td>' + item['rep_fecha_cita'] + '</td>' +
+                            /* '<td>' + item['rep_fecha_cita'] + '</td>' + */
                             '<td>' + item['rep_especialidad'] + '</td>' +
                             '<td>' + item['rep_profesional'] + '</td>' +
                             '</tr>'
                         );
 
                         break;
+                    case 7:
+                            /* REPROGRAMACION */
+
+                            /* $('[name=div_input_datetime]').css("display", "block"); */
+                            $('#span_proceso').text('Informacion de la captacion')
+                            info_proceso.append(
+                                '<tr><td colspan="6">No se ha encontrado informacion</td></tr>'
+                            );
+
+                            break;
                     default:
 
                         info_proceso.append(

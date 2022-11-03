@@ -113,7 +113,6 @@ class HospitalizadoImport implements ToModel, WithHeadingRow, WithBatchInserts, 
             actas_cargue::create([
                 'Acc_codigo' => $this->acc_codigo,
                 'Acc_nombre' => $this->file_name,
-                'Acc_fecha_recepcion' => $fecha,
                 'Acc_leidos' => $this->r_leidos,
                 'Acc_duplicados' => $this->r_duplicados,
                 'Acc_cargados' => $this->r_cargados

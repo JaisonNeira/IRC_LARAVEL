@@ -273,6 +273,30 @@ class ProcesosController extends Controller
                 $cant = DB::select($filtro_sql);
 
                 break;
+            case 7:
+                    /* CAPTACION */
+
+                    $filtro_sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
+                    AND pro.car_id = ".$car_id;
+
+                    if($dep != ""){
+                        $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                    }
+
+                    if($mun != ""){
+                        $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                    }
+
+                    if($pri != ""){
+                        $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                    }
+
+                    $cant = DB::select($filtro_sql);
+
+                    break;
             default:
 
                 $filtro_sql = "";
@@ -517,13 +541,36 @@ class ProcesosController extends Controller
                 $cant = DB::select($filtro_sql);
 
                 break;
+            case 7:
+                    /* CAPTACION */
+
+                    $filtro_sql = "SELECT pro.pro_id
+                    FROM procesos AS pro
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
+                    AND pro.car_id = ".$car_id;
+
+                    if($dep != ""){
+                        $filtro_sql = $filtro_sql." AND pac.dep_id = ".$dep;
+                    }
+
+                    if($mun != ""){
+                        $filtro_sql = $filtro_sql." AND pac.mun_id = ".$mun;
+                    }
+
+                    if($pri != ""){
+                        $filtro_sql = $filtro_sql." AND pro.pro_prioridad = ".$pri;
+                    }
+
+                    $cant = DB::select($filtro_sql);
+
+                    break;
             default:
 
                 $filtro_sql = "";
 
                 break;
         }
-
         if($filtro_sql != ""){
             $procesos = DB::select($filtro_sql);
 

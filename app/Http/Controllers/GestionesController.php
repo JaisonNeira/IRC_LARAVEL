@@ -149,7 +149,7 @@ class GestionesController extends Controller
         $paciente = DB::select($sql2);
 
         $parte1 = "SELECT pro.pro_id, car.car_id, pro.pac_id, pro.pro_prioridad, car.car_fecha_cargue, car.car_mes, car.car_fecha_reporte,
-        tpp.tpp_id, tpp.tpp_nombre, ";
+        tpp.tpp_id, tpp.tpp_nombre ";
 
         $parte3 = " FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -161,14 +161,14 @@ class GestionesController extends Controller
             case 1:
                 /* INASISTIDOS */
 
-                $parte2 = " ina.*";
+                $parte2 = ", ina.*";
                 $parte4 = " INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id";
 
                 break;
             case 2:
                 /* SEGUIMIENTOS */
 
-                $parte2 = " seg.*";
+                $parte2 = ", seg.*";
                 $parte4 = " INNER JOIN seguimientos_demandas_inducidas AS seg ON seg.pro_id = pro.pro_id";
 
 
@@ -176,7 +176,7 @@ class GestionesController extends Controller
             case 3:
                 /* RECORDATORIOS */
 
-                $parte2 = " rec.*";
+                $parte2 = ", rec.*";
                 $parte4 = " INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id";
 
 
@@ -184,24 +184,32 @@ class GestionesController extends Controller
             case 4:
                 /* HOSPITALIZADOS */
 
-                $parte2 = " hos.*";
+                $parte2 = ", hos.*";
                 $parte4 = " INNER JOIN hospitalizados AS hos ON hos.pro_id = pro.pro_id";
 
                 break;
             case 5:
                 /* BRIGADA */
 
-                $parte2 = " bri.*";
+                $parte2 = ", bri.*";
                 $parte4 = " INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id";
 
                 break;
             case 6:
                 /* REPROGRAMACION */
 
-                $parte2 = " rep.*";
-                $parte4 = " INNER JOIN reprogramacion AS rep ON rep.pro_id = pro.pro_id";
+                $parte2 = ", rep.*";
+                $parte4 = " INNER JOIN reprogramaciones AS rep ON rep.pro_id = pro.pro_id";
 
                 break;
+            case 7:
+                /* REPROGRAMACION */
+
+                $parte2 = "";
+                $parte4 = "";
+
+                break;
+
             default:
 
                 $filtro_sql = "";
@@ -236,14 +244,10 @@ class GestionesController extends Controller
         $gestion->ges_comentario = $request->ges_comentario;
         $gestion->pro_id = $request->pro_id;
         $gestion->age_id = $age_id[0]->age_id;
+        if($request->fecha_cita != null){
+            $gestion->ges_fecha_nueva_cita = date('Y-m-d h:m:s', strtotime($request->fecha_cita));
+        }
         $gestion->save();
-
-        if($tpp_id == 6){
-            seguimiento::where('pro_id', $request->pro_id)->update(['sdi_fecha_cita' => $request->fecha_cita]);
-        }
-        if($tpp_id == 2){
-            reprogramacione::where('pro_id', $request->pro_id)->update(['rep_nueva_cita' => $request->fecha_cita]);
-        }
 
         return redirect()->back();
     }

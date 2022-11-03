@@ -100,6 +100,15 @@ function consulta(car_id, tpp_id){
             "esp" : esp,
         }
         break;
+    case 7:
+        var sendData = {
+            "tpp_id" : tpp_id,
+            "car_id" : car_id,
+            "dep" : dep,
+            "mun" : mun,
+            "pri" : pri
+        }
+        break;
 
     default:
         break;

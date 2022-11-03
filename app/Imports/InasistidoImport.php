@@ -78,7 +78,7 @@ class InasistidoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
                 'car_fecha_cargue' => $fecha,
                 'car_mes' => $row['mes'],
                 'car_fecha_reporte' => $row['fecha_reporte'],
-                'tpp_id' => '4',
+                'tpp_id' => '1'
             ]);
 
             $this->car_id = $cargue->id;
@@ -95,11 +95,15 @@ class InasistidoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
             $brigada = inasistido::create([
                 'pro_id' => $proceso->id,
-                'ina_fecha_cita' => $row['diagnostico'],
-                'hos_fecha_ingreso' => $row['fecha_ingreso'],
-                'hos_fecha_egreso' => $row['fecha_egreso'],
-                'hos_programa' => $row['programa'],
-                'hos_pertenece_irc' => $row['pertenece_irc'],
+                'ina_fecha_cita' => $row['fecha_cita'],
+                'ina_convenio_nombre' => $row['convenio'],
+                'ina_medico_nombre' => $row['medico'],
+                'ina_medico_especialidad' => $row['medico_especialidad'],
+                'ina_rotulo' => $row['rotulo'],
+                'ina_pym' => $row['pym'],
+                'ina_modalidad' => $row['modalidad'],
+                'ina_estado_consulta' => $row['estado_consulta'],
+                'ina_motivo_inasistencia' => $row['motivo_inasistencia']
             ]);
             $this->r_cargados = $this->r_cargados+1;
         }else{
@@ -112,7 +116,6 @@ class InasistidoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
             actas_cargue::create([
                 'Acc_codigo' => $this->acc_codigo,
                 'Acc_nombre' => $this->file_name,
-                'Acc_fecha_recepcion' => $fecha,
                 'Acc_leidos' => $this->r_leidos,
                 'Acc_duplicados' => $this->r_duplicados,
                 'Acc_cargados' => $this->r_cargados

@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use App\Models\recordatorio;
 use App\Models\municipio;
 use App\Models\departamento;
 use App\Models\tipos_identificacione;
@@ -17,8 +16,9 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
+class CaptacionImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
 {
+
     protected $acc_codigo;
     protected $file_name;
     protected $r_leidos = 0;
@@ -78,7 +78,7 @@ class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, W
                 'car_fecha_cargue' => $fecha,
                 'car_mes' => $row['mes'],
                 'car_fecha_reporte' => $row['fecha_reporte'],
-                'tpp_id' => '3'
+                'tpp_id' => '7',
             ]);
 
             $this->car_id = $cargue->id;
@@ -93,16 +93,6 @@ class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, W
                 'pro_prioridad' => $row['prioridad']
             ]);
 
-            $brigada = recordatorio::create([
-                'pro_id' => $proceso->id,
-                'rec_fecha_cita' => $row['fecha_cita'],
-                'rec_convenio' => $row['convenio'],
-                'rec_especialidad' => $row['especialidad'],
-                'rec_profesional' => $row['medico'],
-                'rec_modalidad' => $row['modalidad'],
-                'rec_pym' => $row['pym'],
-                'rec_tipo_de_recordatorio' => $row['tipo_recordatorio']
-            ]);
             $this->r_cargados = $this->r_cargados+1;
         }else{
             $this->r_duplicados = $this->r_duplicados+1;
@@ -145,4 +135,5 @@ class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, W
              '*.pac_identificacion' => 'required|unique:pacientes',
         ];
     } */
+
 }

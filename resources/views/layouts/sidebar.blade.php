@@ -12,7 +12,7 @@
     <!-- Nav Item - Dashboard -->
     {{-- importar item --}}
     @can('ver-importar')
-    <li class="nav-item active items m-t-5 mb-0" style="margin-top: 15px!important;">
+    <li class="nav-item active items m-t-5 mb-0" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('importar.index') }}">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-cloud-arrow-up text-center" style="font-size: 25px;"></i>
@@ -23,8 +23,8 @@
     </li>
     @endcan
 
-    @can('ver-proceso')
-    <li class="nav-item active items m-t-5">
+    @can('ver-procesos')
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('proceso.index') }}">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-pencil text-center" style="font-size: 25px;"></i>
@@ -36,7 +36,7 @@
     @endcan
 
     @can('ver-gestionar')
-    <li class="nav-item active items m-t-5">
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('gestionar.index', Auth::user()->id) }}">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-house-medical-circle-check text-center" style="font-size: 25px;"></i>
@@ -47,8 +47,8 @@
     </li>
     @endcan
 
-    @can('var-consultar')
-    <li class="nav-item active items m-t-5">
+    @can('ver-consultar')
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('consultas.index') }}">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-folder-open text-center" style="font-size: 25px;"></i>
@@ -61,7 +61,7 @@
 
 
     @can('ver-administracion')
-        <li class="nav-item active">
+        <li class="nav-item active" style="margin-top: 10px!important;">
             <a class="nav-link collapsed" {{-- href="#" --}} data-toggle="collapse" data-target="#gestiones"
                 aria-expanded="true" aria-controls="collapsePages">
                 <div class="d-flex flex-column ">
@@ -97,8 +97,8 @@
         </li>
     @endcan
 
-    @can('var-reportes')
-    <li class="nav-item active items m-t-5">
+    @can('ver-reportes  ')
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('reportes.index') }}">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-clipboard text-center" style="font-size: 30px;"></i>
