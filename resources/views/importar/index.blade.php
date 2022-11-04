@@ -29,13 +29,14 @@
             <input type="text" name="file_name" id="file_name" style="display: none;">
 
             <div class="select  col-12  align-items-center" id="select">
-                <select id="seleccion" name="tipo_proceso" style="font-weight: bold;">
+                <select id="seleccion" name="tipo_proceso" style="font-weight: bold;" >
                     <option selected disabled>Tipo de proceso</option>
                     @foreach ($tipos_procesos as $list)
                         <option value="{{ $list->tpp_id }}" class="opciones">{{ $list->tpp_nombre }}</option>
                     @endforeach
                 </select>
             </div>
+
             <span class="error" id="error1">Selecciona un proceso</span> {{-- error --}}
             <div class="col-12 mt-4 mb-4 align-items-center" style="padding-right: 0; padding-left: 0;">
                 {{-- Input file --}}
@@ -52,9 +53,13 @@
                 <span class="error" id="error2">Ingresa un archivo</span>{{-- error --}}
             </div>
             <div>
+
                 <button type="submit" class="btn btn-primary mt-3"
                     style="width: 200px; height: 48px; font-weight: bold; border: 1px solid  #E22A3D; color: #fff ">Subir
                     Archivo</button>
+                    <span data-toggle="popover"><i class="fa-solid fa-circle-exclamation " style="color: #b4abac"></i></span>
+
+
         </form>
         {{--  Fin Formulorio  --}}
     </div>

@@ -297,6 +297,7 @@ select::-ms-expand {
   border-radius: .25em;
   font-weight: bold;
 }
+
 .select::after {
   content: '\23F7';
   position: absolute;

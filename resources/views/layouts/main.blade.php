@@ -168,6 +168,7 @@
     <script src="{{ asset('js/funcionalidades/validator.js') }}"></script>
     <script src="{{ asset('js/funcionalidades/estado.js') }}"></script>
     <script src="{{ asset('js/funcionalidades/gestionar.js') }}"></script>
+    <script src="{{ asset('js/popover.js') }}"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     @yield('script')
 </body>

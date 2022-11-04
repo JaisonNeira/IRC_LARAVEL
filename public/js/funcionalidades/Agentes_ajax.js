@@ -8,6 +8,9 @@ $(document).ready(function() {
             $('#password_2').attr('type', 'password');
         }
     });
+
+    
+
 });
 
 
