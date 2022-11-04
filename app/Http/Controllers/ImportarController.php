@@ -74,7 +74,7 @@ class ImportarController extends Controller
             $año = intval(substr($file_fecha, 0, -4));
             $mes = intval(substr($file_fecha, 4, -2));
             $dia = intval(substr($file_fecha, 6));
-            
+
             if($mes > 12 || $dia > 31 || $mes < 0 || $dia < 0 || $mes == 0 || $año == 0 || $dia == 0){
                 return back()->with('mDanger', 'La fecha dentro del nombre es invalida!');
             }
@@ -236,7 +236,11 @@ class ImportarController extends Controller
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
-                    return back()->with('import_error', $failures);
+                    $nombre = substr($file_name, 0, -5);
+                    $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
+                    return $pdf->stream('Actaerror.pdf');
+                    /* return back()->with('import_error', $failures); */
+
                 }
             }
             else if($tipo == '6'){
@@ -268,7 +272,10 @@ class ImportarController extends Controller
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
-                    return back()->with('import_error', $failures);
+                    $nombre = substr($file_name, 0, -5);
+                    $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
+                    return $pdf->stream('Actaerror.pdf');
+                    /* return back()->with('import_error', $failures); */
                 }
             }
             else if($tipo == '7'){
@@ -300,7 +307,10 @@ class ImportarController extends Controller
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
-                    return back()->with('import_error', $failures);
+                    $nombre = substr($file_name, 0, -5);
+                    $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
+                    return $pdf->stream('Actaerror.pdf');
+                    /* return back()->with('import_error', $failures); */
                 }
             }
             else{

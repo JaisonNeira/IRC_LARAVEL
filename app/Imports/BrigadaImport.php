@@ -16,11 +16,12 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-/* use Maatwebsite\Excel\Concerns\WithValidation; */
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
 use Throwable;
 
-class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading/* , WithValidation */
+class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation
 {
 
     protected $acc_codigo;
@@ -140,14 +141,56 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         return 4000;
     }
 
-    /* public function rules(): array
+    public function rules(): array
     {
         return [
-            'pac_identificacion' => 'required|unique:pacientes',
+            'numero_de_documento' => 'required',
+            '*.numero_de_documento' => 'required',
 
-             // Above is alias for as it always validates in batches
-             '*.pac_identificacion' => 'required|unique:pacientes',
+            'primer_nombre' => 'required',
+            '*.primer_nombre' => 'required',
+
+            'primer_apellido' => 'required',
+            '*.primer_apellido' => 'required',
+
+            'telefono' => 'required',
+            '*.telefono' => 'required',
+
+            'fecha_nacimiento' => 'required|string',
+            '*.fecha_nacimiento' => 'required|string',
+
+            'documento' => 'required|exists:tipos_identificaciones,tip_alias',
+            '*.documento' => 'required|exists:tipos_identificaciones,tip_alias',
+
+            'departamento' => 'required|exists:departamentos,dep_nombre',
+            '*.departamento' => 'required|exists:departamentos,dep_nombre',
+
+            'municipio' => 'required|exists:municipios,mun_nombre',
+            '*.municipio' => 'required|exists:municipios,mun_nombre',
+
+            /* BRIGRADA */
+
+            'fecha_llegada' => 'required',
+            '*.fecha_llegada' => 'required',
+
+            'convenio' => 'required',
+            '*.convenio' => 'required',
+
+            'punto_de_acopio' => 'required',
+            '*.punto_de_acopio' => 'required',
+
+            'especialidad' => 'required',
+            '*.especialidad' => 'required',
+
+            'fecha_ultimo_control' => 'required',
+            '*.fecha_ultimo_control' => 'required',
+
+            'dias_transcurrido' => 'required',
+            '*.dias_transcurrido' => 'required',
+
+            'fecha_cita' => 'required',
+            '*.fecha_cita' => 'required',
         ];
-    } */
+    }
 
 }

@@ -18,13 +18,16 @@
             onsubmit="return validacion()">
             @csrf
 
-            @if (Session::has('import_error'))
+            {{-- @if (Session::has('import_error'))
                 @foreach (Session::get('import_error') as $erros)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong> {{ $erros->errors()[0] }} en la linea {{ $erros->row() }} </strong>
                     </div>
                 @endforeach
-            @endif
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> error </strong>
+                </div>
+            @endif --}}
 
             <input type="text" name="file_name" id="file_name" style="display: none;">
 

@@ -22,6 +22,10 @@ return view('auth.login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/pi', function () {
+    return view('importar.pdf-incorrecto');
+});
+
 //ROLE CRUD
 Route::get('/roles', [RolController::class, 'index'])->name('indexRol');
 Route::get('/rol/create', [RolController::class, 'create'])->name('GuardarRol');
@@ -29,7 +33,7 @@ Route::post('/rol/create', [RolController::class, 'store'])->name('StoreRol');
 Route::delete('/roles/delete/{id}', [RolController::class, 'destroy'])->name('BorrarRol');
 Route::get('/roles/update/{id}', [RolController::class, 'edit'])->name('EditarRol');
 Route::patch('/roles/update/{id}', [RolController::class, 'update'])->name('UpdateRol');
-Route::get('/user/perfil', [UserController::class, 'perfil'])->name('perfil');
+
 
 //USUARIOS CRUD
 Route::get('/user', [UserController::class, 'index'])->name('indexUser');
@@ -38,6 +42,7 @@ Route::post('/user/create', [UserController::class, 'store'])->name('StoreUser')
 Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('BorrarUser');
 Route::get('/user/update/{id}', [UserController::class, 'edit'])->name('EditarUser');
 Route::patch('/user/update/{id}', [UserController::class, 'update'])->name('UpdateUser');
+Route::get('/user/perfil', [UserController::class, 'perfil'])->name('perfil');
 
 /* IMPORTAR */
 Route::get('/importar', [App\Http\Controllers\ImportarController::class, 'index'])->name('importar.index');

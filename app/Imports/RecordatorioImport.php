@@ -16,8 +16,10 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
+class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation
 {
     protected $acc_codigo;
     protected $file_name;
@@ -136,13 +138,55 @@ class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, W
         return 4000;
     }
 
-    /* public function rules(): array
+    public function rules(): array
     {
         return [
-            'pac_identificacion' => 'required|unique:pacientes',
+            'numero_de_documento' => 'required',
+            '*.numero_de_documento' => 'required',
 
-             // Above is alias for as it always validates in batches
-             '*.pac_identificacion' => 'required|unique:pacientes',
+            'primer_nombre' => 'required',
+            '*.primer_nombre' => 'required',
+
+            'primer_apellido' => 'required',
+            '*.primer_apellido' => 'required',
+
+            'telefono' => 'required',
+            '*.telefono' => 'required',
+
+            'fecha_nacimiento' => 'required|string',
+            '*.fecha_nacimiento' => 'required|string',
+
+            'documento' => 'required|exists:tipos_identificaciones,tip_alias',
+            '*.documento' => 'required|exists:tipos_identificaciones,tip_alias',
+
+            'departamento' => 'required|exists:departamentos,dep_nombre',
+            '*.departamento' => 'required|exists:departamentos,dep_nombre',
+
+            'municipio' => 'required|exists:municipios,mun_nombre',
+            '*.municipio' => 'required|exists:municipios,mun_nombre',
+
+            /* RECORDATORIOS */
+
+            'fecha_cita' => 'required',
+            '*.fecha_cita' => 'required',
+
+            'convenio' => 'required',
+            '*.convenio' => 'required',
+
+            'especialidad' => 'required',
+            '*.especialidad' => 'required',
+
+            'medico' => 'required',
+            '*.medico' => 'required',
+
+            'modalidad' => 'required',
+            '*.modalidad' => 'required',
+
+            'pym' => 'required',
+            '*.pym' => 'required',
+
+            'tipo_recordatorio' => 'required',
+            '*.tipo_recordatorio' => 'required',
         ];
-    } */
+    }
 }

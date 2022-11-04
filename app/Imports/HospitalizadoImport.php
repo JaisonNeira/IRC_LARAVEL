@@ -16,8 +16,10 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class HospitalizadoImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
+class HospitalizadoImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, WithValidation
 {
 
     protected $acc_codigo;
@@ -135,13 +137,51 @@ class HospitalizadoImport implements ToModel, WithHeadingRow, WithBatchInserts, 
         return 4000;
     }
 
-    /* public function rules(): array
+
+    public function rules(): array
     {
         return [
-            'pac_identificacion' => 'required|unique:pacientes',
+            'numero_de_documento' => 'required',
+            '*.numero_de_documento' => 'required',
 
-             // Above is alias for as it always validates in batches
-             '*.pac_identificacion' => 'required|unique:pacientes',
+            'primer_nombre' => 'required',
+            '*.primer_nombre' => 'required',
+
+            'primer_apellido' => 'required',
+            '*.primer_apellido' => 'required',
+
+            'telefono' => 'required',
+            '*.telefono' => 'required',
+
+            'fecha_nacimiento' => 'required|string',
+            '*.fecha_nacimiento' => 'required|string',
+
+            'documento' => 'required|exists:tipos_identificaciones,tip_alias',
+            '*.documento' => 'required|exists:tipos_identificaciones,tip_alias',
+
+            'departamento' => 'required|exists:departamentos,dep_nombre',
+            '*.departamento' => 'required|exists:departamentos,dep_nombre',
+
+            'municipio' => 'required|exists:municipios,mun_nombre',
+            '*.municipio' => 'required|exists:municipios,mun_nombre',
+
+            /* HOSPITALIZADOS */
+
+            'diagnostico' => 'required',
+            '*.diagnostico' => 'required',
+
+            'fecha_ingreso' => 'required',
+            '*.fecha_ingreso' => 'required',
+
+            'fecha_egreso' => 'required',
+            '*.fecha_egreso' => 'required',
+
+            'programa' => 'required',
+            '*.programa' => 'required',
+
+            'pertenece_irc' => 'required',
+            '*.pertenece_irc' => 'required',
         ];
-    } */
+    }
+
 }
