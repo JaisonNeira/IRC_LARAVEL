@@ -57,7 +57,7 @@
                 <button type="submit" class="btn btn-primary mt-3"
                     style="width: 200px; height: 48px; font-weight: bold; border: 1px solid  #E22A3D; color: #fff ">Subir
                     Archivo</button>
-                    <span data-toggle="popover"><i class="fa-solid fa-circle-exclamation " style="color: #b4abac"></i></span>
+                    <span data-toggle="popover"><i class="fa-regular fa-circle-question" style="color: #6d6465"></i></span>
 
 
         </form>
