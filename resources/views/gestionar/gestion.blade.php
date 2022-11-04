@@ -65,12 +65,17 @@
                                         <textarea class="form-control" id="ges_comentario" name="ges_comentario" rows="3" style="max-width: 985px"
                                             placeholder="Escribe un comentario..."required></textarea>
                                     </div>
-                                    <div class="col-12  text-right mt-">
+                                    <div class="col-6  text-left mt-2">
+                                        <button type="button" class="btn  btn_ver_mas fixed-position" onclick="activar()">
+                                            <p id="texto_ver" style="margin-bottom: 0px">Ver Historial</p>
+                                        </button>
+                                    </div>
+                                    <div class="col-6  text-right mt-2">
                                         <button class="btn btn-primary" type="submit">Enviar Gestion</button>
                                     </div>
                                 </form>
                             </div>
-
+                            
 
                              {{-- Informacion del proceso --}}
                             <div class="col-6 p-4">
@@ -80,16 +85,10 @@
                                 <!-- Informacion info proceso -->
                                 <table class="table table-responsive" name="tbody_modal_info_proceso">
                                 </table>
-                                <div class="container-fluid p-3 text-right" style="margin-top: 126px !important;">
-                                    <button class="btn  btn_ver_mas" onclick="activar()">
-                                        <p id="texto_ver" style="margin-bottom: 0px">Ver Historial</p>
-                                    </button>
-                                </div>
                             </div>
 
                         </div>
                     </div>
-
 
                     <!-- Historial gestion proceso -->
                     <div class="container-fluid" style="display: none" id="historial">
