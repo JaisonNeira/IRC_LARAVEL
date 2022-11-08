@@ -170,7 +170,29 @@
     <script src="{{ asset('js/funcionalidades/gestionar.js') }}"></script>
     <script src="{{ asset('js/popover.js') }}"></script>
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    
     @yield('script')
+
+    <script>
+        function SoloLetras(e) {
+            key = e.keyCode || e.which;
+            tecla = String.fromCharCode(key).toString();
+            letras = "QWERTYUIOPASDFGHJKLÑZXCVBNMqwertyuiopasdfghjklñzxcvbnmàèìòùÀÈÌÒÙ"
+            especiales = [8, 32];
+            tecla_especial = false
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                /* alert("Ingresa solo numeros"); */
+                return false;
+            }
+        }
+    </script>
+
 </body>
 
 </html>

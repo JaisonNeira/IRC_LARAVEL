@@ -10,7 +10,10 @@ use App\Models\agente;
 use App\Models\gestione;
 use App\Models\tipos_gestione;
 use App\Models\seguimiento;
+use App\Models\recordatorio;
 use App\Models\reprogramacione;
+use App\Models\inasistido;
+use App\Models\tipos_inasistencia;
 
 class GestionesController extends Controller
 {
@@ -48,7 +51,9 @@ class GestionesController extends Controller
 
         $tipo_procesos = tipos_gestione::where('tge_estado', '=', '1')->get();
 
-        return view('gestionar.index', compact('gestiones', 'tipo_procesos'));
+        $tipos_inasistencias = tipos_inasistencia::where('tin_estado', '=', '1')->get();
+
+        return view('gestionar.index', compact('gestiones', 'tipo_procesos', 'tipos_inasistencias'));
     }
 
     /* MODALES AJAX */
@@ -248,6 +253,14 @@ class GestionesController extends Controller
             $gestion->ges_fecha_nueva_cita = date('Y-m-d h:m:s', strtotime($request->fecha_cita));
         }
         $gestion->save();
+
+        if($tpp_id == 3){
+            recordatorio::where('pro_id', $request->pro_id)->update(['rec_tipo_de_recordatorio' => $request->tin_id]);
+        }
+
+        if($tpp_id == 1){
+            inasistido::where('pro_id', $request->pro_id)->update(['ina_motivo_inasistencia' => $request->motivo_inasistencia]);
+        }
 
         return redirect()->back();
     }

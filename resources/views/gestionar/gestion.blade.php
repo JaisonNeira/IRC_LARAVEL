@@ -58,6 +58,29 @@
                                         <input type="datetime-local" id="fecha_cita" name="fecha_cita">
                                     </div>
 
+                                    <div class="col-12 mb-3" style="padding-left:0px, max-width: 495PX !important;">
+                                        <h6>Motivo Inasistencia</h6>
+                                        <div class="select select_gestion  col-12  align-items-center">
+                                            <select id="seleccion" name="motivo_inasistencia" style="font-weight: bold;" required>
+                                                <option selected disabled>Selecionar Resultado</option>
+                                                @foreach ($tipos_inasistencias as $list)
+                                                    <option value="{{ $list->tin_id }}">{{ $list->tin_nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mb-3" style="padding-left:0px, max-width: 495PX !important;">
+                                        <h6>Tipo de recordatorio</h6>
+                                        <div class="select select_gestion  col-12  align-items-center">
+                                            <select id="seleccion" name="tin_id" style="font-weight: bold;" required>
+                                                <option selected disabled>Selecionar Resultado</option>
+                                                <option value="TELEFONICO">TELEFONICO</option>
+                                                <option value="SMS">SMS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
 
 
 
@@ -75,7 +98,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
 
                              {{-- Informacion del proceso --}}
                             <div class="col-6 p-4">
