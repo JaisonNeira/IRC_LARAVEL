@@ -330,9 +330,9 @@ class ProcesosController extends Controller
 
         $agentes = $request->ids;
 
-        /* if($agentes == null){
+        if($agentes == null){
             return redirect()->back()->with('warmessage', 'Tiene que seleccionar por lo menos un agente!...');
-        } */
+        }
 
         $tpp_id = $request->tpp_id;
         $car_id = $request->car_id;

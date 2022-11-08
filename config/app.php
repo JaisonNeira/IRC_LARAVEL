@@ -181,6 +181,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         /* PDF */
         Barryvdh\DomPDF\ServiceProvider::class,
+        /* DATA TABLE */
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*

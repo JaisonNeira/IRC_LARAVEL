@@ -29,7 +29,7 @@ class GestionesController extends Controller
 
         $agente = agente::where('user_id', $id_user)->get();
 
-        $sql = "SELECT pac.pac_id, pro.pro_id, pro.pro_prioridad, pac.pac_primer_nombre,
+        $sql = "SELECT pac.pac_id, pac.pac_identificacion, pro.pro_id, pro.pro_prioridad, pac.pac_primer_nombre,
         pac.pac_segundo_nombre, pac.pac_primer_apellido, pac.pac_segundo_apellido,
         pac.pac_telefono, tpp.tpp_id, tpp.tpp_nombre
         FROM proceso_agentes AS pra

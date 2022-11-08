@@ -44,13 +44,13 @@ class ReprogramacionImport implements ToModel, WithHeadingRow, WithBatchInserts,
 
         $fecha_nacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_nacimiento'])->format('Y-m-d');
         $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
-        
+
         $fecha_cita = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_cita'])->format('Y-m-d');
-        
+
 
         $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
         $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
-            
+
         if($validador_pac == 0){
             /* dd(intval($municipio[0]->mun_id)); */
             $paciente = paciente::create([
@@ -73,7 +73,7 @@ class ReprogramacionImport implements ToModel, WithHeadingRow, WithBatchInserts,
             $pac_id = $paciente->id;
         }else{
             $paciente = paciente::where('pac_identificacion', $row['numero_de_documento'])->get();
-            
+
             paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["tip_id" => $ti[0]->tip_id]);
             paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_identificacion" => $row['numero_de_documento']]);
             paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_primer_nombre" => $row['primer_nombre']]);
@@ -120,13 +120,14 @@ class ReprogramacionImport implements ToModel, WithHeadingRow, WithBatchInserts,
             'rep_especialidad' => $row['especialidad'],
             'rep_profesional' => $row['medico']
         ]);
-            
+
         $this->r_cargados = $this->r_cargados+1;
 
         $validador_acc = actas_cargue::where('Acc_codigo', $this->acc_codigo)->count();
 
         if($validador_acc == 0){
             actas_cargue::create([
+                'car_id' => $this->car_id,
                 'Acc_codigo' => $this->acc_codigo,
                 'Acc_nombre' => $this->file_name,
                 'Acc_leidos' => $this->r_leidos,

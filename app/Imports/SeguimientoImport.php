@@ -40,7 +40,7 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
 
         $fecha_nacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_nacimiento'])->format('Y-m-d');
         $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
-        
+
         $fecha_ultimo_control = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_ultimo_control'])->format('Y-m-d');
 
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
@@ -49,7 +49,7 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
 
         $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
         $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
-            
+
         if($validador_pac == 0){
             /* dd(intval($municipio[0]->mun_id)); */
             $paciente = paciente::create([
@@ -72,7 +72,7 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
             $pac_id = $paciente->id;
         }else{
             $paciente = paciente::where('pac_identificacion', $row['numero_de_documento'])->get();
-            
+
             paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["tip_id" => $ti[0]->tip_id]);
             paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_identificacion" => $row['numero_de_documento']]);
             paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_primer_nombre" => $row['primer_nombre']]);
@@ -118,11 +118,12 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
             'sdi_fecha_ultimo_control' => $fecha_ultimo_control
         ]);
         $this->r_cargados = $this->r_cargados+1;
-        
+
         $validador_acc = actas_cargue::where('Acc_codigo', $this->acc_codigo)->count();
 
         if($validador_acc == 0){
             actas_cargue::create([
+                'car_id' => $this->car_id,
                 'Acc_codigo' => $this->acc_codigo,
                 'Acc_nombre' => $this->file_name,
                 'Acc_leidos' => $this->r_leidos,

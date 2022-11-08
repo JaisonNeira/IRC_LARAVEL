@@ -35,10 +35,10 @@
         </a>
     </li>
     @endcan
-    
+
     @can('ver-captaciones')
     <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
-        <a class="nav-link" href="{{ route('proceso.index') }}">
+        <a class="nav-link" href="{{ route('captaciones.index') }}">
             <div class="d-flex flex-column ">
                 <i class="fas fa-users text-center" style="font-size: 25px;"></i>
                 <div Class="text-center"><span style="line-height: 10px;">Administrar<br>Captaciones</span></div>
