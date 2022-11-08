@@ -160,7 +160,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
         'tpp_id': tpp_id,
         'pac_id': pac_id,
     }
-
+    
     $.ajax({
         url: '/gestionar/modal/gestion',
         type: 'GET',
@@ -225,9 +225,8 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                 var item = proceso[i];
                 $('#tpp_id').val(item['tpp_id']);
                 $('#pro_id').val(item['pro_id']);
-
-                switch (item['tpp_id']) {
-                    case 1:
+                switch (item['tpp_id'].toString()) {
+                    case "1":
                         /* INASISTIDOS */
 
                         $('#span_proceso').text('Informacion de la inasistencia')
@@ -238,7 +237,6 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                             '<td class="bold center_text">Medico</td>' +
                             '<td class="bold">Medico especialidad</td>' +
                             '<td class="bold center_text">Convenio</td>' +
-                            '<td class="bold center_text">Motivo</td>' +
                             '</tr>'+
                              //Inasistidos Registros 1
                             '<tr>' +
@@ -246,7 +244,6 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                             '<td class="text-center">' + item['ina_medico_nombre'] + '</td>' +
                             '<td class="text-center">' + item['ina_medico_especialidad'] + '</td>' +
                             '<td class="text-center">' + item['ina_convenio_nombre'] + '</td>' +
-                            '<td class="text-center">' + item['ina_motivo_inasistencia'] + '</td>' +
                             '</tr>' +
 
                             //Inasistidos Titulos 2
@@ -266,7 +263,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         );
 
                         break;
-                    case 2:
+                    case "2":
                         /* SEGUIMIENTOS */
 
                         /* $('[name=div_input_datetime]').css("display", "block"); */
@@ -288,7 +285,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         );
 
                         break;
-                    case 3:
+                    case "3":
                         /* RECORDATORIOS */
                         $('#span_proceso').text('Informacion del recordatorio')
                         info_proceso.append(
@@ -310,20 +307,18 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
 
                             //Recordatorios titulos 2
                             '<tr>'+
-                            '<td class="bold">Tipo recordatorio</td>' +
                             '<td class="bold center_text">PYM</td>' +
                             '<td class="bold center_text">Modalidad</td>' +
                             '</tr>'+
                             //Recordatorios Registros 2
                             '<tr>' +
-                            '<td>' + item['rec_tipo_de_recordatorio'] + '</td>' +
                             '<td>' + item['rec_pym'] + '</td>' +
                             '<td>' + item['rec_modalidad'] + '</td>' +
                             '</tr>'
                         );
 
                         break;
-                    case 4:
+                    case "4":
                         /* HOSPITALIZADOS */
 
                         $('#span_proceso').text('Informacion de la hospitalizacion')
@@ -357,7 +352,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         );
 
                         break;
-                    case 5:
+                    case "5":
                         /* BRIGADA */
                         $('#span_proceso').text('Informacion de la  brigada')
                         info_proceso.append(
@@ -391,7 +386,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         );
 
                         break;
-                    case 6:
+                    case "6":
                         /* REPROGRAMACION */
 
                         /* $('[name=div_input_datetime]').css("display", "block"); */
@@ -414,7 +409,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         );
 
                         break;
-                    case 7:
+                    case "7":
                             /* REPROGRAMACION */
 
                             /* $('[name=div_input_datetime]').css("display", "block"); */
@@ -463,11 +458,11 @@ function  activar(){
 }
 
 function desactivar(){
-    var informacion = document.getElementById("informacion");
+    //var informacion = document.getElementById("informacion");
     var historial = document.getElementById("historial");
     var texto_ver = document.getElementById("texto_ver");
 
-        informacion.style.display = "none";
+        //informacion.style.display = "none";
         historial.style.display = "none";
         texto_ver.textContent = "Ver mas";
 }

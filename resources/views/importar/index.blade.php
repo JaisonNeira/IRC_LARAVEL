@@ -18,6 +18,8 @@
             onsubmit="return validacion()">
             @csrf
 
+            <input type="text" id="email" name="email" value="{{ Auth::user()->email}}" style="display: none;">
+
             {{-- @if (Session::has('import_error'))
                 @foreach (Session::get('import_error') as $erros)
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">

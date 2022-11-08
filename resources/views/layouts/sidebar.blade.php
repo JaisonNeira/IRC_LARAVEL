@@ -36,6 +36,18 @@
     </li>
     @endcan
 
+    @can('ver-captaciones')
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
+        <a class="nav-link" href="{{ route('captaciones.index') }}">
+            <div class="d-flex flex-column ">
+                <i class="fas fa-users text-center" style="font-size: 25px;"></i>
+                <div Class="text-center"><span style="line-height: 10px;">Administrar<br>Captaciones</span></div>
+            </div>
+            <hr class="sidebar-divider">
+        </a>
+    </li>
+    @endcan
+
     @can('ver-gestionar')
     <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('gestionar.index', Auth::user()->id) }}">
@@ -87,10 +99,10 @@
                             <span>Usuarios</span></a>
                     @endcan
 
-                    @can('ver-usuarios')
+                    @can('ver-agentes')
                         <a class="nav-link" href="{{ route('administracion.index') }}">
-                            <i class="fa-solid fa-user-doctor text-center"></i>
-                            <span>Administracion</span></a>
+                            <i class="fas fa-user"></i>
+                            <span>Agentes</span></a>
                     @endcan
 
                 </div>

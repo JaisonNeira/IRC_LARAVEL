@@ -38,14 +38,19 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
     {
         $this->r_leidos = $this->r_leidos+1;
 
+        $fecha_nacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_nacimiento'])->format('Y-m-d');
+        $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
+
+        $fecha_ultimo_control = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_ultimo_control'])->format('Y-m-d');
+
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
         $departamento = departamento::where('dep_nombre', '=', $row['departamento'])->get();
         $municipio = municipio::where('mun_nombre', '=', $row['municipio'])->get();
 
         $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
+        $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
 
         if($validador_pac == 0){
-            $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
             /* dd(intval($municipio[0]->mun_id)); */
             $paciente = paciente::create([
                 'tip_id' => $ti[0]->tip_id,
@@ -55,8 +60,8 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
                 'pac_primer_apellido' => $row['primer_apellido'],
                 'pac_segundo_apellido' => $row['segundo_apellido'],
                 'pac_nombre_completo' => $nombre_completo,
-                'pac_telefono' => $row['telefono'],
-                'pac_fecha_nacimiento' => $row['fecha_nacimiento'],
+                'pac_telefono' => strval($row['telefono']),
+                'pac_fecha_nacimiento' => $fecha_nacimiento,
                 'dep_id' => $departamento[0]->dep_id,
                 'mun_id' => $municipio[0]->mun_id,
                 'pac_direccion' => $row['direccion'],
@@ -67,6 +72,21 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
             $pac_id = $paciente->id;
         }else{
             $paciente = paciente::where('pac_identificacion', $row['numero_de_documento'])->get();
+
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["tip_id" => $ti[0]->tip_id]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_identificacion" => $row['numero_de_documento']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_primer_nombre" => $row['primer_nombre']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_segundo_nombre" => $row['segundo_nombre']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_primer_apellido" => $row['primer_apellido']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_segundo_apellido" => $row['segundo_apellido']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_nombre_completo" => $nombre_completo]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_telefono" => strval($row['telefono'])]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_fecha_nacimiento" => $fecha_nacimiento]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["dep_id" => $departamento[0]->dep_id]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["mun_id" => $municipio[0]->mun_id]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_direccion" => $row['direccion']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_sexo" => $row['sexo']]);
+            paciente::where('pac_identificacion', $row['numero_de_documento'])->update(["pac_regimen_afiliacion_SGSS" => $row['regimen_afiliacion_sgss']]);
 
             $pac_id = $paciente[0]->pac_id;
         }
@@ -79,36 +99,31 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
             $cargue = cargue::create([
                 'car_fecha_cargue' => $fecha,
                 'car_mes' => $row['mes'],
-                'car_fecha_reporte' => $row['fecha_reporte'],
+                'car_fecha_reporte' => $fecha_reporte,
                 'tpp_id' => '2'
             ]);
 
             $this->car_id = $cargue->id;
         }
 
-        $validador_pro = proceso::where('car_id', $this->car_id)->where('pac_id', $pac_id)->count();
+        $proceso = proceso::create([
+            'car_id' => $this->car_id,
+            'pac_id' => $pac_id,
+            'pro_prioridad' => $row['prioridad']
+        ]);
 
-        if($validador_pro == 0){
-            $proceso = proceso::create([
-                'car_id' => $this->car_id,
-                'pac_id' => $pac_id,
-                'pro_prioridad' => $row['prioridad']
-            ]);
-
-            $brigada = seguimientos_demandas_inducida::create([
-                'pro_id' => $proceso->id,
-                'sdi_especialidad' => $row['especialidad'],
-                'sdi_fecha_ultimo_control' => $row['fecha_ultimo_control']
-            ]);
-            $this->r_cargados = $this->r_cargados+1;
-        }else{
-            $this->r_duplicados = $this->r_duplicados+1;
-        }
+        $brigada = seguimientos_demandas_inducida::create([
+            'pro_id' => $proceso->id,
+            'sdi_especialidad' => $row['especialidad'],
+            'sdi_fecha_ultimo_control' => $fecha_ultimo_control
+        ]);
+        $this->r_cargados = $this->r_cargados+1;
 
         $validador_acc = actas_cargue::where('Acc_codigo', $this->acc_codigo)->count();
 
         if($validador_acc == 0){
             actas_cargue::create([
+                'car_id' => $this->car_id,
                 'Acc_codigo' => $this->acc_codigo,
                 'Acc_nombre' => $this->file_name,
                 'Acc_leidos' => $this->r_leidos,
@@ -148,8 +163,8 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
             'telefono' => 'required',
             '*.telefono' => 'required',
 
-            'fecha_nacimiento' => 'required|string',
-            '*.fecha_nacimiento' => 'required|string',
+            'fecha_nacimiento' => 'required',
+            '*.fecha_nacimiento' => 'required',
 
             'documento' => 'required|exists:tipos_identificaciones,tip_alias',
             '*.documento' => 'required|exists:tipos_identificaciones,tip_alias',

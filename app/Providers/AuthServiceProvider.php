@@ -27,9 +27,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::before(function ($user, $ability) {
             //TODO EL QUE TENGA ESTE CORREO NO NECESITARA PERMISOS PARA ACCEDER A CUALQUIER PARTE DEL PROGRAMA
-            return $user->email == 'Admin@gmail.com' ?? null;
+            //return $user->email == 'Admin@gmail.com' ?? null;
             //TODO EL QUE TENGA EL ROL ADMINISTRADOR NO NECESITARA PERMISOS PARA ACCEDER A CUALQUIER PARTE DEL PROGRAMA
-            // return $user->hasRole('Super Admin') ? true : null;
+            return $user->hasRole('Desarrollador') ? true : null;
         });
     }
 }
