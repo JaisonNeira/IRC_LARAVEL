@@ -105,22 +105,19 @@
                                 <br>
                             </div>
 
-                            <div class="col-md-4">
-                                <label for="dep_id" class="form-label">Departamento</label>
-                                <select name="dep_id" id="dep_id" {{-- class="form-select" --}} aria-label="Default select example"
-                                    required>
-                                    <option class="form-control" disabled selected>-- Seleccione --</option>
+                            <div class="select shadow-sm col-md-4 mx-3">
+                                <select name="dep_id" id="dep_id">
+                                    <option class="form-control" disabled selected>Departamento</option>
                                     @foreach ($departamentos as $dep)
                                         <option value="{{ $dep->CAR_ID }}">{{ $dep->CAR_NOMBRE }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
-                                <label for="mun_id" class="form-label">Municipio</label>
+                            <div class="select shadow-sm col-md-4  mx-3">
                                 <select name="mun_id" id="mun_id" {{-- class="form-select" --}} aria-label="Default select example"
                                     required>
-                                    <option class="form-control" disabled selected>-- Seleccione --</option>
+                                    <option class="form-control" disabled selected>Municipio</option>
                                 </select>
                             </div>
 
@@ -132,8 +129,7 @@
                                 <br>
                             </div>
 
-                            <div class="col-md-4">
-                                <label for="pac_sexo" class="form-label">Sexo</label>
+                            <div class="select shadow-sm col-md-4 mx-3">
                                 <select name="pac_sexo" id="pac_sexo" {{-- class="form-select" --}} aria-label="Default select example"
                                     required>
                                     <option class="form-control" disabled selected>-- Seleccione --</option>
