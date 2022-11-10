@@ -160,7 +160,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
         'tpp_id': tpp_id,
         'pac_id': pac_id,
     }
-    
+
     $.ajax({
         url: '/gestionar/modal/gestion',
         type: 'GET',
@@ -269,7 +269,6 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
                         /* $('[name=div_input_datetime]').css("display", "block"); */
                         $('#span_proceso').text('Informacion del seguimiento')
                         info_proceso.append(
-
                             //Seguimientos Titulos 1
                             '<tr>'+
                             '<td class="bold">Fecha ultimo control</td>' +

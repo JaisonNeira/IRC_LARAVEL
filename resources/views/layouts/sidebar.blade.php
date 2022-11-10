@@ -110,7 +110,7 @@
         </li>
     @endcan
 
-    @can('ver-reportes  ')
+    @can('ver-reportes')
     <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('reportes.index') }}">
             <div class="d-flex flex-column ">
