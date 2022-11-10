@@ -19,7 +19,7 @@
                 <h3 class="text-center">Manuales de Usuario</h3>
                 <div class="row g-2 m-2 pt-2">
                     <div class="col-4">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/manuales_usuarios/admin_irc.pdf') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                             </div>
@@ -27,7 +27,7 @@
                         </a>
                     </div>
                     <div class="col-4">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/manuales_usuarios/agentes.pdf') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                             </div>
@@ -35,7 +35,7 @@
                         </a>
                     </div>
                     <div class="col-4">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/manuales_usuarios/supervisor.pdf') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                             </div>
@@ -53,55 +53,55 @@
                 <h3 class="text-center">Plantillas</h3>
                 <div class="row m-2 pt-2">
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRINA20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
-                            <p>Plantilla <br>Captacion</p>
+                            <p>Plantilla <br>Inasistidos</p>
                         </a>
                     </div>
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRSEG20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
-                            <p>Plantilla <br>Captacion</p>
+                            <p>Plantilla <br>Segumientos</p>
                         </a>
                     </div>
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRREC20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
-                            <p>Plantilla <br>Captacion</p>
+                            <p>Plantilla <br>Recordatorios</p>
                         </a>
                     </div>
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRHOS20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
-                            <p>Plantilla <br>Captacion</p>
+                            <p>Plantilla <br>Hospitalizados</p>
                         </a>
                     </div>
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRBRI20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
-                            <p>Plantilla <br>Captacion</p>
+                            <p>Plantilla <br>Brigadas</p>
                         </a>
                     </div>
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRREP20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
-                            <p>Plantilla <br>Captacion</p>
+                            <p>Plantilla <br>Reporgramacion</p>
                         </a>
                     </div>
                     <div class="col-3">
-                        <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                        <a class="text-center custom-link" href="{{ asset('files/plantillas/IRCAP20221102A1.xlsx') }}" style="font-size: 10px;" target="_blank">
                             <div class="text-center">
                                 <i class="fa-solid fa-file-excel" style="font-size:20px"></i>
                             </div>
@@ -120,7 +120,7 @@
                     <h3 class="text-center">Manuales de Plantillas</h3>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/ina_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>
@@ -128,7 +128,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/seg_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>
@@ -136,7 +136,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/rec_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>
@@ -144,7 +144,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/hos_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>
@@ -152,7 +152,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/bri_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>
@@ -160,7 +160,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/rep_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>
@@ -168,7 +168,7 @@
                     </a>
                 </div>
                 <div class="col-3">
-                    <a class="text-center custom-link" href="{{-- Aqui va el link --}}" style="font-size: 10px;">
+                    <a class="text-center custom-link" href="{{ asset('files/manuales_plantillas/cap_detalles.pdf') }}" style="font-size: 10px;" target="_blank">
                         <div class="text-center">
                             <i class="fa-solid fa-file-pdf" style="font-size:20px"></i>
                         </div>

@@ -9,4 +9,5 @@ class AyudaController extends Controller
     public function index(){
         return view('centro_ayuda.index');
     }
+    
 }
