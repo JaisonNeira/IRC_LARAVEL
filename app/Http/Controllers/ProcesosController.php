@@ -63,6 +63,11 @@ class ProcesosController extends Controller
 
     }
 
+    /* EXCELS VISTAS */
+    public function bri_vista(request $request){
+
+    }
+
     /* COMBOBOX */
     public function filtro(request $request){
 
