@@ -17,7 +17,7 @@
                         style="max-width: 200px; max-height: 40px;">
                 </div>
 
-                <div class="col-12 text-center text-white">
+                <div class="col-12 text-center text-white mt-4">
                     <h1 style="font-weight: bold;" class="">Bienvenido a IRC</h1>
                     <h3 style="font-weight: bold;" class="">{{ Auth::user()->name }}</h3>
                 </div>
@@ -25,15 +25,12 @@
                 <div class="col-12 px-5" style="margin-top: 90px">
                     <div class="text-left text-white">
                         <h3>Panel informativo</h3>
+                        <h5>10/11/2022</h5>
                         <p>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
-                          - Probando informacion de test.<br>
+                          - Se ha implementado un nuevo boton "centro de ayuda".<br>
+                          - Se han solucionado problemas de supervisores y agentes.<br>
+                          - Se han hecho mejoras en la interfaz grafica.<br>
+
                         </p>
                     </div>
                 </div>
