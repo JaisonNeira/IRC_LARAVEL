@@ -52,6 +52,15 @@ Route::post('/post/importar', [App\Http\Controllers\ImportarController::class, '
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
 Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'index_tabla'])->name('proceso.index.tabla');
 Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
+/* PROCESO EXCELS VISTAS */
+Route::get('/proceso/e/bri/{id}', [App\Http\Controllers\ProcesosController::class, 'bri_vista'])->name('proceso.e.bri3');
+/* Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index'); */
+
 
 /* PRO_AJAX */
 Route::get('/filtro/consulta', [App\Http\Controllers\ProcesosController::class, 'filtro'])->name('conbo.filtro');
