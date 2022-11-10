@@ -231,3 +231,10 @@ button.btn.btn_ver_mas:hover{
     position: relative;
     background-size: cover ;
 }
+
+.custom-link{
+    color: #000000;
+}
+.custom-link:hover{
+    color: #E22A3D;
+}
