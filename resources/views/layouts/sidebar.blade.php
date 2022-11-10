@@ -12,6 +12,18 @@
 
     <!-- Nav Item - Dashboard -->
     {{-- importar item --}}
+    @can('ver-centro-ayuda')
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
+        <a class="nav-link" href="{{ route('ayuda.index') }}">
+            <div class="d-flex flex-column ">
+                <i class="fa-solid fa-handshake-angle text-center" style="font-size: 30px;"></i>
+                <div Class="text-center"><span>Centro de Ayuda</span></div>
+            </div>
+            <hr class="sidebar-divider">
+        </a>
+    </li>
+    @endcan
+
     @can('ver-importar')
     <li class="nav-item active items m-t-5 mb-0" style="margin-top: 10px!important;">
         <a class="nav-link" href="{{ route('importar.index') }}">
@@ -65,7 +77,7 @@
         <a class="nav-link" href="{{ route('consultas.index') }}">
             <div class="d-flex flex-column ">
                 <i class="fa-solid fa-folder-open text-center" style="font-size: 25px;"></i>
-                <div Class="text-center"><span style="line-height: 10px;">Consultar<br>pacientes</span></div>
+                <div Class="text-center"><span style="line-height: 10px;">Administrar<br>pacientes</span></div>
             </div>
             <hr class="sidebar-divider">
         </a>
@@ -122,17 +134,6 @@
     </li>
     @endcan
 
-    @can('ver-centro-ayuda')
-    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
-        <a class="nav-link" href="{{ route('ayuda.index') }}">
-            <div class="d-flex flex-column ">
-                <i class="fa-solid fa-handshake-angle text-center" style="font-size: 30px;"></i>
-                <div Class="text-center"><span>Centro Ayuda</span></div>
-            </div>
-            <hr class="sidebar-divider">
-        </a>
-    </li>
-    @endcan
 
 
 </ul>
