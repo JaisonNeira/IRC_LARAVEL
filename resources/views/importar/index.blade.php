@@ -37,7 +37,7 @@
                 <select id="seleccion" name="tipo_proceso" style="font-weight: bold;" >
                     <option selected disabled>Tipo de proceso</option>
                     @foreach ($tipos_procesos as $list)
-                        <option value="{{ $list->tpp_id }}" class="opciones">{{ $list->tpp_nombre }}</option>
+                        <option value="" class="opciones">{{ $list->tpp_nombre }}</option>
                     @endforeach
                 </select>
             </div>

@@ -78,6 +78,7 @@ function modal_perfil(pac_id) {
             console.log('completada');
         }, */
         success: function (response) {
+      
             var resp = response;
             var data = resp.data;
             listado.empty();
@@ -160,7 +161,7 @@ function modal_gestion(pro_id, tpp_id, pac_id) {
         'tpp_id': tpp_id,
         'pac_id': pac_id,
     }
-    
+
     $.ajax({
         url: '/gestionar/modal/gestion',
         type: 'GET',
