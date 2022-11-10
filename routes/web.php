@@ -89,3 +89,5 @@ Route::get('/administracion', [App\Http\Controllers\AdministracionesController::
 /* REPORTES */
 Route::get('/reportes', [App\Http\Controllers\ReportesController::class, 'index'])->name('reportes.index');
 
+/* AYUDA */
+Route::get('/ayuda', [App\Http\Controllers\AyudaController::class, 'index'])->name('ayuda.index');

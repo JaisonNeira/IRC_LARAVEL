@@ -57,11 +57,12 @@
                                     <td>{{ $gestion->pac_telefono }}</td>
                                     <td>{{ $gestion->tpp_nombre }}</td>
                                     <td>
+                                        <div class="d-flex aling-items-center">
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#modal_proceso" onclick="modal_proceso({{ $gestion->pac_id }});">
                                             Proceso
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        <button type="button" class="btn btn-primary mx-1" data-toggle="modal"
                                             data-target="#modal_perfil" onclick="modal_perfil({{ $gestion->pac_id }});">
                                             Perfil
                                         </button>
@@ -70,6 +71,7 @@
                                             onclick="modal_gestion({{ $gestion->pro_id }}, {{ $gestion->tpp_id }}, {{ $gestion->pac_id }});">
                                             Gestion
                                         </button>
+                                    </div>
                                     </td>
                                 </tr>
                             @endforeach
