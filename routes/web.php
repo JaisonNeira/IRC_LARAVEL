@@ -47,7 +47,6 @@ Route::get('/user/perfil', [UserController::class, 'perfil'])->name('perfil');
 /* IMPORTAR */
 Route::get('/importar', [App\Http\Controllers\ImportarController::class, 'index'])->name('importar.index');
 Route::post('/post/importar', [App\Http\Controllers\ImportarController::class, 'importar'])->name('importar.post');
-Route::get('/get/pdf/{codigo}', [App\Http\Controllers\ImportarController::class, 'descargar_pdf'])->name('importar.pdf.descargar');
 
 /* PROCESOS */
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
@@ -69,8 +68,11 @@ Route::post('/gestionar/modal/gestion/post', [App\Http\Controllers\GestionesCont
 Route::get('/adm/captaciones', [App\Http\Controllers\CaptacionesController::class, 'index'])->name('captaciones.index');
 Route::post('/adm/captaciones/asig', [App\Http\Controllers\CaptacionesController::class, 'asignar'])->name('captaciones.asignar');
 
-/* CONSULTAS */
+
+/* PACIENTES */
 Route::get('/consultas', [App\Http\Controllers\PacientesController::class, 'index'])->name('consultas.index');
+Route::get('/adm/combo/dep/mun', [App\Http\Controllers\PacientesController::class, 'dep_mun'])->name('consultas.dep_mun');
+Route::post('/con/pac/create', [App\Http\Controllers\PacientesController::class, 'create'])->name('consultas.create');
 
 /* ADMINISTRACION */
 Route::get('/administracion', [App\Http\Controllers\AdministracionesController::class, 'index'])->name('administracion.index');

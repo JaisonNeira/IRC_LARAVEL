@@ -14,6 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+                @include('layouts.msj')
                 <div class="table-responsive">
                     <table id="table3" class="table table-bordered">
                         <thead style="background-color: #E22A3D; color:#ffff; text-align:center;">

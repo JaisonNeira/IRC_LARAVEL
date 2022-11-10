@@ -42,10 +42,6 @@ class ImportarController extends Controller
             'tipo_proceso' => 'required',
             'file' => 'required'
         ]);
-        
-        
-        
-        
 
         return DB::transaction(function () use ($request){
             /* VALIDACIONES */
@@ -60,7 +56,7 @@ class ImportarController extends Controller
             $file_len = strlen($file_name);
 
             $email = $request->email;
-            
+
             /* VALIDAMOS QUE EL NOMBRE DEL ARCHIVO ESTE BIEN */
             if($file_len != 20 || $file_ir != "IR"){
                 return back()->with('mDanger', 'El nombre del archivo no es adecuado, cambielo e intentelo nuevamente!');
@@ -102,14 +98,15 @@ class ImportarController extends Controller
                     $acta = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
-                    
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Inasistidos importados exitosamente');
+                    /* return back()->with('mSucces', 'Inasistidos importados exitosamente'); */
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
@@ -138,13 +135,14 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Seguimientos importados exitosamente!');
+                    /* return back()->with('mSucces', 'Seguimientos importados exitosamente!'); */
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
@@ -173,13 +171,14 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Recordatorios importados exitosamente!');
+                    /* return back()->with('mSucces', 'Recordatorios importados exitosamente!'); */
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
@@ -208,13 +207,14 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Hospitalizados importados exitosamente');
+                    /* return back()->with('mSucces', 'Hospitalizados importados exitosamente'); */
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
@@ -243,13 +243,14 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Brigadas importadas exitosamente');
+                    /* return back()->with('mSucces', 'Brigadas importadas exitosamente'); */
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
@@ -279,13 +280,14 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Reprogramaciones importadas exitosamente');
+                    /* return back()->with('mSucces', 'Reprogramaciones importadas exitosamente'); */
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();
@@ -313,14 +315,15 @@ class ImportarController extends Controller
                     $acta = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
-                    
-                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+
+                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    });
+                    }); */
 
-                    return back()->with('mSucces', 'Captaciones importadas exitosamente');
+                    Session::flash('mSucces', 'Captaciones importadas exitosamente');
+                    return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
 
                 } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
                     $failures = $e->failures();

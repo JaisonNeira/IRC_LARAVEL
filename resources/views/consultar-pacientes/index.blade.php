@@ -11,6 +11,11 @@
             <div class="col-12">
                 <button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#crear_paciente">
                     <i class="fas fa-plus"></i> Nuevo Paciente</button>
+
+                @include('layouts.msj')
+
+                @include('consultar-pacientes.msj')
+
                 <div class="table-responsive">
                     <table id="table3" class="table table-bordered">
                         <thead style="background-color: #E22A3D; color:#ffff; text-align:center;">
@@ -47,120 +52,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="crear_paciente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="row">
-                            <div class="col-3">
-                                <label for="pac_identificacion" class="form-label">Numero de documento</label>
-                                <input type="number" class="form-control" id="pac_identificacion" name="pac_identificacion"
-                                    required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                            </div>
-                            <div class="col-3">
-                                <label for="pac_primer_nombre" class="form-label">Primer Nombre</label>
-                                <input type="text" class="form-control" id="pac_primer_nombre" name="pac_primer_nombre"
-                                    onkeypress="return SoloLetras(event);" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                            </div>
-                            <div class="col-3">
-                                <label for="pac_segundo_nombre" class="form-label">Segundo Nombre</label>
-                                <input type="text" class="form-control" id="pac_segundo_nombre" name="pac_segundo_nombre"
-                                    onkeypress="return SoloLetras(event);" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                            </div>
-                            <div class="col-3">
-                                <label for="pac_primer_apellido" class="form-label">Primer Apellido</label>
-                                <input type="text" class="form-control" id="pac_primer_apellido"
-                                    name="pac_primer_apellido" onkeypress="return SoloLetras(event);" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                            </div>
-                            <div class="col-3">
-                                <label for="pac_segundo_apellido" class="form-label">Segundo Apellido</label>
-                                <input type="text" class="form-control" id="pac_segundo_apellido"
-                                    name="pac_segundo_apellido" onkeypress="return SoloLetras(event);" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                            </div>
-                            <div class="col-3">
-                                <label for="pac_telefono" class="form-label">Telefono</label>
-                                <input type="number" class="form-control" id="pac_telefono" name="pac_telefono" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                                <br>
-                            </div>
-                            <div class="col-3">
-                                <label for="pac_fecha_nacimiento" class="form-label">Fecha nacimiento</label>
-                                <input type="date" class="form-control" id="pac_fecha_nacimiento"
-                                    name="pac_fecha_nacimiento" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                                <br>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="dep_id" class="form-label">Departamento</label>
-                                <select name="dep_id" id="dep_id" {{-- class="form-select" --}} aria-label="Default select example"
-                                    required>
-                                    <option class="form-control" disabled selected>-- Seleccione --</option>
-                                    @foreach ($departamentos as $dep)
-                                        <option value="{{ $dep->CAR_ID }}">{{ $dep->CAR_NOMBRE }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="mun_id" class="form-label">Municipio</label>
-                                <select name="mun_id" id="mun_id" {{-- class="form-select" --}} aria-label="Default select example"
-                                    required>
-                                    <option class="form-control" disabled selected>-- Seleccione --</option>
-                                </select>
-                            </div>
-
-                            <div class="col-3">
-                                <label for="pac_direccion" class="form-label">Direccion</label>
-                                <input type="text" class="form-control" id="pac_direccion" name="pac_direccion"
-                                    required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                                <br>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="pac_sexo" class="form-label">Sexo</label>
-                                <select name="pac_sexo" id="pac_sexo" {{-- class="form-select" --}} aria-label="Default select example"
-                                    required>
-                                    <option class="form-control" disabled selected>-- Seleccione --</option>
-                                    <option class="form-control" value="M">M</option>
-                                    <option class="form-control" value="F">F</option>
-                                    <option class="form-control" value="Otros">Otros</option>
-                                </select>
-                            </div>
-
-                            <div class="col-3">
-                                <label for="pac_regimen_afiliacion_SGSS" class="form-label">Regimen de afiliacion</label>
-                                <input type="number" class="form-control" id="pac_regimen_afiliacion_SGSS"
-                                    name="pac_regimen_afiliacion_SGSS" required>
-                                <div class="invalid-feedback">Completa los datos</div>
-                                <br>
-                            </div>
-
-                            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="submit" class="btn btn-primary col-3">Guardar</button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('consultar-pacientes.create')
 
     @include('gestionar.proceso')
 
@@ -168,6 +60,51 @@
 @endsection
 
 @section('script')
+    <script>
+        /* SELECT DINAMICO */
+
+        /* --variables para llamar a los select por el id */
+        let $select_departamento = document.getElementById('dep_id')
+        let $select_municipio = document.getElementById('mun_id')
+
+        /* CARGAR CAMPAnA */
+        function cargarCampana(sendDatos) {
+
+            $.ajax({
+                url: '/adm/combo/dep/mun',
+                type: 'GET',
+                dataType: 'json',
+                data: sendDatos,
+                success: function(response) {
+                    const respuestas = response.municipios;
+
+                    let template = '<option class="form-control" selected disabled>-- Seleccione --</option>'
+
+                    respuestas.forEach(respuesta => {
+                        template +=
+                            `<option class="form-control" value="${respuesta.mun_id}">${respuesta.mun_nombre}</option>`;
+                    })
+
+                    $select_municipio.innerHTML = template;
+                },
+                error: function(jqXHR) {
+                    console.log('error!');
+                }
+            });
+
+        }
+
+        $select_departamento.addEventListener('change', () => {
+            const dep_id = $select_departamento.value
+
+            const sendDatos = {
+                'dep_id': dep_id
+            }
+
+            cargarCampana(sendDatos)
+
+        })
+    </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>

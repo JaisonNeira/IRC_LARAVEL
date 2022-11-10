@@ -20,14 +20,16 @@ class RoleSeeder extends Seeder
         $permisos = [
 
             /* PERMISOS PARA VER OPCIONES SIDEBAR */
-            'ver-importar',
+            /* 'ver-importar',
             'ver-procesos',
             'ver-gestionar',
             'ver-consultar',
             'ver-administracion',
             'ver-roles',
             'ver-usuarios',
-            'ver-reportes'
+            'ver-reportes' */
+            'ver-captaciones',
+            'ver-agentes'
 
         ];
 
