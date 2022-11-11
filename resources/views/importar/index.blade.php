@@ -33,7 +33,7 @@
 
             <input type="text" name="file_name" id="file_name" style="display: none;">
 
-            <div class="select  col-12  align-items-center" id="select">
+            <div class="select  col-12  align-items-center shadow-sm" id="select">
                 <select id="seleccion" name="tipo_proceso" style="font-weight: bold;" >
                     <option selected disabled>Tipo de proceso</option>
                     @foreach ($tipos_procesos as $list)
@@ -59,10 +59,10 @@
             </div>
             <div>
 
-                <button type="submit" class="btn btn-primary mt-3"
+                {{-- <button type="submit" class="btn btn-primary mt-3"
                     style="width: 200px; height: 48px; font-weight: bold; border: 1px solid  #E22A3D; color: #fff ">Subir
                     Archivo</button>
-                    <span data-toggle="popover"><i class="fa-regular fa-circle-question" style="color: #6d6465"></i></span>
+                    <span data-toggle="popover"><i class="fa-regular fa-circle-question" style="color: #6d6465"></i></span> --}}
 
 
         </form>
