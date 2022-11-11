@@ -42,8 +42,8 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="password" class="form-label fw-bold"> Contraseña </label>
-                        <input id="password3" type="password"
+                        <label for="password1" class="form-label fw-bold"> Contraseña </label>
+                        <input id="password1" type="password"
                             class="form-control @error('password') is-invalid @enderror" name="password" required
                             autocomplete="current-password" placeholder="Password">
                         @error('password')
@@ -54,7 +54,7 @@
                     </div>
                     <div class="mb-3">
                             <input  type="checkbox" id="mostrar_contrasena2"
-                                title="clic para mostrar contraseña" />
+                                title="clic para mostrar contraseña"  onchange="mostrar_contraseña()"/>
                             &nbsp;&nbsp;Mostrar Contraseña
                         </div>
 
