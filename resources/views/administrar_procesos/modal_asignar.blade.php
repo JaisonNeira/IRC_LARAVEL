@@ -360,14 +360,6 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            {{-- <tr>
-                                            <td>1042241113</td>
-                                            <td>Jaison</td>
-                                            <td>Neira</td>
-                                            <td>
-                                                <input type="checkbox" id="cbox1" value="first_checkbox">
-                                            </td>
-                                        </tr> --}}
                                         </tbody>
                                     </table>
                                 </div>

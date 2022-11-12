@@ -8,17 +8,31 @@
 
 
 @section('content')
-
     <div class="container" style="width: 55%; align:left;">
         {{--  Inicio Formulorio  --}}
         <h1 style="font-weight: bold;">Selecciona el tipo de proceso</h1>
 
         @include('layouts.msj')
+
+        @error('tipo_proceso')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong> {{ $message }} </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @enderror
+
+        @error('file')
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong> {{ $message }} </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @enderror
+
         <form action="{{ route('importar.post') }}" method="POST" name="form-data" enctype="multipart/form-data"
             onsubmit="return validacion()">
             @csrf
 
-            <input type="text" id="email" name="email" value="{{ Auth::user()->email}}" style="display: none;">
+            <input type="text" id="email" name="email" value="{{ Auth::user()->email }}" style="display: none;">
 
             {{-- @if (Session::has('import_error'))
                 @foreach (Session::get('import_error') as $erros)
@@ -34,10 +48,10 @@
             <input type="text" name="file_name" id="file_name" style="display: none;">
 
             <div class="select  col-12  align-items-center shadow-sm" id="select">
-                <select id="seleccion" name="tipo_proceso" style="font-weight: bold;" >
+                <select id="seleccion" name="tipo_proceso" style="font-weight: bold;">
                     <option selected disabled>Tipo de proceso</option>
                     @foreach ($tipos_procesos as $list)
-                        <option value="" class="opciones">{{ $list->tpp_nombre }}</option>
+                        <option value="{{ $list->tpp_id }}" class="opciones">{{ $list->tpp_nombre }}</option>
                     @endforeach
                 </select>
             </div>
@@ -59,11 +73,10 @@
             </div>
             <div>
 
-                {{-- <button type="submit" class="btn btn-primary mt-3"
-                    style="width: 200px; height: 48px; font-weight: bold; border: 1px solid  #E22A3D; color: #fff ">Subir
-                    Archivo</button>
-                    <span data-toggle="popover"><i class="fa-regular fa-circle-question" style="color: #6d6465"></i></span> --}}
-
+                <button type="submit" class="btn btn-primary mt-3"
+                style="width: 200px; height: 48px; font-weight: bold; border: 1px solid  #E22A3D; color: #fff ">
+                Subir Archivo</button>
+                <span data-toggle="popover"><i class="fa-regular fa-circle-question" style="color: #6d6465"></i></span>
 
         </form>
         {{--  Fin Formulorio  --}}
