@@ -68,7 +68,7 @@
 
                     <div class="flex-column">
                         <select onchange="filtro();" class="custom-select" id="rec_profesional" name="rec_profesional">
-                            <option class="form-control" value="" selected>Especialidad
+                            <option class="form-control" value="" selected>Medico
                             </option>
                             @foreach ($medicos as $med)
                                 <option value="{{ $med->medico_nombre }}">{{ $med->medico_nombre }}</option>

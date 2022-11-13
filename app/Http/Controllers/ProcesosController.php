@@ -193,7 +193,8 @@ class ProcesosController extends Controller
 
     public function rec_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id, pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, rec.*
+        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, rec.*
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
         INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
@@ -261,6 +262,72 @@ class ProcesosController extends Controller
         $tpp_id = 3;
 
         return view('administrar_procesos.excel.rec', compact('procesos', 'id', 'total', 'tpp_id', 'agentes', 'convenios', 'fecha_cita', 'medicos', 'especialidades', 'departamentos', 'municipios', 'prioridades'));
+    }
+
+    public function ina_vista($id){
+
+        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, ina.*
+        FROM procesos AS pro
+        INNER JOIN cargues AS car ON car.car_id = pro.car_id
+        INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
+        INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+        INNER JOIN tipos_identificaciones AS tip ON tip.tip_id = pac.tip_id
+        INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+        INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+        WHERE pro.pro_estado = 1
+        AND car.car_id = ".$id." LIMIT 20";
+
+        $procesos = DB::select($sql);
+        $total = proceso::where('car_id','=',$id)->count();
+
+        //Municipio
+        $sql2 = "SELECT mun.mun_id, mun.mun_nombre
+            FROM procesos AS pro
+            INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+            INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+            WHERE pro.pro_estado = 1
+            AND pro.car_id = ".$id.' GROUP BY mun.mun_id, mun.mun_nombre';
+        $municipios = DB::select($sql2);
+
+        //Prioridad
+        $sql3 = "SELECT pro.pro_prioridad
+                FROM procesos AS pro
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+                WHERE pro.pro_estado = 1
+                AND pro.car_id =".$id.' GROUP BY pro.pro_prioridad';
+        $prioridades = DB::select($sql3);
+
+        //Departamento
+        $sql4 = "SELECT dep.dep_id, dep.dep_nombre
+            FROM procesos AS pro
+            INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+            INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+            WHERE pro.pro_estado = 1
+            AND pro.car_id = ".$id.' GROUP BY dep.dep_id, dep.dep_nombre';
+        $departamentos = DB::select($sql4);
+
+        /* INASISTIDOS */
+        //Convenio
+        $convenios = $this->combo_convenio($id, 1);
+        //Especialidad
+        $especialidades = $this->combo_especialidad($id, 1);
+        //Medicos
+        $medicos = $this->combo_medico($id, 1);
+
+
+        $sql5 = "SELECT age.age_id, age.tip_id, age.age_documento, usu.id ,usu.name, usu.email
+        FROM agentes AS age
+        INNER JOIN users AS usu ON usu.id = age.user_id
+        WHERE age.age_estado = 1";
+
+        $agentes = DB::select($sql5);
+
+
+        $tpp_id = 1;
+
+        return view('administrar_procesos.excel.ina', compact('procesos', 'total', 'tpp_id', 'id', 'agentes', 'medicos', 'especialidades', 'convenios', 'departamentos', 'municipios', 'prioridades'));
     }
 
     /* COMBOBOX */
@@ -543,6 +610,8 @@ class ProcesosController extends Controller
         $esp = $request->especialidad;
         $pro = $request->programa;
         $pa = $request->punto_de_acopio;
+        $med = $request->medico;
+        $fec = $request->fecha_cita;
 
         switch ($tpp_id) {
             case 1:
@@ -572,7 +641,11 @@ class ProcesosController extends Controller
                 }
 
                 if($esp != ""){
-                    $filtro_sql = $filtro_sql." AND ina.ina_medico_especialidad	 = '".$esp."'";
+                    $filtro_sql = $filtro_sql." AND ina.ina_medico_especialidad	= '".$esp."'";
+                }
+
+                if($med != ""){
+                    $filtro_sql = $filtro_sql." AND ina.ina_medico_nombre = '".$med."'";
                 }
 
                 $cant = DB::select($filtro_sql);
@@ -636,6 +709,14 @@ class ProcesosController extends Controller
 
                 if($esp != ""){
                     $filtro_sql = $filtro_sql." AND rec.rec_especialidad = '".$esp."'";
+                }
+
+                if($med != ""){
+                    $filtro_sql = $filtro_sql." AND rec.rec_profesional = '".$med."'";
+                }
+
+                if($fec != ""){
+                    $filtro_sql = $filtro_sql." AND rec.rec_fecha_cita = '".$fec."'";
                 }
 
                 $cant = DB::select($filtro_sql);
@@ -951,6 +1032,23 @@ class ProcesosController extends Controller
             case 1:
                 /* INASISTIDOS */
 
+                $filtro_sql = 'SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+                pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, ina.*
+                FROM procesos AS pro
+                INNER JOIN cargues AS car ON car.car_id = pro.car_id
+                INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                INNER JOIN tipos_identificaciones AS tip ON tip.tip_id = pac.tip_id
+                INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+                INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+                WHERE pro.pro_estado = 1
+                AND car.car_id ='.$car_id.'
+                AND pac.mun_id LIKE "%'.$mun.'%"
+                AND pac.dep_id LIKE "%'.$dep.'%"
+                AND pro.pro_prioridad LIKE "%'.$pri.'%"
+                AND ina.ina_convenio_nombre LIKE "%'.$con.'%"
+                AND ina.ina_medico_nombre LIKE "%'.$med.'%"
+                AND ina.ina_medico_especialidad LIKE "%'.$esp.'%"';
 
                 break;
             case 2:
@@ -961,6 +1059,23 @@ class ProcesosController extends Controller
             case 3:
                 /* RECORDATORIOS */
 
+                $filtro_sql = 'SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id, pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, rec.*
+                FROM procesos AS pro
+                INNER JOIN cargues AS car ON car.car_id = pro.car_id
+                INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                INNER JOIN tipos_identificaciones AS tip ON tip.tip_id = pac.tip_id
+                INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+                INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+                WHERE pro.pro_estado = 1
+                AND car.car_id ='.$car_id.'
+                AND pac.mun_id LIKE "%'.$mun.'%"
+                AND pac.dep_id LIKE "%'.$dep.'%"
+                AND pro.pro_prioridad LIKE "%'.$pri.'%"
+                AND rec.rec_fecha_cita LIKE "%'.$fec.'%"
+                AND rec.rec_convenio LIKE "%'.$con.'%"
+                AND rec.rec_especialidad LIKE "%'.$esp.'%"
+                AND rec.rec_profesional LIKE "%'.$med.'%"';
 
                 break;
             case 4:

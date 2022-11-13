@@ -47,7 +47,7 @@
                                     <td>
                                         @switch($list->tpp_id)
                                             @case('1')
-                                                <a class="btn btn-primary" href="{{ route('administracion.index') }}">
+                                                <a class="btn btn-primary" href="{{ route('proceso.e.ina', $list->car_id) }}">
                                                     <i class="far fa-eye"></i></a>
                                             @break
 

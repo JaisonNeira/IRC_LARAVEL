@@ -4,33 +4,30 @@ function filtro() {
     dep_id = document.getElementById('dep_id').value;
     mun_id = document.getElementById('mun_id').value;
     pro_prioridad = document.getElementById('pro_prioridad').value;
-    rec_convenio = document.getElementById('rec_convenio').value;
-    rec_especialidad = document.getElementById('rec_especialidad').value;
-    rec_profesional = document.getElementById('rec_profesional').value;
-    rec_fecha_cita = document.getElementById('rec_fecha_cita').value;
+    ina_convenio = document.getElementById('ina_convenio').value;
+    ina_especialidad = document.getElementById('ina_especialidad').value;
+    ina_profesional = document.getElementById('ina_profesional').value;
 
     document.getElementById('modal_departamento').value = dep_id;
     document.getElementById('modal_municipio').value = mun_id;
     document.getElementById('modal_prioridad').value = pro_prioridad;
-    document.getElementById('modal_convenio').value = rec_convenio;
-    document.getElementById('modal_especialidad').value = rec_especialidad;
-    document.getElementById('modal_medico').value = rec_profesional;
-    document.getElementById('modal_fecha_cita').value = rec_fecha_cita;
+    document.getElementById('modal_convenio').value = ina_convenio;
+    document.getElementById('modal_especialidad').value = ina_especialidad;
+    document.getElementById('modal_medico').value = ina_profesional;
 
     sendDatos = {
-        'tpp_id': 3,
+        'tpp_id': 1,
         'car_id': car_id,
         'dep_id': dep_id,
         'mun_id': mun_id,
         'prioridad': pro_prioridad,
-        'convenio': rec_convenio,
-        'especialidad': rec_especialidad,
-        'medico': rec_profesional,
-        'fecha_cita' : rec_fecha_cita
+        'convenio': ina_convenio,
+        'especialidad': ina_especialidad,
+        'medico': ina_profesional
     }
 
     var a_cantidad = document.getElementById('a_cantidad');
-    var listado = $("[name=tbody_excel_rec]");
+    var listado = $("[name=tbody_excel_ina]");
     listado.empty();
     listado.append(
         '<tr><td colspan="7" >Buscando...</td></tr>'
@@ -73,6 +70,12 @@ function filtro() {
                         c_style = "fa-solid fa-circle circle-green";
                     }
 
+                    if(item['ina_estado_consulta'] == null){
+                        estado_consulta = "";
+                    }else{
+                        estado_consulta = item['ina_estado_consulta'];
+                    }
+
                     listado.append(
                         '<tr>' +
                         '<td></td>' +
@@ -85,12 +88,14 @@ function filtro() {
                         '<td>' + item['pac_nombre_completo'] + '</td>' +
                         '<td>' + item['dep_nombre'] + '</td>' +
                         '<td>' + item['mun_nombre'] + '</td>' +
-                        '<td>' + item['rec_fecha_cita'] + '</td>' +
-                        '<td>' + item['rec_convenio'] + '</td>' +
-                        '<td>' + item['rec_profesional'] + '</td>' +
-                        '<td>' + item['rec_especialidad'] + '</td>' +
-                        '<td>' + item['rec_pym'] + '</td>' +
-                        '<td>' + item['rec_modalidad'] + '</td>' +
+                        '<td>' + item['ina_fecha_cita'] + '</td>' +
+                        '<td>' + item['ina_convenio_nombre'] + '</td>' +
+                        '<td>' + item['ina_medico_nombre'] + '</td>' +
+                        '<td>' + item['ina_medico_especialidad'] + '</td>' +
+                        '<td>' + item['ina_rotulo'] + '</td>' +
+                        '<td>' + item['ina_pym'] + '</td>' +
+                        '<td>' + item['ina_modalidad'] + '</td>' +
+                        '<td>' + estado_consulta + '</td>' +
                         '</tr>'
                     );
                 }

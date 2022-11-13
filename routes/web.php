@@ -56,7 +56,7 @@ Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class,
 Route::get('/proceso/e/bri/{id}', [App\Http\Controllers\ProcesosController::class, 'bri_vista'])->name('proceso.e.bri');
 Route::get('/proceso/e/cap/{id}', [App\Http\Controllers\ProcesosController::class, 'cap_vista'])->name('proceso.e.cap');
 Route::get('/proceso/e/rec/{id}', [App\Http\Controllers\ProcesosController::class, 'rec_vista'])->name('proceso.e.rec');
-// Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
+Route::get('/proceso/e/ina/{id}', [App\Http\Controllers\ProcesosController::class, 'ina_vista'])->name('proceso.e.ina');
 // Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
 // Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
 // Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
