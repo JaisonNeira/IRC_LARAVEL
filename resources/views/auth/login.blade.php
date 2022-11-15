@@ -33,8 +33,9 @@
                     <div class="mb-4">
                         <label for="user"class="form-label fw-bold"> Usuario </label>
                         <input id="email" type="email"
-                            class="form-control form-control-user @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                            class="form-control form-control-user @error('email') is-invalid @enderror input_login" name="email"
+                            value="{{ old('email') }}" required autocomplete="email" autofocus
+                            placeholder="Escribe un correo">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -44,8 +45,8 @@
                     <div class="mb-4">
                         <label for="password1" class="form-label fw-bold"> Contraseña </label>
                         <input id="password1" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
-                            autocomplete="current-password" placeholder="Password">
+                            class="form-control @error('password') is-invalid @enderror input_login" name="password" required
+                            autocomplete="current-password" placeholder="Escribe una contraseña">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -53,13 +54,12 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                            <input  type="checkbox" id="mostrar_contrasena2"
-                                title="clic para mostrar contraseña"  onchange="mostrar_contraseña()"/>
-                            &nbsp;&nbsp;Mostrar Contraseña
-                        </div>
-
+                        <input type="checkbox" id="mostrar_contrasena2" title="clic para mostrar contraseña"
+                            onchange="mostrar_contraseña()" />
+                        &nbsp;&nbsp;Mostrar Contraseña
+                    </div>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary fw-bold">Iniciar sesión</button>
+                        <button type="submit" class="btn btn-primary" style="border-radius: 2px;">Iniciar sesión</button>
                     </div>
                 </form>
 
@@ -75,7 +75,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
-        <script src="{{ asset('js/funcionalidades/Agentes_ajax.js') }}"></script>
+    <script src="{{ asset('js/funcionalidades/Agentes_ajax.js') }}"></script>
 </body>
 
 </html>
