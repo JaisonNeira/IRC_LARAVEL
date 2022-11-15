@@ -52,7 +52,7 @@
                                             @break
 
                                             @case('2')
-                                                <a class="btn btn-primary" href="{{ route('administracion.index') }}">
+                                                <a class="btn btn-primary" href="{{ route('proceso.e.seg', $list->car_id) }}">
                                                     <i class="far fa-eye"></i></a>
                                             @break
 
@@ -62,7 +62,7 @@
                                             @break
 
                                             @case('4')
-                                                <a class="btn btn-primary" href="{{ route('administracion.index') }}">
+                                                <a class="btn btn-primary" href="{{ route('proceso.e.hos', $list->car_id) }}">
                                                     <i class="far fa-eye"></i></a>
                                             @break
 
@@ -72,7 +72,7 @@
                                             @break
 
                                             @case('6')
-                                                <a class="btn btn-primary" href="{{ route('administracion.index') }}">
+                                                <a class="btn btn-primary" href="{{ route('proceso.e.rep', $list->car_id) }}">
                                                     <i class="far fa-eye"></i></a>
                                             @break
 

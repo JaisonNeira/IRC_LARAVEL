@@ -273,7 +273,7 @@ class ImportarController extends Controller
 
                 try {
 
-                    $excel = Excel::import(new CaptacionImport($acc_codigo, substr($file_name, 0, -5)), $file);
+                    $excel = Excel::import(new ReprogramacionImport($acc_codigo, substr($file_name, 0, -5)), $file);
 
                     /* return back()->with('import_pro', $acc_codigo); */
                     $acta = actas_cargue::where('Acc_codigo', $acc_codigo)->get();
