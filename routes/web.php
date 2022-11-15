@@ -73,6 +73,7 @@ Route::get('/gestionar/modal/proceso', [App\Http\Controllers\GestionesController
 Route::get('/gestionar/modal/perfil', [App\Http\Controllers\GestionesController::class, 'modal_perfil'])->name('gestionar.modal.perfil');
 Route::get('/gestionar/modal/gestion', [App\Http\Controllers\GestionesController::class, 'modal_gestion'])->name('gestionar.modal.gestion');
 Route::post('/gestionar/modal/gestion/post', [App\Http\Controllers\GestionesController::class, 'post_gestion'])->name('gestionar.post');
+Route::get('/gestion/marcar', [App\Http\Controllers\GestionesController::class, 'marcar'])->name('gestionar.marcar');
 
 /* CAPTACIONES */
 Route::get('/adm/captaciones', [App\Http\Controllers\CaptacionesController::class, 'index'])->name('captaciones.index');

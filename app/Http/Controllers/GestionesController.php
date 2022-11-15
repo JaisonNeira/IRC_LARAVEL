@@ -14,6 +14,7 @@ use App\Models\recordatorio;
 use App\Models\reprogramacione;
 use App\Models\inasistido;
 use App\Models\tipos_inasistencia;
+use App\Models\proceso;
 
 class GestionesController extends Controller
 {
@@ -32,9 +33,9 @@ class GestionesController extends Controller
 
         $agente = agente::where('user_id', $id_user)->get();
 
-        $sql = "SELECT pac.pac_id, pac.pac_identificacion, pro.pro_id, pro.pro_prioridad, pac.pac_primer_nombre,
-        pac.pac_segundo_nombre, pac.pac_primer_apellido, pac.pac_segundo_apellido,
-        pac.pac_telefono, tpp.tpp_id, tpp.tpp_nombre
+        $sql = "SELECT pac.pac_id, pac.pac_identificacion, pro.pro_id, pro.pro_prioridad, pro.pro_gestionado, pro.id_user_gestion,
+        pac.pac_primer_nombre, pac.pac_segundo_nombre, pac.pac_primer_apellido, pac.pac_segundo_apellido,pac.pac_telefono,
+        tpp.tpp_id, tpp.tpp_nombre
         FROM proceso_agentes AS pra
         INNER JOIN agentes AS age ON age.age_id = pra.age_id
         INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
@@ -54,6 +55,38 @@ class GestionesController extends Controller
         $tipos_inasistencias = tipos_inasistencia::where('tin_estado', '=', '1')->get();
 
         return view('gestionar.index', compact('gestiones', 'tipo_procesos', 'tipos_inasistencias'));
+    }
+
+    function marcar(request $request){
+        $id = $request->pro_id;
+
+        $user = $request->user_id;
+
+        $proceso = proceso::where('pro_id', $id)->get();
+
+        if($proceso[0]->pro_gestionado == 0){
+            proceso::where('pro_id', $id)->update(['pro_gestionado' => 1]);
+            proceso::where('pro_id', $id)->update(['id_user_gestion' => $user]);
+            $e = 1;
+        }else if($proceso[0]->pro_gestionado == 1){
+            proceso::where('pro_id', $id)->update(['pro_gestionado' => 0]);
+            proceso::where('pro_id', $id)->update(['id_user_gestion' => $user]);
+            $e = 0;
+        }else{
+            echo json_encode(
+                array(
+                    "success" => false,
+                    "estado" => "error!"
+                )
+            );
+        }
+
+        echo json_encode(
+            array(
+                "success" => true,
+                "estado" => $e
+            )
+        );
     }
 
     /* MODALES AJAX */

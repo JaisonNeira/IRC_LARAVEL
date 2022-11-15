@@ -103,7 +103,7 @@ class ImportarController extends Controller
                         $mail->from('contactatest2020@gmail.com', 'Admin IRC');
                         $mail->to($email);
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    }); *
 
                     /* return back()->with('mSucces', 'Inasistidos importados exitosamente'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
