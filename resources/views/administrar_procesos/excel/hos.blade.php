@@ -3,6 +3,16 @@
 @section('title')
     Excel-HOS
 @endsection
+@section('style')
+<style>
+    ul.pagination{
+        display: none;
+    }
+    div#table_cap_info{
+        display: none;
+    }
+</style>
+@endsection
 
 @section('content')
     <div class="container-fluid">

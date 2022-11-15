@@ -18,6 +18,11 @@ function mostrar_contraseña(){
     }
 }
 
+function cambiar_bg(){
+    var aeiou = document.getElementById("gestiones");
+    aeiou.style.backgroundColor ="#E22A3D";
+}
+
 
 
 
