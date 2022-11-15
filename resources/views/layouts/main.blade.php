@@ -23,8 +23,6 @@
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-
-
     @yield('style')
 
 </head>
@@ -52,6 +50,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <input style="display: none;" type="text" value="{{ Auth::user()->id }}" name="sidebar_id_user" id="sidebar_id_user">
                     <!-- Topbar Search -->
 
 

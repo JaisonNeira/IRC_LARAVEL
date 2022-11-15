@@ -11,18 +11,18 @@
             <form action="{{ route('asignar.segmentacion') }}" method="POST" name="form-data"
                 enctype="multipart/form-data">
                 @csrf
-                <input type="text" name="tpp_id" id="modal_tpp_id" value="{{ $tpp_id }}">
-                <input type="text" name="car_id" id="modal_car_id" value="{{ $id }}">
-                <input type="text" name="departamento" id="modal_departamento">
-                <input type="text" name="municipio" id="modal_municipio">
-                <input type="text" name="prioridad" id="modal_prioridad">
-                <input type="text" name="convenio" id="modal_convenio">
-                <input type="text" name="especialidad" id="modal_especialidad">
-                <input type="text" name="programa" id="modal_programa">
-                <input type="text" name="punto_de_acopio" id="modal_punto_de_acopio">
-                <input type="text" name="doctor" id="modal_doctor">
-                <input type="text" name="medico" id="modal_medico">
-                <input type="text" name="fecha_cita" id="modal_fecha_cita">
+                <input type="text" style="display: none;" name="tpp_id" id="modal_tpp_id" value="{{ $tpp_id }}">
+                <input type="text" style="display: none;" name="car_id" id="modal_car_id" value="{{ $id }}">
+                <input type="text" style="display: none;" name="departamento" id="modal_departamento">
+                <input type="text" style="display: none;" name="municipio" id="modal_municipio">
+                <input type="text" style="display: none;" name="prioridad" id="modal_prioridad">
+                <input type="text" style="display: none;" name="convenio" id="modal_convenio">
+                <input type="text" style="display: none;" name="especialidad" id="modal_especialidad">
+                <input type="text" style="display: none;" name="programa" id="modal_programa">
+                <input type="text" style="display: none;" name="punto_de_acopio" id="modal_punto_de_acopio">
+                <input type="text" style="display: none;" name="doctor" id="modal_doctor">
+                <input type="text" style="display: none;" name="medico" id="modal_medico">
+                <input type="text" style="display: none;" name="fecha_cita" id="modal_fecha_cita">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12 mt-3">

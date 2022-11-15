@@ -90,7 +90,7 @@
             <table class="table" id="table_rep">
                 <thead>
                     <tr>
-                        <th scope="col">Opciones</th>
+                        <th scope="col">Marcador</th>
                         <th scope="col">Prioridad</th>
                         <th scope="col">Tipo Doc.</th>
                         <th scope="col">Documento</th>
@@ -106,7 +106,16 @@
                 <tbody name="tbody_excel_rep">
                     @foreach ($procesos as $list)
                         <tr>
-                            <td></td>
+                            <td style="padding-top: 20px;">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="marcador_{{ $list->pro_id }}"
+                                    onchange="marca_gestion({{ $list->pro_id }}, {{ Auth::user()->id}})"
+                                        @if ($list->pro_gestionado == 1) checked @endif>
+                                    <label class="custom-control-label" for="marcador_{{ $list->pro_id }}" style=""></label>
+                                    <input type="text" style="display: none" name="" id=""
+                                        value="{{ $list->pro_gestionado }}">
+                                </div>
+                            </td>
                             <td>
                                 @if ($list->pro_prioridad == 1)
                                     <!-- Si es prioridad 1 -->

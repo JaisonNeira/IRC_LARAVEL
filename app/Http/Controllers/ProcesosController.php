@@ -65,8 +65,10 @@ class ProcesosController extends Controller
 
     /* EXCELS VISTAS */
     public function bri_vista($id){
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id, pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, bri.bri_id, bri.bri_fecha, bri.bri_convenio, bri.bri_punto_acopio,
-        bri.bri_especialidad, bri.bri_fecha_ultimo_control, bri.bri_dias_transcurrido, bri.bri_fecha_cita
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias,
+        pac.pac_id, pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, bri.bri_id, bri.bri_fecha,
+        bri.bri_convenio, bri.bri_punto_acopio, bri.bri_especialidad, bri.bri_fecha_ultimo_control, bri.bri_dias_transcurrido,
+        bri.bri_fecha_cita
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
         INNER JOIN brigadas AS bri ON bri.pro_id = pro.pro_id
@@ -75,7 +77,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -137,7 +139,7 @@ class ProcesosController extends Controller
 
     public function cap_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -146,7 +148,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -193,7 +195,7 @@ class ProcesosController extends Controller
 
     public function rec_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
          pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, rec.*
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -203,7 +205,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -266,7 +268,7 @@ class ProcesosController extends Controller
 
     public function ina_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, ina.*
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -276,7 +278,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -332,7 +334,7 @@ class ProcesosController extends Controller
 
     public function rep_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, rep.*
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -342,7 +344,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -394,7 +396,7 @@ class ProcesosController extends Controller
 
     public function hos_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, hos.*
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -404,7 +406,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -460,7 +462,7 @@ class ProcesosController extends Controller
 
     public function seg_vista($id){
 
-        $sql = "SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+        $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, seg.*
         FROM procesos AS pro
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -470,7 +472,7 @@ class ProcesosController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
-        AND car.car_id = ".$id." LIMIT 20";
+        AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
         $total = proceso::where('car_id','=',$id)->count();
@@ -518,7 +520,6 @@ class ProcesosController extends Controller
 
         return view('administrar_procesos.excel.seg', compact('procesos', 'total', 'tpp_id', 'id', 'agentes', 'especialidades', 'departamentos', 'municipios', 'prioridades'));
     }
-
 
     /* COMBOBOX */
     public function filtro(request $request){
@@ -1222,7 +1223,7 @@ class ProcesosController extends Controller
             case 1:
                 /* INASISTIDOS */
 
-                $filtro_sql = 'SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
+                $filtro_sql = 'SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
                 pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, ina.*
                 FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
@@ -1305,7 +1306,7 @@ class ProcesosController extends Controller
             case 5:
                 /* BRIGADA */
 
-                $filtro_sql = 'SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_nombre, pac.pac_id, pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, bri.bri_id, bri.bri_fecha, bri.bri_convenio, bri.bri_punto_acopio,
+                $filtro_sql = 'SELECT pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id, pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, bri.bri_id, bri.bri_fecha, bri.bri_convenio, bri.bri_punto_acopio,
                 bri.bri_especialidad, bri.bri_fecha_ultimo_control, bri.bri_dias_transcurrido, bri.bri_fecha_cita
                 FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id

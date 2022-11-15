@@ -16,6 +16,8 @@ function filtro() {
     bri_especialidad = document.getElementById('bri_especialidad').value;
     bri_punto_acopio = document.getElementById('bri_punto_acopio').value;
 
+    id_user = document.getElementById('sidebar_id_user').value;
+
     document.getElementById('modal_departamento').value = dep_id;
     document.getElementById('modal_municipio').value = mun_id;
     document.getElementById('modal_prioridad').value = pro_prioridad;
@@ -78,9 +80,22 @@ function filtro() {
                         c_style = "fa-solid fa-circle circle-green";
                     }
 
+                    if(item['pro_gestionado'] == 1){
+                        check = "checked";
+                    }else{
+                        check = "";
+                    }
+
+
                     listado.append(
                         '<tr>' +
-                        '<td></td>' +
+                        '<td style="padding-top: 20px;">' +
+                            '<div class="custom-control custom-switch">' +
+                                '<input type="checkbox" class="custom-control-input" id="marcador_'+item['pro_id']+'" onchange="marca_gestion('+item['pro_id']+', '+id_user+')" '+check+'>' +
+                                '<label class="custom-control-label" for="marcador_'+item['pro_id']+'" style=""></label>' +
+                                '<input type="text" style="display: none" name="" id="" value="'+item['pro_gestionado']+'">'+
+                            '</div>' +
+                        '</td>' +
                         '<td>' +
                         '<span style="display: none;">' + item['pro_prioridad'] + '</span>' +
                         '<i class="' + c_style + '"></i>' +
