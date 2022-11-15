@@ -78,7 +78,7 @@ function modal_perfil(pac_id) {
             console.log('completada');
         }, */
         success: function (response) {
-      
+
             var resp = response;
             var data = resp.data;
             listado.empty();
@@ -465,6 +465,37 @@ function desactivar(){
         //informacion.style.display = "none";
         historial.style.display = "none";
         texto_ver.textContent = "Ver mas";
+}
+
+function marca_gestion_ajax(sendDatos){
+
+    $.ajax({
+        url: '/gestion/marcar',
+        type: 'GET',
+        dataType: 'json',
+        data: sendDatos,
+        /* beforeSend: function () {
+            console.log('enviada');
+        },
+        complete: function () {
+            console.log('completada');
+        }, */
+        /* success: function (response) {
+            console.log(response);
+        }, */
+        error: function (jqXHR) {
+            console.log('error!');
+        }
+    });
+
+}
+
+function marca_gestion(id, user_id){
+    const sendDatos = {
+        'pro_id': id,
+        'user_id': user_id
+    }
+    marca_gestion_ajax(sendDatos);
 }
 
 

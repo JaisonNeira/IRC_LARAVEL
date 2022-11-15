@@ -19,6 +19,7 @@
                     <table id="table3" class="table table-bordered">
                         <thead style="background-color: #E22A3D; color:#ffff; text-align:center;">
                             <tr>
+                                <th style="text-align: center;">Marcador</th>
                                 <th style="text-align: center;">Prioridad</th>
                                 <th style="text-align: center;">documento</th>
                                 <th style="text-align: center;">Nombre</th>
@@ -29,7 +30,17 @@
                         </thead>
                         <tbody style="background-color: #ffff; text-align: center;">
                             @foreach ($gestiones as $gestion)
-                                <tr onload="prioridad({{ $gestion->pro_id }})">
+                                <tr>
+                                    <td style="padding-top: 20px;">
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="marcador"
+                                            onchange="marca_gestion({{ $gestion->pro_id }}, {{ Auth::user()->id}})"
+                                                @if ($gestion->pro_gestionado == 1) checked @endif>
+                                            <label class="custom-control-label" for="marcador" style=""></label>
+                                            <input type="text" style="display: none" name="" id=""
+                                                value="{{ $gestion->pro_gestionado }}">
+                                        </div>
+                                    </td>
                                     <!-- Esta es la variable -->
                                     <td>
                                         @if ($gestion->pro_prioridad == 1)
@@ -58,20 +69,22 @@
                                     <td>{{ $gestion->tpp_nombre }}</td>
                                     <td>
                                         <div class="d-flex aling-items-center">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#modal_proceso" onclick="modal_proceso({{ $gestion->pac_id }});">
-                                            Proceso
-                                        </button>
-                                        <button type="button" class="btn btn-primary mx-1" data-toggle="modal"
-                                            data-target="#modal_perfil" onclick="modal_perfil({{ $gestion->pac_id }});">
-                                            Perfil
-                                        </button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#modal_gestion"
-                                            onclick="modal_gestion({{ $gestion->pro_id }}, {{ $gestion->tpp_id }}, {{ $gestion->pac_id }});">
-                                            Gestion
-                                        </button>
-                                    </div>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#modal_proceso"
+                                                onclick="modal_proceso({{ $gestion->pac_id }});">
+                                                Proceso
+                                            </button>
+                                            <button type="button" class="btn btn-primary mx-1" data-toggle="modal"
+                                                data-target="#modal_perfil"
+                                                onclick="modal_perfil({{ $gestion->pac_id }});">
+                                                Perfil
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#modal_gestion"
+                                                onclick="modal_gestion({{ $gestion->pro_id }}, {{ $gestion->tpp_id }}, {{ $gestion->pac_id }});">
+                                                Gestion
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
