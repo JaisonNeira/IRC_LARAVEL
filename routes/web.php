@@ -22,8 +22,8 @@ return view('auth.login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/pi', function () {
-    return view('importar.pdf-incorrecto');
+Route::get('/rp', function () {
+    return view('reportes.pdf');
 });
 
 //ROLE CRUD
@@ -90,7 +90,7 @@ Route::get('/administracion', [App\Http\Controllers\AdministracionesController::
 
 /* REPORTES */
 Route::get('/reportes', [App\Http\Controllers\ReportesController::class, 'index'])->name('reportes.index');
-Route::get('/reportes/pdf', [App\Http\Controllers\ReportesController::class, 'reporte_pdf'])->name('reportes.pdf');
+Route::get('/reportes/d', [App\Http\Controllers\ReportesController::class, 'reporte_descarga'])->name('reportes.descarga');
 
 /* AYUDA */
 Route::get('/ayuda', [App\Http\Controllers\AyudaController::class, 'index'])->name('ayuda.index');

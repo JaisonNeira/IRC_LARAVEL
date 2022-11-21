@@ -33,10 +33,10 @@
                                 <tr>
                                     <td style="padding-top: 20px;">
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="marcador"
+                                            <input type="checkbox" class="custom-control-input" id="marcador_{{ $gestion->pro_id }}"
                                             onchange="marca_gestion({{ $gestion->pro_id }}, {{ Auth::user()->id}})"
                                                 @if ($gestion->pro_gestionado == 1) checked @endif>
-                                            <label class="custom-control-label" for="marcador" style=""></label>
+                                            <label class="custom-control-label" for="marcador_{{ $gestion->pro_id }}" style=""></label>
                                             <input type="text" style="display: none" name="" id=""
                                                 value="{{ $gestion->pro_gestionado }}">
                                         </div>
