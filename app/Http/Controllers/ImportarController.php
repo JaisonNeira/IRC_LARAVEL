@@ -40,17 +40,17 @@ class ImportarController extends Controller
 
         $request->validate([
             'tipo_proceso' => 'required',
-            'file' => 'required'
+            'file' => ''
         ]);
-
+        
         return DB::transaction(function () use ($request){
             /* VALIDACIONES */
             $tipo = $request->tipo_proceso;
             $file = $request->file('file');
             $file_name = $request->file_name;
-            $file_ir = substr($file_name, 0, -18);
-            $file_pro = substr($file_name, 2, -15);
-            $file_fecha = substr($file_name, 5, -7);
+            $file_ir = substr($file_name, 0, -17);
+            $file_pro = substr($file_name, 2, -14);
+            $file_fecha = substr($file_name, 5, -6);
             $file_v = substr($file_name, 13, 2);
             $file_tipe = substr($file_name, 16);
             $file_len = strlen($file_name);
@@ -58,13 +58,13 @@ class ImportarController extends Controller
             $email = $request->email;
 
             /* VALIDAMOS QUE EL NOMBRE DEL ARCHIVO ESTE BIEN */
-            if($file_len != 20 || $file_ir != "IR"){
+            if($file_len != 19 || $file_ir != "IR"){
                 return back()->with('mDanger', 'El nombre del archivo no es adecuado, cambielo e intentelo nuevamente!');
             }
             /* VALIDAMOS QUE SEA UN ARCHOVO XLSX */
-            if($file_tipe != "xlsx"){
+            /* if($file_tipe != "xlsx"){
                 return back()->with('mDanger', 'Tipo de archivo erroneo, debe ser formato excel (.xlsx)!');
-            }
+            } */
 
             $validador_car = actas_cargue::where('Acc_nombre', '=',substr($file_name, 0, -5))->count();
             if($validador_car > 0){
@@ -99,11 +99,12 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); *
+                    });
 
                     /* return back()->with('mSucces', 'Inasistidos importados exitosamente'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -112,7 +113,7 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
                     /* return back()->with('import_error', $failures); */
                 }
             }
@@ -135,11 +136,12 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    });
 
                     /* return back()->with('mSucces', 'Seguimientos importados exitosamente!'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -148,7 +150,7 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
                     /* return back()->with('import_error', $failures); */
                 }
             }
@@ -171,11 +173,12 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    });
 
                     /* return back()->with('mSucces', 'Recordatorios importados exitosamente!'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -184,7 +187,7 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
                     /* return back()->with('import_error', $failures); */
                 }
             }
@@ -207,11 +210,12 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    });
 
                     /* return back()->with('mSucces', 'Hospitalizados importados exitosamente'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -220,7 +224,7 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
                     /* return back()->with('import_error', $failures); */
                 }
             }
@@ -243,11 +247,12 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    });
 
                     /* return back()->with('mSucces', 'Brigadas importadas exitosamente'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -256,7 +261,7 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
                     /* return back()->with('import_error', $failures); */
 
                 }
@@ -280,11 +285,13 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    });
+
 
                     /* return back()->with('mSucces', 'Reprogramaciones importadas exitosamente'); */
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -293,7 +300,7 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
                     /* return back()->with('import_error', $failures); */
                 }
             }
@@ -316,11 +323,13 @@ class ImportarController extends Controller
 
                     $pdf = PDF::loadView('importar.pdf-correcto', compact('acta'));
 
-                    /* Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
-                        $mail->from('contactatest2020@gmail.com', 'Admin IRC');
+
+                    Mail::send('email.email_validacion', compact($acta), function ($mail) use ($pdf, $email) {
+                        $mail->from('adminIRC@gmail.com', 'Admin IRC');
                         $mail->to($email);
+                        $mail->subject('Acta de cargue a plataforma');
                         $mail->attachData($pdf->output(), 'ActaCargue.pdf');
-                    }); */
+                    });
 
                     Session::flash('mSucces', 'Captaciones importadas exitosamente');
                     return $pdf->download(substr($file_name, 0, -5).'ActaCargue.pdf');
@@ -329,7 +338,8 @@ class ImportarController extends Controller
                     $failures = $e->failures();
                     $nombre = substr($file_name, 0, -5);
                     $pdf = PDF::loadView('importar.pdf-incorrecto', compact('failures','nombre'));
-                    return $pdf->stream('Actaerror.pdf');
+                    return $pdf->download('Actaerror.pdf');
+
                     /* return back()->with('import_error', $failures); */
                 }
             }

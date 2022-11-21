@@ -12,8 +12,15 @@ class ReportesController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     function index(){
         return view('reportes.index');
     }
+
+    function reporte_pdf(request $request){
+
+        dd('nashe');
+
+    }
+
 }

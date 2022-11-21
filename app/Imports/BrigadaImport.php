@@ -48,6 +48,12 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         $fecha_ultimo_control = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_ultimo_control'])->format('Y-m-d');
         $fecha_cita = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_cita'])->format('Y-m-d');
 
+        /* $fecha_nacimiento = date("Y-m-d", strtotime($row['fecha_nacimiento']));
+        $fecha_reporte = date("Y-m-d", strtotime($row['fecha_reporte']));
+
+        $fecha_llegada = date("Y-m-d", strtotime($row['fecha_llegada']));
+        $fecha_ultimo_control = date("Y-m-d", strtotime($row['fecha_ultimo_control']));
+        $fecha_cita = date("Y-m-d", strtotime($row['fecha_cita'])); */
 
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
         $departamento = departamento::where('dep_nombre', '=', $row['departamento'])->get();

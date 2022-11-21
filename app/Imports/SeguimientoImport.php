@@ -140,12 +140,12 @@ class SeguimientoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wi
 
     public function batchSize(): int
     {
-        return 4000;
+        return 60000;
     }
 
     public function chunkSize(): int
     {
-        return 4000;
+        return 60000;
     }
 
     public function rules(): array

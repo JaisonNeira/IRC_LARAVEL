@@ -90,6 +90,7 @@ Route::get('/administracion', [App\Http\Controllers\AdministracionesController::
 
 /* REPORTES */
 Route::get('/reportes', [App\Http\Controllers\ReportesController::class, 'index'])->name('reportes.index');
+Route::get('/reportes/pdf', [App\Http\Controllers\ReportesController::class, 'reporte_pdf'])->name('reportes.pdf');
 
 /* AYUDA */
 Route::get('/ayuda', [App\Http\Controllers\AyudaController::class, 'index'])->name('ayuda.index');
