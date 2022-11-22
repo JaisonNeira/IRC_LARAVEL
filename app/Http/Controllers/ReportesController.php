@@ -36,10 +36,16 @@ class ReportesController extends Controller
         if($rep_formato == "excel"){
             dd('excel');
         }else if ($rep_formato == "pdf") {
-            $gestiones = $this->busca_gestion($tpp_id, $fecha_ini, $fecha_fin);
-            $cantidad = $this->contar_gestiones($tpp_id, $fecha_ini, $fecha_fin);
+            $total = $this->total_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
+            if($total == 0){
+                return back()->with('mDanger', 'No hay registros en estas fechas!');
+            }
+            $gestiones = $this->busca_gestion($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
+            $cantidad = $this->contar_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
+            $faltantes = $total-$cantidad;
+            $cumplimiento = round(($cantidad*100)/$total)."%";
 
-            $pdf = PDF::loadView('reportes.pdf', compact('gestiones', 'cantidad'));
+            $pdf = PDF::loadView('reportes.pdf', compact('gestiones', 'cantidad', 'total', 'faltantes', 'cumplimiento', 'fecha_ini', 'fecha_fin'));
             $nombre = $fecha_ini."-".$fecha_fin."-";
             return $pdf->stream($nombre.'reporte.pdf');
         }else{
@@ -49,7 +55,7 @@ class ReportesController extends Controller
 
     }
 
-    function busca_gestion($tpp_id, $fecha_ini, $fecha_fin){
+    function busca_gestion($tpp_id, $fecha_ini, $fecha_fin, $dep_id){
         switch ($tpp_id) {
             case 1:
                 /* INASISTIDOS */
@@ -57,16 +63,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 1
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
             case 2:
@@ -75,16 +82,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 2
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
             case 3:
@@ -93,16 +101,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 3
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
             case 4:
@@ -111,16 +120,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 4
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
             case 5:
@@ -129,16 +139,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 5
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
             case 6:
@@ -147,16 +158,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 6
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
             case 7:
@@ -165,16 +177,17 @@ class ReportesController extends Controller
                 $sql = "SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
                 FROM tipos_gestiones AS tge
                 LEFT JOIN (
-                    SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-                    FROM gestiones AS ges
-                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+                    FROM procesos AS pro
+                    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                    WHERE ges.ges_estado = 1
+                    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                    WHERE pro.pro_estado = 1
                     AND car.tpp_id = 7
-                    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+                    AND pac.dep_id = ".$dep_id."
+                    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
                     GROUP BY tge.tge_nombre
-                ) T1 ON T1.tge_nombre = tge.tge_nombre";
+                ) T1 ON T1.tge_nombre = tge.tge_nombre ";
 
                 break;
 
@@ -184,102 +197,108 @@ class ReportesController extends Controller
 
                 break;
         }
-
         return $gestiones = DB::select($sql);
 
     }
 
-    function contar_gestiones($tpp_id, $fecha_ini, $fecha_fin){
+    function contar_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id){
         switch ($tpp_id) {
             case 1:
                 /* INASISTIDOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 1
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 2:
                 /* SEGUIMIENTOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 2
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 3:
                 /* RECORDATORIOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 3
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 4:
                 /* HOSPITALIZADOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
-                AND car.tpp_id = 5
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND car.tpp_id = 4
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 5:
                 /* BRIGADA */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 5
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 6:
                 /* REPROGRAMACION */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 6
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 7:
                 /* REPROGRAMACION */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 7
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
 
@@ -289,104 +308,103 @@ class ReportesController extends Controller
 
                 break;
         }
-
         $cantidad = DB::select($sql);
 
         return $a = $cantidad[0]->cantidad;
 
     }
 
-    function total_gestiones($tpp_id, $fecha_ini, $fecha_fin){
+    function total_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id){
         switch ($tpp_id) {
             case 1:
                 /* INASISTIDOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 1
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 2:
                 /* SEGUIMIENTOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 2
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 3:
                 /* RECORDATORIOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 3
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 4:
                 /* HOSPITALIZADOS */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
-                AND car.tpp_id = 5
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND car.tpp_id = 4
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 5:
                 /* BRIGADA */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 5
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 6:
                 /* REPROGRAMACION */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 6
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
             case 7:
                 /* REPROGRAMACION */
 
-                $sql = "SELECT count(ges.tge_id) AS cantidad
-                FROM gestiones AS ges
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-                INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+                $sql = "SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
                 INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                WHERE ges.ges_estado = 1
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
                 AND car.tpp_id = 7
-                AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'";
 
                 break;
 
@@ -398,7 +416,6 @@ class ReportesController extends Controller
         }
 
         $cantidad = DB::select($sql);
-
         return $a = $cantidad[0]->cantidad;
 
     }
@@ -409,23 +426,36 @@ class ReportesController extends Controller
 /* SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
 FROM tipos_gestiones AS tge
 LEFT JOIN (
-	SELECT tge.tge_nombre AS tge_nombre, count(ges.tge_id) AS cantidad
-    FROM gestiones AS ges
-    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
+    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+    FROM procesos AS pro
+    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
     INNER JOIN cargues AS car ON car.car_id = pro.car_id
-    WHERE ges.ges_estado = 1
+    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+    WHERE pro.pro_estado = 1
     AND car.tpp_id = 7
-    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+    AND pac.dep_id = ".$dep_id."
+    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
     GROUP BY tge.tge_nombre
 ) T1 ON T1.tge_nombre = tge.tge_nombre */
 
+/* AND pro.created_at BETWEEN '2010-10-10' AND '2025-10-10' */
 
-/* SELECT count(ges.tge_id) AS cantidad
-    FROM gestiones AS ges
-    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = ges.tge_id
-    INNER JOIN procesos AS pro ON pro.pro_id = ges.pro_id
-    INNER JOIN cargues AS car ON car.car_id = pro.car_id
-    WHERE ges.ges_estado = 1
-    AND car.tpp_id = 7
-    AND ges.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' */
+/* SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
+                INNER JOIN cargues AS car ON car.car_id = pro.car_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND car.tpp_id = 7
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' */
+
+
+/* SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN cargues AS car ON car.car_id = pro.car_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND car.tpp_id = 7
+                AND pac.dep_id = 70
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' */

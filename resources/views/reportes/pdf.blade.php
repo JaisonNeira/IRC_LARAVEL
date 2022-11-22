@@ -1,17 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
 </head>
 
 <body>
+
     <div class="container mt-4">
         <div class="row">
             <div class="col-sm-12 text-right mb-5">
@@ -28,14 +38,14 @@
             <div class="col-sm-12 text-left mb-4">
                 <p class="texto font-weight-normal">Cantidades de gestiones y sus tipos:
                 </p>
-                <table class="table table-bordered">
+                <table class="table">
                     <thead>
                         <tr>
-                            <th style="text-align: center;">Fecha inicio: </th>
-                            <th style="text-align: center;">Fecha final: </th>
+                            <th style="text-align: center;">Fecha inicio: {{$fecha_ini}}</th>
+                            <th style="text-align: center;">Fecha final: {{$fecha_fin}}</th>
                         </tr>
                         <tr>
-                            <th style="text-align: center;">Gestion</th>
+                            <th>Gestion</th>
                             <th style="text-align: center;">Cantidad</th>
                         </tr>
                     </thead>
@@ -50,7 +60,7 @@
                 </table>
                 <p class="texto font-weight-normal"><mark class="resaltado"></mark></p>
             </div>
-
+            <br><br><br><br><br><br><br><br>
             <div class="col-sm-12 text-left mb-4">
                 <p class="texto font-weight-bold">Resultados:</p>
             </div>
@@ -58,6 +68,9 @@
             <div class="col-sm-12 text-left mb-4">
 
                 <p class="texto font-weight-normal">- Total de gestiones: {{ $cantidad }}</p>
+                <p class="texto font-weight-normal">- Gestiones pendientes: {{ $faltantes }}</p>
+                <p class="texto font-weight-normal">- Total de procesos: {{ $total }}</p>
+                <p class="texto font-weight-normal">- Porcentaje de cumplimiento: {{ $cumplimiento }}</p>
 
             </div>
 
@@ -67,14 +80,14 @@
 
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
     </script>
 </body>
 

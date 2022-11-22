@@ -287,6 +287,8 @@ class GestionesController extends Controller
         }
         $gestion->save();
 
+        proceso::where('pro_id', $request->pro_id)->update(['tge_id' => $request->tge_id]);
+
         if($tpp_id == 3){
             recordatorio::where('pro_id', $request->pro_id)->update(['rec_tipo_de_recordatorio' => $request->tin_id]);
         }

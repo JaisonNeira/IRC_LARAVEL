@@ -6,6 +6,7 @@
 
 
 @section('content')
+
     <form action="{{ route('reportes.descarga') }}" method="GET" name="form-data" enctype="multipart/form-data">
         @csrf
         <div class="row p-3" {{-- style="max-width: 800px" --}}>
@@ -13,6 +14,8 @@
             <div class="col-12">
                 <h1 style="font-weight: bold;">Generador de reportes</h1>
             </div>
+
+            @include('layouts.msj')
 
             <div class="col-4 mt-4">
                 <div class="select col-12  align-items-center shadow-sm" id="select">
@@ -42,8 +45,8 @@
             <div class="col-4 mt-4">
                 <div class="select col-12  align-items-center shadow-sm" id="select">
                     <select id="seleccion" name="rep_formato" style="font-weight: bold;" required>
-                        <option selected disabled>Formato</option>
-                        <option value="excel">Excel</option>
+                        <option value="" selected disabled>Formato</option>
+                        {{-- <option value="excel">Excel</option> --}}
                         <option value="pdf">Pdf</option>
                     </select>
                 </div>
