@@ -22,9 +22,10 @@ return view('auth.login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/rp', function () {
+/* Route::get('/rp', function () {
     return view('reportes.pdf');
-});
+}); */
+
 
 //ROLE CRUD
 Route::get('/roles', [RolController::class, 'index'])->name('indexRol');
@@ -52,6 +53,7 @@ Route::post('/post/importar', [App\Http\Controllers\ImportarController::class, '
 Route::get('/proceso', [App\Http\Controllers\ProcesosController::class, 'index'])->name('proceso.index');
 Route::get('/proceso/tabla', [App\Http\Controllers\ProcesosController::class, 'index_tabla'])->name('proceso.index.tabla');
 Route::get('/proceso/c/estado', [App\Http\Controllers\ProcesosController::class, 'actualizar_estado'])->name('proceso.cambiar.estado');
+
 /* PROCESO EXCELS VISTAS */
 Route::get('/proceso/e/bri/{id}', [App\Http\Controllers\ProcesosController::class, 'bri_vista'])->name('proceso.e.bri');
 Route::get('/proceso/e/cap/{id}', [App\Http\Controllers\ProcesosController::class, 'cap_vista'])->name('proceso.e.cap');
@@ -61,7 +63,6 @@ Route::get('/proceso/e/rep/{id}', [App\Http\Controllers\ProcesosController::clas
 Route::get('/proceso/e/hos/{id}', [App\Http\Controllers\ProcesosController::class, 'hos_vista'])->name('proceso.e.hos');
 Route::get('/proceso/e/seg/{id}', [App\Http\Controllers\ProcesosController::class, 'seg_vista'])->name('proceso.e.seg');
 Route::get('/proceso/e/filtro', [App\Http\Controllers\ProcesosController::class, 'filtro_excel'])->name('proceso.e.filtro');
-
 
 /* PRO_AJAX */
 Route::get('/filtro/consulta', [App\Http\Controllers\ProcesosController::class, 'filtro'])->name('conbo.filtro');
@@ -84,6 +85,9 @@ Route::post('/adm/captaciones/asig', [App\Http\Controllers\CaptacionesController
 Route::get('/consultas', [App\Http\Controllers\PacientesController::class, 'index'])->name('consultas.index');
 Route::get('/adm/combo/dep/mun', [App\Http\Controllers\PacientesController::class, 'dep_mun'])->name('consultas.dep_mun');
 Route::post('/con/pac/create', [App\Http\Controllers\PacientesController::class, 'create'])->name('consultas.create');
+
+Route::get('/pac/get', [App\Http\Controllers\PacientesController::class, 'modal_edit'])->name('pacientes.get.edit');
+Route::patch('/pac/patch', [App\Http\Controllers\PacientesController::class, 'post_edit'])->name('pacientes.edit.patch');
 
 /* ADMINISTRACION */
 Route::get('/administracion', [App\Http\Controllers\AdministracionesController::class, 'index'])->name('administracion.index');

@@ -45,7 +45,13 @@ class ReportesController extends Controller
             $faltantes = $total-$cantidad;
             $cumplimiento = round(($cantidad*100)/$total)."%";
 
-            $pdf = PDF::loadView('reportes.pdf', compact('gestiones', 'cantidad', 'total', 'faltantes', 'cumplimiento', 'fecha_ini', 'fecha_fin'));
+            $a = tipos_proceso::where('tpp_id', '=', $tpp_id)->get('tpp_nombre');
+            $tipos_procesos = $a[0]->tpp_nombre;
+
+            $b = departamento::where('dep_id', '=', $dep_id)->get('dep_nombre');
+            $departamentos = $b[0]->dep_nombre;
+            
+            $pdf = PDF::loadView('reportes.pdf', compact('gestiones', 'cantidad', 'total', 'faltantes', 'cumplimiento', 'departamentos', 'tipos_procesos', 'fecha_ini', 'fecha_fin'))->setOptions(['defaultFont' => 'sans-serif']);
             $nombre = $fecha_ini."-".$fecha_fin."-";
             return $pdf->stream($nombre.'reporte.pdf');
         }else{

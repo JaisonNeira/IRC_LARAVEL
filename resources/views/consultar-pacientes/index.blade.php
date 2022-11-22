@@ -9,14 +9,17 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#crear_paciente">
-                    <i class="fas fa-plus"></i> Nuevo Paciente</button>
-
-                @include('layouts.msj')
-
-                @include('consultar-pacientes.msj')
-
+                <div class="col-12">
+                    <button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#crear_paciente">
+                        <i class="fas fa-plus"></i> Nuevo Paciente</button>
+                </div>
+                <br>
                 <div class="table-responsive">
+
+                    @include('layouts.msj')
+
+                    @include('consultar-pacientes.msj')
+
                     <table id="table3" class="table table-bordered">
                         <thead style="background-color: #E22A3D; color:#ffff; text-align:center;">
                             <tr>
@@ -42,6 +45,11 @@
                                             data-target="#modal_perfil" onclick="modal_perfil({{ $list->pac_id }});">
                                             Perfil
                                         </button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#editar_paciente_{{ $list->pro_id }}"
+                                            onclick="modal_editar({{ $list->pac_id }});">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -57,54 +65,12 @@
     @include('gestionar.proceso')
 
     @include('gestionar.perfil')
+
+    @include('consultar-pacientes.edit')
 @endsection
 
 @section('script')
-    <script>
-        /* SELECT DINAMICO */
-
-        /* --variables para llamar a los select por el id */
-        let $select_departamento = document.getElementById('dep_id')
-        let $select_municipio = document.getElementById('mun_id')
-
-        /* CARGAR CAMPAnA */
-        function cargarCampana(sendDatos) {
-
-            $.ajax({
-                url: '/adm/combo/dep/mun',
-                type: 'GET',
-                dataType: 'json',
-                data: sendDatos,
-                success: function(response) {
-                    const respuestas = response.municipios;
-
-                    let template = '<option class="form-control" selected disabled>-- Seleccione --</option>'
-
-                    respuestas.forEach(respuesta => {
-                        template +=
-                            `<option class="form-control" value="${respuesta.mun_id}">${respuesta.mun_nombre}</option>`;
-                    })
-
-                    $select_municipio.innerHTML = template;
-                },
-                error: function(jqXHR) {
-                    console.log('error!');
-                }
-            });
-
-        }
-
-        $select_departamento.addEventListener('change', () => {
-            const dep_id = $select_departamento.value
-
-            const sendDatos = {
-                'dep_id': dep_id
-            }
-
-            cargarCampana(sendDatos)
-
-        })
-    </script>
+    <script type="text/javascript" src="{{ asset('js/funcionalidades/paciente.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>

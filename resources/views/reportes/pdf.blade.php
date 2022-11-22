@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>PDF</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
@@ -25,7 +25,8 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-sm-12 text-right mb-5">
-                <h1 class="font-weight-bold">Informe de gestiones realizadas</h1>
+                <h1 class="font-weight-bold">Informe de gestiones realizadas </h1>
+                <h4>{{ $tipos_procesos }} del departamente de {{ $departamentos }}</h4>
                 <p class="texto"> <strong>Fecha: </strong><?php echo date('F d'); ?> de <?php echo date('Y'); ?></p>
                 <p class="texto font-weight-bold"> Barranquilla-Atlántico </p>
             </div>

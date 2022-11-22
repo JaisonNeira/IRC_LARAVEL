@@ -124,4 +124,40 @@ class PacientesController extends Controller
 
     }
 
+    /* MODAL EDIT */
+    public function modal_edit(request $request){
+
+        $sql = "SELECT pac.pac_telefono, pac.pac_fecha_nacimiento, pac.pac_direccion, mun.mun_id, mun.mun_nombre, dep.dep_id, dep.dep_nombre
+        FROM pacientes AS pac
+        INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
+        INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
+        WHERE pac.pac_id = ".$request->pac_id;
+
+        $paciente = DB::select($sql);
+
+        $departamentos = departamento::all();
+
+        echo json_encode(
+            array(
+                "success" => true,
+                "paciente" => $paciente[0],
+                "departamentos" => $departamentos
+            )
+        );
+
+    }
+
+    public function post_edit(request $request){
+
+        $user_id = $request->user_id;
+        paciente::where('pac_id', $request->pac_id)->update(["pac_telefono" => $request->pac_telefono]);
+        paciente::where('pac_id', $request->pac_id)->update(["pac_direccion" => $request->pac_direccion]);
+        paciente::where('pac_id', $request->pac_id)->update(["dep_id" => $request->dep_id]);
+        paciente::where('pac_id', $request->pac_id)->update(["mun_id" => $request->mun_id]);
+        paciente::where('pac_id', $request->pac_id)->update(["user_updated" => $user_id]);
+
+        return back()->with('mSucces', 'Paciente actualizado correctamente');
+
+    }
+
 }
