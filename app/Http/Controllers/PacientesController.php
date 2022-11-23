@@ -127,8 +127,9 @@ class PacientesController extends Controller
     /* MODAL EDIT */
     public function modal_edit(request $request){
 
-        $sql = "SELECT pac.pac_telefono, pac.pac_fecha_nacimiento, pac.pac_direccion, mun.mun_id, mun.mun_nombre, dep.dep_id, dep.dep_nombre
+        $sql = "SELECT tpi.tip_alias, pac.*, mun.mun_id, mun.mun_nombre, dep.dep_id, dep.dep_nombre
         FROM pacientes AS pac
+        INNER JOIN tipos_identificaciones AS tpi ON tpi.tip_id = pac.tip_id
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pac.pac_id = ".$request->pac_id;
@@ -148,7 +149,6 @@ class PacientesController extends Controller
     }
 
     public function post_edit(request $request){
-
         $user_id = $request->user_id;
         paciente::where('pac_id', $request->pac_id)->update(["pac_telefono" => $request->pac_telefono]);
         paciente::where('pac_id', $request->pac_id)->update(["pac_direccion" => $request->pac_direccion]);

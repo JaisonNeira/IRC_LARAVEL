@@ -25,6 +25,13 @@ function modal_editar(pac_id) {
 
             document.getElementById('modal_pac_telefono').value = response.paciente.pac_telefono;
 
+            document.getElementById('modal_tip_id').value = response.paciente.tip_alias;
+            document.getElementById('modal_pac_identificacion').value = response.paciente.pac_identificacion;
+            document.getElementById('modal_pac_nombre_completo').value = response.paciente.pac_nombre_completo;
+            document.getElementById('modal_pac_fecha_nacimiento').value = response.paciente.pac_fecha_nacimiento;
+            document.getElementById('modal_pac_sexo').value = response.paciente.pac_sexo;
+            document.getElementById('modal_pac_regimen_afiliacion_SGSS').value = response.paciente.pac_regimen_afiliacion_SGSS;
+
             let template = '<option class="form-control" value="' + response.paciente.dep_id + '" selected>' + response.paciente.dep_nombre + '</option>';
             template += '<option class="form-control" disabled>-- Seleccione --</option>';
 
