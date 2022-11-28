@@ -38,11 +38,17 @@ class ReportesController extends Controller
 
         if($rep_formato == "excel"){
 
+            $total = $this->total_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
+            $cantidad = $this->contar_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
+            $faltantes = $total-$cantidad;
+
+            $cumplimiento = round(($cantidad*100)/$total)."%";
+
             $gestiones = $this->gestiones_realizadas($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
 
-            /* if(count($gestiones) == 0){
+            if(count($gestiones) == 0){
                 return back()->with('mDanger', 'No hay gestiones en estas fechas!');
-            } */
+            }
             $meses_cargados = $this->mes_cargados($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
 
             $sql_tpp = "SELECT tge.tge_nombre FROM tipos_gestiones AS tge";
@@ -54,8 +60,7 @@ class ReportesController extends Controller
             $b = departamento::where('dep_id', '=', $dep_id)->get('dep_nombre');
             $departamentos = $b[0]->dep_nombre;
 
-            return Excel::download(new ReporteExport($gestiones, $meses_cargados, $tipos_gestiones, $tipos_procesos, $departamentos), $fecha_ini.'_'.$fecha_fin.'_REPORTE.xlsx');
-
+            return Excel::download(new ReporteExport($gestiones, $meses_cargados, $tipos_gestiones, $tipos_procesos, $departamentos, $fecha_ini, $fecha_fin, $total, $cantidad, $faltantes, $cumplimiento), $fecha_ini.'_'.$fecha_fin.'_REPORTE.xlsx');
 
         }else if ($rep_formato == "pdf") {
             $total = $this->total_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
@@ -700,42 +705,15 @@ class ReportesController extends Controller
         return $b = DB::select($sql);
     }
 
+    //REPORTES PERSONALIZADOS
+
+    function index_personalizado(){
+        $tipos_procesos = tipos_proceso::where('tpp_estado', '=', '1')->get();
+        $departamentos = departamento::where('dep_estado', '=', '1')->get();
+
+        return view('reportes.personalizados', compact('tipos_procesos', 'departamentos'));
+    }
+
 }
 
 
-/* SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
-FROM tipos_gestiones AS tge
-LEFT JOIN (
-    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
-    FROM procesos AS pro
-    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
-    INNER JOIN cargues AS car ON car.car_id = pro.car_id
-    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-    WHERE pro.pro_estado = 1
-    AND car.tpp_id = 7
-    AND pac.dep_id = ".$dep_id."
-    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
-    GROUP BY tge.tge_nombre
-) T1 ON T1.tge_nombre = tge.tge_nombre */
-
-/* AND pro.created_at BETWEEN '2010-10-10' AND '2025-10-10' */
-
-/* SELECT count(pro.tge_id) AS cantidad
-                FROM procesos AS pro
-                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
-                INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND car.tpp_id = 7
-                AND pac.dep_id = ".$dep_id."
-                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' */
-
-
-/* SELECT COUNT(pro.pro_id) AS cantidad
-                FROM procesos AS pro
-                INNER JOIN cargues AS car ON car.car_id = pro.car_id
-                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
-                WHERE pro.pro_estado = 1
-                AND car.tpp_id = 7
-                AND pac.dep_id = 70
-                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' */

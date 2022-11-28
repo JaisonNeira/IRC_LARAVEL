@@ -22,9 +22,9 @@ return view('auth.login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-/* Route::get('/rp', function () {
-    return view('reportes.pdf');
-}); */
+Route::get('/rp', function () {
+    return view('reportes.excel');
+});
 
 
 //ROLE CRUD
@@ -95,6 +95,9 @@ Route::get('/administracion', [App\Http\Controllers\AdministracionesController::
 /* REPORTES */
 Route::get('/reportes', [App\Http\Controllers\ReportesController::class, 'index'])->name('reportes.index');
 Route::get('/reportes/d', [App\Http\Controllers\ReportesController::class, 'reporte_descarga'])->name('reportes.descarga');
+
+Route::get('/reportes/p', [App\Http\Controllers\ReportesController::class, 'index_personalizado'])->name('reportes.personalizados.index');
+
 
 /* AYUDA */
 Route::get('/ayuda', [App\Http\Controllers\AyudaController::class, 'index'])->name('ayuda.index');
