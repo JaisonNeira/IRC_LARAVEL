@@ -42,15 +42,15 @@ class ImportarController extends Controller
             'tipo_proceso' => 'required',
             'file' => ''
         ]);
-        
+
         return DB::transaction(function () use ($request){
             /* VALIDACIONES */
             $tipo = $request->tipo_proceso;
             $file = $request->file('file');
             $file_name = $request->file_name;
-            $file_ir = substr($file_name, 0, -17);
-            $file_pro = substr($file_name, 2, -14);
-            $file_fecha = substr($file_name, 5, -6);
+            $file_ir = substr($file_name, 0, -18);
+            $file_pro = substr($file_name, 2, -15);
+            $file_fecha = substr($file_name, 5, -7);
             $file_v = substr($file_name, 13, 2);
             $file_tipe = substr($file_name, 16);
             $file_len = strlen($file_name);
@@ -58,13 +58,13 @@ class ImportarController extends Controller
             $email = $request->email;
 
             /* VALIDAMOS QUE EL NOMBRE DEL ARCHIVO ESTE BIEN */
-            if($file_len != 19 || $file_ir != "IR"){
+            if($file_len != 20 || $file_ir != "IR"){
                 return back()->with('mDanger', 'El nombre del archivo no es adecuado, cambielo e intentelo nuevamente!');
             }
             /* VALIDAMOS QUE SEA UN ARCHOVO XLSX */
-            /* if($file_tipe != "xlsx"){
+            if($file_tipe != "xlsx"){
                 return back()->with('mDanger', 'Tipo de archivo erroneo, debe ser formato excel (.xlsx)!');
-            } */
+            }
 
             $validador_car = actas_cargue::where('Acc_nombre', '=',substr($file_name, 0, -5))->count();
             if($validador_car > 0){
@@ -72,11 +72,11 @@ class ImportarController extends Controller
             }
 
             /* VALIDAMOS QUE LA FECHA EN EL NOMBRE DEL ARCHIVO ESTE BIEN */
-            $año = intval(substr($file_fecha, 0, -4));
+            $year = intval(substr($file_fecha, 0, -4));
             $mes = intval(substr($file_fecha, 4, -2));
             $dia = intval(substr($file_fecha, 6));
 
-            if($mes > 12 || $dia > 31 || $mes < 0 || $dia < 0 || $mes == 0 || $año == 0 || $dia == 0){
+            if($mes > 12 || $dia > 31 || $mes < 0 || $dia < 0 || $mes == 0 || $year == 0 || $dia == 0){
                 return back()->with('mDanger', 'La fecha dentro del nombre es invalida!');
             }
 

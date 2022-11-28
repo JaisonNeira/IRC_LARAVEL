@@ -96,7 +96,7 @@ class CaptacionImport implements ToModel, WithHeadingRow, WithBatchInserts, With
         if($this->car_id == 0){
             $cargue = cargue::create([
                 'car_fecha_cargue' => $fecha,
-                'car_mes' => $row['mes'],
+                'car_mes' => $row['mes_year'],
                 'car_fecha_reporte' => $fecha_reporte,
                 'tpp_id' => '7',
             ]);

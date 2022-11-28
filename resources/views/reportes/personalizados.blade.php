@@ -21,9 +21,7 @@
                 <div class="select col-12  align-items-center shadow-sm" id="select">
                     <select id="seleccion" name="tipo_proceso" style="font-weight: bold;" required>
                         <option value="" selected disabled>Tipo de proceso</option>
-                        @foreach ($tipos_procesos as $list)
-                            <option value="{{ $list->tpp_id }}" class="opciones">{{ $list->tpp_nombre }}</option>
-                        @endforeach
+                        
                     </select>
                 </div>
             </div>

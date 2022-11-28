@@ -132,6 +132,15 @@
                 <hr class="sidebar-divider">
             </a>
         </li>
+        <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
+            <a class="nav-link" style="padding: 0px" {{-- href="{{ route('reportes.index') }}" --}}>
+                <div class="d-flex flex-column ">
+                    <i class="fa-solid fa-clipboard text-center" style="font-size: 30px;"></i>
+                    <div Class="text-center"><span>Reportes personalizados</span></div>
+                </div>
+                <hr class="sidebar-divider">
+            </a>
+        </li>
     @endcan
 
     <div class="text-center d-none d-md-inline">

@@ -25,11 +25,11 @@
                 <div class="col-12 px-5" style="margin-top: 90px">
                     <div class="text-left text-white">
                         <h3>Panel informativo</h3>
-                        <h5>10/11/2022</h5>
+                        {{-- <h5>10/11/2022</h5> --}}
                         <p>
-                          - Se ha implementado un nuevo boton "centro de ayuda".<br>
+                          {{-- - Se ha implementado un nuevo boton "centro de ayuda".<br>
                           - Se han solucionado problemas de supervisores y agentes.<br>
-                          - Se han hecho mejoras en la interfaz grafica.<br>
+                          - Se han hecho mejoras en la interfaz grafica.<br> --}}
 
                         </p>
                     </div>
