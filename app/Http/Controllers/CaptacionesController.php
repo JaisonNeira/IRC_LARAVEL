@@ -10,6 +10,10 @@ use App\Models\proceso_agente;
 
 class CaptacionesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(){
         $sql = "SELECT car.car_id

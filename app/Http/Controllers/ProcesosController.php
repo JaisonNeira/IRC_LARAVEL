@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Session;
 
 class ProcesosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     function index(){
 
