@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <form action="{{ route('reportes.descarga') }}" method="GET" name="form-data" enctype="multipart/form-data">
+    <form action="{{ route('reportes.personalizados.get') }}" method="GET" name="form-data" enctype="multipart/form-data">
         @csrf
         <div class="row p-3" {{-- style="max-width: 800px" --}}>
             {{--  Inicio Formulorio  --}}

@@ -42,7 +42,7 @@ class InasistidoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
         $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
 
         $fecha_cita = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_cita'])->format('Y-m-d');
-
+        $mes_year = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['mes_year'])->format('M-Y');
 
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
         $departamento = departamento::where('dep_nombre', '=', $row['departamento'])->get();
@@ -94,7 +94,6 @@ class InasistidoImport implements ToModel, WithHeadingRow, WithBatchInserts, Wit
 
 
         $fecha = date('d-m-Y H:i:s');
-
 
         if($this->car_id == 0){
             $cargue = cargue::create([
