@@ -46,7 +46,7 @@ class ReprogramacionImport implements ToModel, WithHeadingRow, WithBatchInserts,
         $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
 
         $fecha_cita = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_cita'])->format('Y-m-d');
-
+        $mes_year = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['mes_year'])->format('M-Y');
 
         $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
         $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
@@ -99,7 +99,7 @@ class ReprogramacionImport implements ToModel, WithHeadingRow, WithBatchInserts,
         if($this->car_id == 0){
             $cargue = cargue::create([
                 'car_fecha_cargue' => $fecha,
-                'car_mes' => $row['mes_year'],
+                'car_mes' => $mes_year,
                 'car_fecha_reporte' => $fecha_reporte,
                 'tpp_id' => '6'
             ]);

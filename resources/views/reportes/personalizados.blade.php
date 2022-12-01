@@ -43,10 +43,10 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="row mx-1 mt-4">
-                    <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
                         <div class="h5" style="min-width: 110px; margin-top: 8px">Fecha Inicio</div>
                     </div>
-                    <div class="col-lg-9 col-md-9  col-sm-12" style="padding-left: 0px; padding-right: 0px;">
+                    <div class="col-lg-7 col-md-7  col-sm-12" style="padding-left: 0px; padding-right: 0px;">
                         {{-- ---   Aqui va la fecha Inicio  --- --}}
                         <input type="date" class="form-control" id="rep_fecha_ini" name="rep_fecha_ini"
                             style="font-size: 14px" required>
@@ -59,10 +59,10 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="row mx-1 mt-4">
-                    <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="col-lg-5 col-md-5 col-sm-12">
                         <div class="h5" style="min-width: 110px; margin-top: 8px">Fecha Fin</div>
                     </div>
-                    <div class="col-lg-9 col-md-9  col-sm-12" style="padding-left: 0px; padding-right: 0px;">
+                    <div class="col-lg-7 col-md-7  col-sm-12" style="padding-left: 0px; padding-right: 0px;">
                         {{-- ---   Aqui va la fecha Fin  --- --}}
                         <input type="date" class="form-control" id="rep_fecha_fin" name="rep_fecha_fin"
                             style="font-size: 14px" required>

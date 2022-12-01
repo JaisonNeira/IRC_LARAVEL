@@ -44,7 +44,8 @@ class CaptacionImport implements ToModel, WithHeadingRow, WithBatchInserts, With
 
         $fecha_nacimiento = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_nacimiento'])->format('Y-m-d');
         $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
-
+        $mes_year = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['mes_year'])->format('M-Y');
+        
         $validador_pac = paciente::where('pac_identificacion', $row['numero_de_documento'])->count();
         $nombre_completo = $row['primer_nombre'].' '.$row['segundo_nombre'].' '.$row['primer_apellido'].' '.$row['segundo_apellido'];
 
@@ -96,7 +97,7 @@ class CaptacionImport implements ToModel, WithHeadingRow, WithBatchInserts, With
         if($this->car_id == 0){
             $cargue = cargue::create([
                 'car_fecha_cargue' => $fecha,
-                'car_mes' => $row['mes_year'],
+                'car_mes' => $mes_year,
                 'car_fecha_reporte' => $fecha_reporte,
                 'tpp_id' => '7',
             ]);

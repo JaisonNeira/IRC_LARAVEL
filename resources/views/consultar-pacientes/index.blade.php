@@ -46,12 +46,13 @@
                                             Perfil
                                         </button>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#editar_paciente_{{ $list->pro_id }}"
+                                            data-target="#editar_paciente"
                                             onclick="modal_editar({{ $list->pac_id }});">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                     </td>
                                 </tr>
+
                             @endforeach
                         </tbody>
                     </table>
@@ -67,6 +68,7 @@
     @include('gestionar.perfil')
 
     @include('consultar-pacientes.edit')
+
 @endsection
 
 @section('script')

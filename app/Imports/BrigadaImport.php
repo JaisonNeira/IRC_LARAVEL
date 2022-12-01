@@ -47,6 +47,7 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         $fecha_llegada = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_llegada'])->format('Y-m-d');
         $fecha_ultimo_control = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_ultimo_control'])->format('Y-m-d');
         $fecha_cita = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_cita'])->format('Y-m-d');
+        $mes_year = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['mes_year'])->format('M-Y');
 
         /* $fecha_nacimiento = date("Y-m-d", strtotime($row['fecha_nacimiento']));
         $fecha_reporte = date("Y-m-d", strtotime($row['fecha_reporte']));
@@ -110,7 +111,7 @@ class BrigadaImport implements ToModel, WithHeadingRow, WithBatchInserts, WithCh
         if($this->car_id == 0){
             $cargue = cargue::create([
                 'car_fecha_cargue' => $fecha,
-                'car_mes' => $row['mes_year'],
+                'car_mes' => $mes_year,
                 'car_fecha_reporte' => $fecha_reporte,
                 'tpp_id' => '5',
             ]);

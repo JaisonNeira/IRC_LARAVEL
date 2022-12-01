@@ -38,17 +38,18 @@ class ReportesController extends Controller
 
         if($rep_formato == "excel"){
 
+            $gestiones = $this->gestiones_realizadas($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
+
+            if(count($gestiones) == 0){
+                return back()->with('mDanger', 'No hay gestiones entre el '.$fecha_ini.' y el '.$fecha_fin.'!');
+            }
+
             $total = $this->total_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
             $cantidad = $this->contar_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
             $faltantes = $total-$cantidad;
 
             $cumplimiento = round(($cantidad*100)/$total)."%";
 
-            $gestiones = $this->gestiones_realizadas($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
-
-            if(count($gestiones) == 0){
-                return back()->with('mDanger', 'No hay gestiones en estas fechas!');
-            }
             $meses_cargados = $this->mes_cargados($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
 
             $sql_tpp = "SELECT tge.tge_nombre FROM tipos_gestiones AS tge";
@@ -66,7 +67,7 @@ class ReportesController extends Controller
             $total = $this->total_gestiones($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
 
             if($total == 0){
-                return back()->with('mDanger', 'No hay registros en estas fechas!');
+                return back()->with('mDanger', 'No hay registros entre el '.$fecha_ini.' y el '.$fecha_fin.'!!');
             }
 
             $gestiones = $this->busca_gestion($tpp_id, $fecha_ini, $fecha_fin, $dep_id);
@@ -705,7 +706,7 @@ class ReportesController extends Controller
         return $b = DB::select($sql);
     }
 
-    
+
 
 }
 

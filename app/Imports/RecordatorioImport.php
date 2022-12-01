@@ -42,7 +42,7 @@ class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, W
         $fecha_reporte = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_reporte'])->format('Y-m-d');
 
         $fecha_cita = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['fecha_cita'])->format('Y-m-d');
-
+        $mes_year = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['mes_year'])->format('M-Y');
 
         $ti = tipos_identificacione::where('tip_alias', '=', $row['documento'])->get();
         $departamento = departamento::where('dep_nombre', '=', $row['departamento'])->get();
@@ -99,7 +99,7 @@ class RecordatorioImport implements ToModel, WithHeadingRow, WithBatchInserts, W
         if($this->car_id == 0){
             $cargue = cargue::create([
                 'car_fecha_cargue' => $fecha,
-                'car_mes' => $row['mes_year'],
+                'car_mes' => $mes_year,
                 'car_fecha_reporte' => $fecha_reporte,
                 'tpp_id' => '3'
             ]);
