@@ -12,17 +12,15 @@
 
     <!-- Nav Item - Dashboard -->
     {{-- importar item --}}
-    @can('ver-centro-ayuda')
-        <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
-            <a class="nav-link" style="padding: 0px" style="padding: 0px" href="{{ route('ayuda.index') }}">
-                <div class="d-flex flex-column ">
-                    <i class="fa-solid fa-handshake-angle text-center" style="font-size: 30px;"></i>
-                    <div Class="text-center"><span>Centro de Ayuda</span></div>
-                </div>
-                <hr class="sidebar-divider">
-            </a>
-        </li>
-    @endcan
+    <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
+        <a class="nav-link" style="padding: 0px" style="padding: 0px" href="{{ route('ayuda.index') }}">
+            <div class="d-flex flex-column ">
+                <i class="fa-solid fa-handshake-angle text-center" style="font-size: 30px;"></i>
+                <div Class="text-center"><span>Centro de Ayuda</span></div>
+            </div>
+            <hr class="sidebar-divider">
+        </a>
+    </li>
 
     @can('ver-importar')
         <li class="nav-item active items m-t-5 mb-0" style="margin-top: 10px!important;">
@@ -87,8 +85,8 @@
 
     @can('ver-administracion')
         <li class="nav-item active" style="margin-top: 10px!important;">
-            <a class="nav-link collapsed" style="padding: 0px" {{-- href="#" --}} data-toggle="collapse" data-target="#gestiones"
-                aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" style="padding: 0px" {{-- href="#" --}} data-toggle="collapse"
+                data-target="#gestiones" aria-expanded="true" aria-controls="collapsePages">
                 <div class="d-flex flex-column ">
                     <i class="fa-solid fa-user-doctor text-center" style="font-size: 25px;"></i>
                     <div Class="text-center"><span>Administracion</span></div>
@@ -98,24 +96,23 @@
             <div id="gestiones" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="py-2 collapse-inner rounded flex row">
 
-                        @can('ver-roles')
+                    @can('ver-roles')
+                        <a class="nav-link" href="{{ route('indexRol') }}">
+                            <i class="fas fa-id-badge"></i>
+                            <span>Gestionar Roles</span></a>
+                    @endcan
 
-                            <a class="nav-link" href="{{ route('indexRol') }}">
-                                <i class="fas fa-id-badge"></i>
-                                <span>Gestionar Roles</span></a>
-                        @endcan
+                    @can('ver-usuarios')
+                        <a class="nav-link" href="{{ route('indexUser') }}">
+                            <i class="fas fa-user"></i>
+                            <span>Usuarios</span></a>
+                    @endcan
 
-                        @can('ver-usuarios')
-                            <a class="nav-link" href="{{ route('indexUser') }}">
-                                <i class="fas fa-user"></i>
-                                <span>Usuarios</span></a>
-                        @endcan
-
-                        @can('ver-agentes')
-                            <a class="nav-link" href="{{ route('administracion.index') }}">
-                                <i class="fas fa-user"></i>
-                                <span>Agentes</span></a>
-                        @endcan
+                    @can('ver-agentes')
+                        <a class="nav-link" href="{{ route('administracion.index') }}">
+                            <i class="fas fa-user"></i>
+                            <span>Agentes</span></a>
+                    @endcan
 
                 </div>
             </div>
