@@ -81,8 +81,8 @@ class ReportePersonalizadoController extends Controller
             }
 
             $hos_data = $this->proceso_hostipalizados($tpp_id, $dep_id, $fecha_ini, $fecha_fin);
-            
-            return Excel::download(new HospitalizadosExport($hos_data), '_'.$fecha_ini.'_'.$fecha_fin.'_REPORTE.xlsx');
+
+            return Excel::download(new HospitalizadosExport($hos_data), 'HOS_'.$fecha_ini.'_'.$fecha_fin.'_REPORTE.xlsx');
         }else{
             dd('Erro');
         }
