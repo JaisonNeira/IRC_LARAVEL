@@ -24,13 +24,6 @@ class ReportePersonalizadoController extends Controller
         $this->middleware('auth');
     }
 
-    function index_personalizado(){
-        $tipos_procesos = tipos_proceso::where('tpp_estado', '=', '1')->get();
-        $departamentos = departamento::where('dep_estado', '=', '1')->get();
-
-        return view('reportes.personalizados', compact('tipos_procesos', 'departamentos'));
-    }
-
     function get_reporte(request $request){
 
         $tpp_id = $request->tipo_proceso;

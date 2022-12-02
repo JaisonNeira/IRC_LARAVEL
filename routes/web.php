@@ -95,9 +95,6 @@ Route::get('/administracion', [App\Http\Controllers\AdministracionesController::
 /* REPORTES */
 Route::get('/reportes', [App\Http\Controllers\ReportesController::class, 'index'])->name('reportes.index');
 Route::get('/reportes/d', [App\Http\Controllers\ReportesController::class, 'reporte_descarga'])->name('reportes.descarga');
-
-/* REPORTES PERSONALIZADOS */
-Route::get('/reportes/p', [App\Http\Controllers\ReportePersonalizadoController::class, 'index_personalizado'])->name('reportes.personalizados.index');
 Route::get('/reportes/p/d', [App\Http\Controllers\ReportePersonalizadoController::class, 'get_reporte'])->name('reportes.personalizados.get');
 
 

@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <title>IRC - @yield('title')</title>
-    <link rel="shortcut icon" href="{{ asset('img/ircicon_page_2.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('img/ircicon_page_2.png') }}" type="image/x-icon">
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -20,6 +20,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
     {{-- <link rel="stylesheet" href="cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> --}}
     <!-- Custom styles for this template-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -50,7 +53,8 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <input style="display: none;" type="text" value="{{ Auth::user()->id }}" name="sidebar_id_user" id="sidebar_id_user">
+                    <input style="display: none;" type="text" value="{{ Auth::user()->id }}" name="sidebar_id_user"
+                        id="sidebar_id_user">
                     <!-- Topbar Search -->
 
 
@@ -63,8 +67,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('img/icon_woman.svg')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('img/icon_woman.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -131,7 +136,8 @@
                 </div>
                 <div class="modal-body">Seleccione "salir" para cerrar su sesión.</div>
                 <div class="modal-footer">
-                    <a class="btn btn-primary" href="{{ route('logout') }}" data-toggle="modal" data-target="#logoutModal"
+                    <a class="btn btn-primary" href="{{ route('logout') }}" data-toggle="modal"
+                        data-target="#logoutModal"
                         onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         {{ __('Salir') }}
@@ -143,6 +149,10 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
