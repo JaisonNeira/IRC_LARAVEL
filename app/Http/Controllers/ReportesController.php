@@ -25,7 +25,16 @@ class ReportesController extends Controller
         $tipos_procesos = tipos_proceso::where('tpp_estado', '=', '1')->get();
         $departamentos = departamento::where('dep_estado', '=', '1')->get();
 
-        return view('reportes.index', compact('tipos_procesos', 'departamentos'));
+        /* ADMINISTRAR CARGUES */
+
+        $sql = "SELECT car.car_id, acc.Acc_id, acc.Acc_nombre, acc.Acc_codigo, car.car_mes,
+        car.car_fecha_cargue, car.car_fecha_reporte, car.tpp_id, acc.Acc_cargados
+        FROM cargues AS car
+        INNER JOIN actas_cargues AS acc ON acc.car_id = car.car_id";
+
+        $cargues = DB::select($sql);
+
+        return view('reportes.index', compact('tipos_procesos', 'departamentos', 'cargues'));
     }
 
     function reporte_descarga(request $request){
