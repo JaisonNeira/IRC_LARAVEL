@@ -41,7 +41,8 @@ class InasistidosExport implements FromCollection, WithHeadings
             'FECHA DE SEGUIMIENTO 2',
             'SEGUIMIENTO 3',
             'FECHA DE SEGUIMIENTO 3',
-            'MOTIVO DE INASISTENCIA'
+            'MOTIVO DE INASISTENCIA',
+            'ULTIMO COMENTARIO'
         ];
     }
 }

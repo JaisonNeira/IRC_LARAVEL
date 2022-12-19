@@ -152,6 +152,18 @@ class AdministrarCarguesController extends Controller
 
             $registro["MOTIVO DE INASISTENCIA"] = $pacientes[$l2]->tin_nombre;
 
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
+            }
+
+
+
             $data[$l2] = $registro;
 
             /* dd($data, $registro, $pacientes, $sql_gestiones); */
@@ -250,6 +262,18 @@ class AdministrarCarguesController extends Controller
                 $registro["FECHA NUEVA CITA"] = $fecha_cita[0]->ges_fecha_nueva_cita;
             }
 
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
+            }
+
+
+
             $data[$l2] = $registro;
 
             /* dd($data, $registro, $pacientes, $sql_gestiones); */
@@ -264,7 +288,7 @@ class AdministrarCarguesController extends Controller
     }
 
     function get_rec($tpp_id, $id){
-        $sql_pacientes = "SELECT rec.*, pro.pac_id, pro.pro_id
+        $sql_pacientes = "SELECT rec.*, pro.pac_id, pro.pro_id, pro.ges_id
         FROM cargues AS car
         INNER JOIN procesos AS pro ON pro.car_id = car.car_id
         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
@@ -340,6 +364,17 @@ class AdministrarCarguesController extends Controller
                 }
             }
 
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
+            }
+
+
 
             $data[$l2] = $registro;
 
@@ -352,7 +387,7 @@ class AdministrarCarguesController extends Controller
     }
 
     function get_hos($tpp_id, $id){
-        $sql_pacientes = "SELECT hos.*, pro.pac_id, pro.pro_id
+        $sql_pacientes = "SELECT hos.*, pro.pac_id, pro.pro_id, pro.ges_id
         FROM cargues AS car
         INNER JOIN procesos AS pro ON pro.car_id = car.car_id
         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
@@ -425,6 +460,16 @@ class AdministrarCarguesController extends Controller
                     $registro["FECHA DE SEGUIMIENTO ".$i] = $gestiones[$v]->ges_fecha;
                     $v -= 1;
                 }
+            }
+
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
             }
 
 
@@ -516,6 +561,18 @@ class AdministrarCarguesController extends Controller
                 }
             }
 
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
+            }
+
+
+
             $data[$l2] = $registro;
 
             /* dd($data, $registro, $pacientes, $sql_gestiones); */
@@ -602,6 +659,18 @@ class AdministrarCarguesController extends Controller
                 }
             }
 
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
+            }
+
+
+
             $data[$l2] = $registro;
 
             /* dd($data, $registro, $pacientes, $sql_gestiones); */
@@ -682,6 +751,17 @@ class AdministrarCarguesController extends Controller
                     $v -= 1;
                 }
             }
+
+            $ult_ges = $pacientes[$l2]->ges_id;
+
+            $registro["ULTIMO COMENTARIO"] = " ";
+
+            if($ult_ges != null){
+                $fecha_cita = DB::select('SELECT `ges_comentario` FROM `gestiones` WHERE `ges_id` = '.$ult_ges);
+
+                $registro["ULTIMO COMENTARIO"] = $fecha_cita[0]->ges_comentario;
+            }
+
 
             $data[$l2] = $registro;
 

@@ -44,7 +44,8 @@ class RecordatorioExport implements FromCollection, WithHeadings
             'SEGUIMIENTO 2',
             'FECHA DE SEGUIMIENTO 2',
             'SEGUIMIENTO 3',
-            'FECHA DE SEGUIMIENTO 3'
+            'FECHA DE SEGUIMIENTO 3',
+            'ULTIMO COMENTARIO'
         ];
     }
 }

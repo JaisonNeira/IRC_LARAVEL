@@ -46,7 +46,7 @@ class BrigadaExport implements FromCollection, WithHeadings
             'FECHA DE SEGUIMIENTO 2',
             'SEGUIMIENTO 3',
             'FECHA DE SEGUIMIENTO 3',
-            'FECHA CITA'
+            'ULTIMO COMENTARIO'
         ];
     }
 }
