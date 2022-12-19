@@ -68,6 +68,16 @@
                 <hr class="sidebar-divider">
             </a>
         </li>
+
+        <li class="nav-item active items m-t-5" style="margin-top: 10px!important;">
+            <a class="nav-link" style="padding: 0px" href="{{ route('gestion.index', Auth::user()->id) }}">
+                <div class="d-flex flex-column ">
+                    <i class="fa-solid fa-house-medical-circle-check text-center" style="font-size: 25px;"></i>
+                    <div Class="text-center"><span>Gestionamiento</span></div>
+                </div>
+                <hr class="sidebar-divider">
+            </a>
+        </li>
     @endcan
 
     @can('ver-consultar')

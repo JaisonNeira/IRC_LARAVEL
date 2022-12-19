@@ -35,7 +35,6 @@ Route::delete('/roles/delete/{id}', [RolController::class, 'destroy'])->name('Bo
 Route::get('/roles/update/{id}', [RolController::class, 'edit'])->name('EditarRol');
 Route::patch('/roles/update/{id}', [RolController::class, 'update'])->name('UpdateRol');
 
-
 //USUARIOS CRUD
 Route::get('/user', [UserController::class, 'index'])->name('indexUser');
 Route::get('/user/create', [UserController::class, 'create'])->name('GuardarUser');
@@ -75,6 +74,19 @@ Route::get('/gestionar/modal/perfil', [App\Http\Controllers\GestionesController:
 Route::get('/gestionar/modal/gestion', [App\Http\Controllers\GestionesController::class, 'modal_gestion'])->name('gestionar.modal.gestion');
 Route::post('/gestionar/modal/gestion/post', [App\Http\Controllers\GestionesController::class, 'post_gestion'])->name('gestionar.post');
 Route::get('/gestion/marcar', [App\Http\Controllers\GestionesController::class, 'marcar'])->name('gestionar.marcar');
+
+Route::get('/age/{id}/ges', [App\Http\Controllers\GestionamientoController::class, 'index'])->name('gestion.index');
+
+/* GESTIONAMIENTO EXCELS VISTAS */
+Route::get('/gestion/e/bri/{id}', [App\Http\Controllers\GestionamientoController::class, 'bri_vista'])->name('gestionamiento.e.bri');
+Route::get('/gestion/e/cap/{id}', [App\Http\Controllers\GestionamientoController::class, 'cap_vista'])->name('gestionamiento.e.cap');
+Route::get('/gestion/e/rec/{id}', [App\Http\Controllers\GestionamientoController::class, 'rec_vista'])->name('gestionamiento.e.rec');
+Route::get('/gestion/e/ina/{id}', [App\Http\Controllers\GestionamientoController::class, 'ina_vista'])->name('gestionamiento.e.ina');
+Route::get('/gestion/e/rep/{id}', [App\Http\Controllers\GestionamientoController::class, 'rep_vista'])->name('gestionamiento.e.rep');
+Route::get('/gestion/e/hos/{id}', [App\Http\Controllers\GestionamientoController::class, 'hos_vista'])->name('gestionamiento.e.hos');
+Route::get('/gestion/e/seg/{id}', [App\Http\Controllers\GestionamientoController::class, 'seg_vista'])->name('gestionamiento.e.seg');
+Route::get('/gestion/e/filtro', [App\Http\Controllers\GestionamientoController::class, 'filtro_excel_gestiones'])->name('gestionamiento.e.filtro');
+
 
 /* CAPTACIONES */
 Route::get('/adm/captaciones', [App\Http\Controllers\CaptacionesController::class, 'index'])->name('captaciones.index');
