@@ -1,64 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!-- NOTAS DE DESARROLLADOR -->
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<!-- consultas reportes -->
 
-## About Laravel
+SELECT tge.tge_nombre, IFNULL(T1.cantidad, 0) AS cantidad
+FROM tipos_gestiones AS tge
+LEFT JOIN (
+    SELECT tge.tge_nombre AS tge_nombre, count(pro.tge_id) AS cantidad
+    FROM procesos AS pro
+    INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
+    INNER JOIN cargues AS car ON car.car_id = pro.car_id
+    INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+    WHERE pro.pro_estado = 1
+    AND car.tpp_id = 7
+    AND pac.dep_id = ".$dep_id."
+    AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."'
+    GROUP BY tge.tge_nombre
+) T1 ON T1.tge_nombre = tge.tge_nombre
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+AND pro.created_at BETWEEN '2010-10-10' AND '2025-10-10'
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+SELECT count(pro.tge_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN tipos_gestiones AS tge ON tge.tge_id = pro.tge_id
+                INNER JOIN cargues AS car ON car.car_id = pro.car_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND car.tpp_id = 7
+                AND pac.dep_id = ".$dep_id."
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+SELECT COUNT(pro.pro_id) AS cantidad
+                FROM procesos AS pro
+                INNER JOIN cargues AS car ON car.car_id = pro.car_id
+                INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
+                WHERE pro.pro_estado = 1
+                AND car.tpp_id = 7
+                AND pac.dep_id = 70
+                AND pro.created_at BETWEEN '".$fecha_ini."' AND '".$fecha_fin."' 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+$tipo = $request->tipo_proceso;
+            $file = $request->file('file');
+            $file_name = $request->file_name;
+            $file_ir = substr($file_name, 0, -17);
+            $file_pro = substr($file_name, 2, -14);
+            $file_fecha = substr($file_name, 5, -6);
+            $file_v = substr($file_name, 13, 1);
+            $file_tipe = substr($file_name, 16);
+            $file_len = strlen($file_name);
 
-### Premium Partners
+            $email = $request->email;
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+            /* VALIDAMOS QUE EL NOMBRE DEL ARCHIVO ESTE BIEN */
+            if($file_len != 19 || $file_ir != "IR"){
+                return back()->with('mDanger', 'El nombre del archivo no es adecuado, cambielo e intentelo nuevamente!');
+            }
+            /* VALIDAMOS QUE SEA UN ARCHOVO XLSX */
+            if($file_tipe != "csv"){
+                return back()->with('mDanger', 'Tipo de archivo erroneo, debe ser formato excel (.xlsx)!');
+            }
 
-## Contributing
+            $validador_car = actas_cargue::where('Acc_nombre', '=',substr($file_name, 0, -5))->count();
+            if($validador_car > 0){
+                return back()->with('mDanger', 'Ya subio un archivo con este mismo nombre!');
+            }
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+            /* VALIDAMOS QUE LA FECHA EN EL NOMBRE DEL ARCHIVO ESTE BIEN */
+            $year = intval(substr($file_fecha, 0, -4));
+            $mes = intval(substr($file_fecha, 4, -2));
+            $dia = intval(substr($file_fecha, 6));
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+            if($mes > 12 || $dia > 31 || $mes < 0 || $dia < 0 || $mes == 0 || $year == 0 || $dia == 0){
+                return back()->with('mDanger', 'La fecha dentro del nombre es invalida!');
+            }

@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -106,7 +106,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'es_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,7 +179,10 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         /* SPATIE */
         Spatie\Permission\PermissionServiceProvider::class,
-
+        /* PDF */
+        Barryvdh\DomPDF\ServiceProvider::class,
+        /* DATA TABLE */
+        Yajra\DataTables\DataTablesServiceProvider::class,
     ],
 
     /*
@@ -237,6 +240,8 @@ return [
 
         /* EXCEL */
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        /* PDF */
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
