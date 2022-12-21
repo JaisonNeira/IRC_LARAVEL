@@ -5,6 +5,7 @@ $(document).ready(function () {
         },
     });
 });
+
 function filtro() {
 
     car_id = document.getElementById('car_id').value;
@@ -17,14 +18,6 @@ function filtro() {
     rec_fecha_cita = document.getElementById('rec_fecha_cita').value;
 
     id_user = document.getElementById('sidebar_id_user').value;
-
-    document.getElementById('modal_departamento').value = dep_id;
-    document.getElementById('modal_municipio').value = mun_id;
-    document.getElementById('modal_prioridad').value = pro_prioridad;
-    document.getElementById('modal_convenio').value = rec_convenio;
-    document.getElementById('modal_especialidad').value = rec_especialidad;
-    document.getElementById('modal_medico').value = rec_profesional;
-    document.getElementById('modal_fecha_cita').value = rec_fecha_cita;
 
     sendDatos = {
         'tpp_id': 3,
@@ -46,7 +39,7 @@ function filtro() {
     );
 
     $.ajax({
-        url: '/proceso/e/filtro',
+        url: '/gestion/e/filtro',
         type: 'GET',
         dataType: 'json',
         data: sendDatos,

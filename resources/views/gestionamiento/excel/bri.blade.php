@@ -164,7 +164,7 @@
 
 
 @section('script')
-    <script src="{{ asset('js/excel/bri.js') }}"></script>
+    <script src="{{ asset('js/excel_age/bri.js') }}"></script>
 
     <script>
         $(document).ready(function() {

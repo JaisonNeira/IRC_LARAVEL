@@ -5,14 +5,15 @@
 @endsection
 
 @section('style')
-<style>
-    ul.pagination{
-        display: none;
-    }
-    div#table_cap_info{
-        display: none;
-    }
-</style>
+    <style>
+        ul.pagination {
+            display: none;
+        }
+
+        div#table_cap_info {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -20,9 +21,6 @@
         <div class="card mb-4">
             <div class="card-body">
                 <a>Cantidad: <span id="a_cantidad">{{ $total }}</span></a>
-
-                <button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#segmentar">
-                    <i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i></button>
 
                 <input type="text" value="{{ $id }}" id="car_id" name="car_id" style="display: none;">
 
@@ -96,11 +94,7 @@
                             @endforeach
                         </select>
                     </div>
-
                 </div>
-
-                @include('administrar_procesos.excel.modal')
-
             </div>
         </div>
 
@@ -131,9 +125,10 @@
                             <td style="padding-top: 20px;">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="marcador_{{ $list->pro_id }}"
-                                    onchange="marca_gestion({{ $list->pro_id }}, {{ Auth::user()->id}})"
+                                        onchange="marca_gestion({{ $list->pro_id }}, {{ Auth::user()->id }})"
                                         @if ($list->pro_gestionado == 1) checked @endif>
-                                    <label class="custom-control-label" for="marcador_{{ $list->pro_id }}" style=""></label>
+                                    <label class="custom-control-label" for="marcador_{{ $list->pro_id }}"
+                                        style=""></label>
                                     <input type="text" style="display: none" name="" id=""
                                         value="{{ $list->pro_gestionado }}">
                                 </div>
@@ -175,7 +170,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/excel/rec.js') }}"></script>
+    <script src="{{ asset('js/excel_age/rec.js') }}"></script>
 
     <script>
         $(document).ready(function() {

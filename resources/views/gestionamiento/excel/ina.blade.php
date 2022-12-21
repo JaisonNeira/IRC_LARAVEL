@@ -21,9 +21,6 @@
             <div class="card-body">
                 <a>Cantidad: <span id="a_cantidad">{{ $total }}</span></a>
 
-                <button class="btn btn-primary" style="float: right;" data-toggle="modal" data-target="#segmentar">
-                    <i class='fa-solid fa-person-circle-plus text-center' style='font-size: 20px;'></i></button>
-
                 <input type="text" value="{{ $id }}" id="car_id" name="car_id" style="display: none;">
 
                 <div class="d-flex flex-row ml-3 text-center">
@@ -83,11 +80,7 @@
                             @endforeach
                         </select>
                     </div>
-
                 </div>
-
-                @include('administrar_procesos.excel.modal')
-
             </div>
         </div>
 
@@ -166,7 +159,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/excel/ina.js') }}"></script>
+    <script src="{{ asset('js/excel_age/ina.js') }}"></script>
 
     <script>
         $(document).ready(function() {

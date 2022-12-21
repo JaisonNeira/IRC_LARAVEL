@@ -18,13 +18,6 @@ function filtro() {
 
     id_user = document.getElementById('sidebar_id_user').value;
 
-    document.getElementById('modal_departamento').value = dep_id;
-    document.getElementById('modal_municipio').value = mun_id;
-    document.getElementById('modal_prioridad').value = pro_prioridad;
-    document.getElementById('modal_convenio').value = ina_convenio;
-    document.getElementById('modal_especialidad').value = ina_especialidad;
-    document.getElementById('modal_medico').value = ina_profesional;
-
     sendDatos = {
         'tpp_id': 1,
         'car_id': car_id,
@@ -44,7 +37,7 @@ function filtro() {
     );
 
     $.ajax({
-        url: '/proceso/e/filtro',
+        url: '/gestion/e/filtro',
         type: 'GET',
         dataType: 'json',
         data: sendDatos,

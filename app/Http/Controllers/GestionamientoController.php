@@ -194,9 +194,13 @@ class GestionamientoController extends Controller
 
     public function rec_vista($id){
 
+        $user_id = Auth::user()->id;
+        $agente = agente::where('user_id', '=', $user_id)->get('age_id');
+
         $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
          pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, rec.*
-        FROM procesos AS pro
+        FROM proceso_agentes AS pra
+        INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
         INNER JOIN recordatorios AS rec ON rec.pro_id = pro.pro_id
         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
@@ -204,6 +208,7 @@ class GestionamientoController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
+        AND pra.age_id = ".$agente[0]->age_id."
         AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
@@ -211,38 +216,44 @@ class GestionamientoController extends Controller
 
         //Municipio
         $sql2 = "SELECT mun.mun_id, mun.mun_nombre
-            FROM procesos AS pro
+            FROM proceso_agentes AS pra
+            INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
             INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
             INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
             WHERE pro.pro_estado = 1
+            AND pra.age_id = ".$agente[0]->age_id."
             AND pro.car_id = ".$id.' GROUP BY mun.mun_id, mun.mun_nombre';
         $municipios = DB::select($sql2);
 
         //Prioridad
         $sql3 = "SELECT pro.pro_prioridad
-                FROM procesos AS pro
+                FROM proceso_agentes AS pra
+                INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
                 WHERE pro.pro_estado = 1
+                AND pra.age_id = ".$agente[0]->age_id."
                 AND pro.car_id =".$id.' GROUP BY pro.pro_prioridad';
         $prioridades = DB::select($sql3);
 
         //Departamento
         $sql4 = "SELECT dep.dep_id, dep.dep_nombre
-            FROM procesos AS pro
+            FROM proceso_agentes AS pra
+            INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
             INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
             INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
             WHERE pro.pro_estado = 1
+            AND pra.age_id = ".$agente[0]->age_id."
             AND pro.car_id = ".$id.' GROUP BY dep.dep_id, dep.dep_nombre';
         $departamentos = DB::select($sql4);
 
         /* RECORDATORIO */
         //Convenio
-        $convenios = $this->combo_convenio($id, 3);
+        $convenios = $this->combo_convenio($id, $agente, 3);
         //Especialidad
-        $especialidades = $this->combo_especialidad($id, 3);
+        $especialidades = $this->combo_especialidad($id, $agente, 3);
         //Medicos
-        $medicos = $this->combo_medico($id, 3);
+        $medicos = $this->combo_medico($id, $agente, 3);
 
         $sql5 = "SELECT age.age_id, age.tip_id, age.age_documento, usu.id ,usu.name, usu.email
         FROM agentes AS age
@@ -269,7 +280,8 @@ class GestionamientoController extends Controller
 
         $sql = "SELECT pro.pro_gestionado, pro.id_user_gestion, pro.car_id, pro.pro_id, pro.pro_prioridad, tip.tip_alias, pac.pac_id,
         pac.pac_identificacion, pac.pac_nombre_completo, dep.dep_nombre, mun.mun_nombre, ina.*
-        FROM procesos AS pro
+        FROM proceso_agentes AS pra
+        INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
         INNER JOIN cargues AS car ON car.car_id = pro.car_id
         INNER JOIN inasistidos AS ina ON ina.pro_id = pro.pro_id
         INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
@@ -277,6 +289,7 @@ class GestionamientoController extends Controller
         INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
         INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
         WHERE pro.pro_estado = 1
+        AND pra.age_id = ".$agente[0]->age_id."
         AND car.car_id = ".$id;
 
         $procesos = DB::select($sql);
@@ -284,38 +297,44 @@ class GestionamientoController extends Controller
 
         //Municipio
         $sql2 = "SELECT mun.mun_id, mun.mun_nombre
-            FROM procesos AS pro
+            FROM proceso_agentes AS pra
+            INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
             INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
             INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
             WHERE pro.pro_estado = 1
+            AND pra.age_id = ".$agente[0]->age_id."
             AND pro.car_id = ".$id.' GROUP BY mun.mun_id, mun.mun_nombre';
         $municipios = DB::select($sql2);
 
         //Prioridad
         $sql3 = "SELECT pro.pro_prioridad
-                FROM procesos AS pro
+                FROM proceso_agentes AS pra
+                INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
                 INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
                 INNER JOIN municipios AS mun ON mun.mun_id = pac.mun_id
                 WHERE pro.pro_estado = 1
+                AND pra.age_id = ".$agente[0]->age_id."
                 AND pro.car_id =".$id.' GROUP BY pro.pro_prioridad';
         $prioridades = DB::select($sql3);
 
         //Departamento
         $sql4 = "SELECT dep.dep_id, dep.dep_nombre
-            FROM procesos AS pro
+            FROM proceso_agentes AS pra
+            INNER JOIN procesos AS pro ON pro.pro_id = pra.pro_id
             INNER JOIN pacientes AS pac ON pac.pac_id = pro.pac_id
             INNER JOIN departamentos AS dep ON dep.dep_id = pac.dep_id
             WHERE pro.pro_estado = 1
+            AND pra.age_id = ".$agente[0]->age_id."
             AND pro.car_id = ".$id.' GROUP BY dep.dep_id, dep.dep_nombre';
         $departamentos = DB::select($sql4);
 
         /* INASISTIDOS */
         //Convenio
-        $convenios = $this->combo_convenio($id, 1);
+        $convenios = $this->combo_convenio($id, $agente, 1);
         //Especialidad
-        $especialidades = $this->combo_especialidad($id, 1);
+        $especialidades = $this->combo_especialidad($id, $agente, 1);
         //Medicos
-        $medicos = $this->combo_medico($id, 1);
+        $medicos = $this->combo_medico($id, $agente, 1);
 
 
         $sql5 = "SELECT age.age_id, age.tip_id, age.age_documento, usu.id ,usu.name, usu.email
