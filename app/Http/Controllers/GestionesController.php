@@ -15,6 +15,8 @@ use App\Models\reprogramacione;
 use App\Models\inasistido;
 use App\Models\tipos_inasistencia;
 use App\Models\proceso;
+use App\Models\tipos_programa;
+use App\Models\tipos_paciente;
 
 class GestionesController extends Controller
 {
@@ -51,10 +53,11 @@ class GestionesController extends Controller
         $gestiones = DB::select($sql);
 
         $tipo_procesos = tipos_gestione::where('tge_estado', '=', '1')->get();
-
         $tipos_inasistencias = tipos_inasistencia::where('tin_estado', '=', '1')->get();
+        $tipos_pacientes = tipos_paciente::where('tpa_estado', '=', '1')->get();
+        $tipos_programas = tipos_programa::where('tpr_estado', '=', '1')->get();
 
-        return view('gestionar.index', compact('gestiones', 'tipo_procesos', 'tipos_inasistencias'));
+        return view('gestionar.index', compact('gestiones', 'tipo_procesos', 'tipos_inasistencias', 'tipos_pacientes', 'tipos_programas'));
     }
 
     function marcar(request $request){
@@ -279,6 +282,8 @@ class GestionesController extends Controller
         $gestion = new gestione();
         $gestion->pac_id = $request->pac_id;
         $gestion->tge_id = $request->tge_id;
+        $gestion->tpa_id = $request->tpa_id;
+        $gestion->tpr_id = $request->tpr_id;
         $gestion->ges_comentario = $request->ges_comentario;
         $gestion->pro_id = $request->pro_id;
         $gestion->age_id = $age_id[0]->age_id;

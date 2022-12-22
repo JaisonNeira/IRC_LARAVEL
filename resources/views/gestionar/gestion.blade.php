@@ -45,8 +45,30 @@
                                         <div class="select select_gestion  col-12  align-items-center">
                                             <select id="seleccion" name="tge_id" style="font-weight: bold;" required>
                                                 <option selected disabled>Selecionar Resultado</option>
-                                                @foreach ($tipo_procesos as $list)
-                                                    <option value="{{ $list->tge_id }}">{{ $list->tge_nombre }}</option>
+                                                @foreach ($tipo_procesos as $tge)
+                                                    <option value="{{ $tge->tge_id }}">{{ $tge->tge_nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3" style="padding-left:0px, max-width: 495PX !important;">
+                                        <h6>Tipo paciente</h6>
+                                        <div class="select select_gestion  col-12  align-items-center">
+                                            <select id="seleccion" name="tpa_id" style="font-weight: bold;" required>
+                                                <option selected disabled>Selecionar</option>
+                                                @foreach ($tipos_pacientes as $tpa)
+                                                    <option value="{{ $tpa->tpa_id }}">{{ $tpa->tpa_nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-3" style="padding-left:0px, max-width: 495PX !important;">
+                                        <h6>Tipo de programa</h6>
+                                        <div class="select select_gestion  col-12  align-items-center">
+                                            <select id="seleccion" name="tpr_id" style="font-weight: bold;" required>
+                                                <option selected disabled>Selecionar Resultado</option>
+                                                @foreach ($tipos_programas as $tpr)
+                                                    <option value="{{ $tpr->tpr_id }}">{{ $tpr->tpr_nombre }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
