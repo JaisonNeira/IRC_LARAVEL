@@ -99,6 +99,8 @@ Route::get('/reportes/p/d', [App\Http\Controllers\ReportePersonalizadoController
 
 Route::get('/reportes/adm/cargue/get/{id}', [App\Http\Controllers\AdministrarCarguesController::class, 'get_cargue'])->name('reportes.administrar.cargues');
 
+Route::get('/reportes/age/{id}', [App\Http\Controllers\ReporteAgenteController::class, 'get_reporte'])->name('reportes.agente.get');
+
 
 /* AYUDA */
 Route::get('/ayuda', [App\Http\Controllers\AyudaController::class, 'index'])->name('ayuda.index');

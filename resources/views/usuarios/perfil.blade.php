@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-12 mt-5 text-center">
-                <button class="btn btn-primary" type="submit" style="min-width: 200px">Acpetar</button>
+                <button class="btn btn-primary" type="submit" style="min-width: 200px">Guardar</button>
             </div>
             </form>
 

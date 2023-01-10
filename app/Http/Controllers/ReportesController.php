@@ -34,7 +34,14 @@ class ReportesController extends Controller
 
         $cargues = DB::select($sql);
 
-        return view('reportes.index', compact('tipos_procesos', 'departamentos', 'cargues'));
+        $sql_agentes = "SELECT age.age_id, age.tip_id, age.age_documento, usu.id ,usu.name, usu.email
+        FROM agentes AS age
+        INNER JOIN users AS usu ON usu.id = age.user_id
+        WHERE age.age_estado = 1";
+
+        $agentes = DB::select($sql_agentes);
+
+        return view('reportes.index', compact('tipos_procesos', 'departamentos', 'cargues', 'agentes'));
     }
 
     function reporte_descarga(request $request){

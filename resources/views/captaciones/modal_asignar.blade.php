@@ -40,7 +40,6 @@
                                             <tbody style="background-color: #ffff; text-align: center;"
                                                 id="registros_asignar" name="registros_asignar">
 
-
                                                 @foreach ($agentes as $agente)
                                                     <tr>
                                                         <td>{{ $agente->age_documento }}</td>
